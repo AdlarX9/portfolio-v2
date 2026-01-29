@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+	--dark-one: rgb(13, 6, 26);
+	--dark-two: rgb(20, 11, 43);
+	--dark-three: rgb(38, 31, 49);
+	--dark-four: rgb(35, 25, 63);
+	--middle-one: rgb(149, 133, 203);
+	--middle-two: rgb(159, 156, 164);
+	--middle-three: rgb(175, 153, 250);
+	--light-one: rgb(170, 163, 194);
+	--light-two: rgb(230, 232, 233);
+	--secondary-contrast: rgb(255, 237, 242);
+	--accent: rgb(0, 255, 136);
+
+	font-family: 'Work Sans', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 2rem;
+	background: var(--dark-one);
+	color: var(--light-one);
+}
+
+.title-font {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	font-weight: 900;
+	font-size: 8rem;
+	letter-spacing: -0.2rem;
+	color: var(--accent);
+}
+
+.mono-font {
+	font-family: 'Roboto Mono', monospace;
+	font-weight: 900;
+	font-size: 10rem;
+}
+
+.stroke-font {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	-webkit-text-stroke: 1px var(--dark-four);
+	color: var(--dark-two);
+	font-weight: 900;
+	font-size: 10rem;
+	text-transform: uppercase;
+}
+
+.show {
+	border: 1px solid red;
+}
+
+.show * {
+	border: 1px solid red;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	color: var(--light-two);
+}

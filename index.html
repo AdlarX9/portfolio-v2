@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/back.css">
+	<link rel="stylesheet" href="./index.css">
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script> 
+	<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script> 
+	<script src="js/main.js" type="module" defer></script>
+	<title>Portfolio</title>
+</head>
+<body class="sho">
+	<div id="back"></div>
+	<main class="sections">
+
+		<section class="main">
+			<h1 class="title-font">AdlarX9 Portfolio</h1>
+			<div class="stroke-font main-stroke">code, paint, print</div>
+			<div class="track">
+				<div class="main-cards">
+					<div id="card"><h3>Code</h3></div>
+					<div id="card"><h3>Paint</h3></div>
+					<div id="card"><h3>Print</h3></div>
+				</div>
+			</div>
+		</section>
+		<div class="separator"></div>
+
+		<section class="programs">
+			<h2>Code</h2>
+			<p>A small selection of recent projects</p>
+			<div id="program-cards"></div>
+		</section>
+		<div class="separator"></div>
+
+		<section class="drawings">
+			<h2>Draw</h2>
+			<div class="stroke-font drawings-stroke main-stroke">nice drawings</div>
+			<p>Creativity.</p>
+			<div class="drawings-track">
+				<div class="drawing-card" id="dc-1"></div>
+				<div class="drawing-card" id="dc-2"></div>
+				<div class="drawing-card" id="dc-3"></div>
+			</div>
+		</section>
+		<div class="separator"></div>
+
+		<section class="printings">
+			<h2>Print</h2>
+			<p>I build cosplay props with my 3D printer</p>
+			<div class="printings-grid">
+				<div class="printing-el" id="pe-1"></div>
+				<div class="printing-el" id="pe-2"></div>
+				<div class="printing-el" id="pe-3"></div>
+				<div class="printing-el" id="pe-4"></div>
+				<div class="printing-el" id="pe-5"></div>
+			</div>
+		</section>
+		<div class="separator"></div>
+
+		<section class="about">
+			<div class="about-1"><h2>About Me</h2></div>
+			<div class="about-2">
+				<p>Hi! I'm Alexis, a passionate developer and artist. I love creating innovative solutions through code and expressing my creativity through drawing and 3D printing. Welcome to my portfolio!</p>
+			</div>
+		</section>
+
+	</main>
+</body>
+</html>
