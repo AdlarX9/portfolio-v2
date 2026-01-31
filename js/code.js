@@ -1,13 +1,35 @@
 import { Octokit, App } from 'https://esm.sh/octokit'
 
 const octokit = new Octokit({})
-const PROJECTS = ['nitflex', 'project-p', 'throphees-nsi', '3d-engine-ascii']
+const PROJECTS = [
+	'nitflex',
+	'project-p',
+	'empire',
+	'trophees-nsi',
+	'3d-engine-ascii',
+	'print-it',
+	'tweeter',
+	'messages',
+	'portfolio-v1',
+	'particules',
+	'playground'
+]
+
 const NAME_MAP = {
-	'nitflex': 'Nitflex',
+	nitflex: 'Nitflex',
 	'project-p': 'Project P',
-	'throphees-nsi': 'Trophées NSI',
-	'3d-engine-ascii': '3D Engine Ascii'
+	empire: 'Empire',
+	'trophees-nsi': "Bletchley's Adventure",
+	'3d-engine-ascii': '3D Engine Ascii',
+	'print-it': 'Print It',
+	tweeter: 'Tweeter',
+	messages: 'Messages',
+	'portfolio-v1': 'Portfolio V1',
+	particules: 'Particules',
+	playground: 'Playground'
 }
+
+const TROPHEES_DESCRIPTION = "an open-world game where players help the Allies win World War II by decrypting Nazi communications. Set in Bletchley Park, the game teaches the origins of cryptography through educational missions featuring systems like Enigma and the Bombe, while remaining fun and engaging."
 
 /**
  * Récupère les détails de repositories spécifiques avec un minimum de requêtes.
@@ -56,7 +78,8 @@ async function getReposDetails(username, repoNames) {
 					name: repo.name,
 					description: repo.description || 'Pas de description',
 					// Astuce : Pas besoin d'API pour l'image, on utilise le générateur d'assets GitHub
-					imageUrl: `https://opengraph.githubassets.com/1/${username}/${repo.name}`,
+					imageUrl: `./assets/code/${repo.name}.jpeg`,
+					owner: username,
 					updatedAt: repo.updated_at.split('T')[0], // Format YYYY-MM-DD
 					stars: repo.stargazers_count,
 					languages: languagesFormatted
@@ -83,36 +106,61 @@ async function getProjects() {
 			res(data)
 		} else {
 			getReposDetails('AdlarX9', PROJECTS)
-			.then(repos => {
-				data = repos
-				localStorage.setItem('codingProjects', JSON.stringify(data))
-				res(data)
-			})
-			.catch(err => {
-				console.error('Erreur lors de la récupération des projets :', err)
-				rej(err)
-			})
+				.then(repos => {
+					data = repos
+					getReposDetails('Equinoxs', PROJECTS)
+						.then(trophees => {
+							data = data.concat(trophees)
+							data.sort((a, b) => {
+								return new Date(b.updatedAt) - new Date(a.updatedAt)
+							})
+							localStorage.setItem('codingProjects', JSON.stringify(data))
+							res(data)
+						})
+						.catch(err => {
+							console.error('Erreur lors de la récupération des trophées nsi :', err)
+							rej(err)
+						})
+				})
+				.catch(err => {
+					console.error('Erreur lors de la récupération des projets :', err)
+					rej(err)
+				})
 		}
 	})
 }
 
-const INDEX_PROJECTS = ['nitflex', 'project-p', 'throphees-nsi', '3d-engine-ascii']
+const INDEX_PROJECTS = ['nitflex', 'project-p', 'trophees-nsi', '3d-engine-ascii']
+const COLORS = {
+	JavaScript: '#f1e05a',
+	HTML: '#e34c26',
+	CSS: '#563d7c',
+	Python: '#3572A5',
+	'C++': '#f34b7d',
+	PHP: '#4F5D95',
+	Dockerfile: '#384d54',
+	Shell: '#89e051',
+	SCSS: '#c6538c',
+	Go: '#00ADD8'
+}
 export function createIndexProgramCards(container) {
 	getProjects().then(projects => {
 		projects = projects.filter(project => INDEX_PROJECTS.includes(project.name))
 		projects.forEach(project => {
-			console.log(project)
 			const card = document.createElement('div')
 			card.classList.add('program-card')
 			card.innerHTML = `
 				<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
 				<h3>${NAME_MAP[project.name]}</h3>
-				<p class="description">${project.description}</p>
-				<p class="languages">${project.languages.map(lang => `${lang.name} (${lang.percentage})`).join(', ')}</p>
+				<p class="description">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
+				<div class="languages">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
 				<aside>
 					<p><strong>Last Updated:</strong> ${project.updatedAt}</p>
 					<p><strong>⭐ Stars:</strong> ${project.stars}</p>
 				</aside>
+				<a class="program-overlay" href="./pages/code.html">
+					<div>View more projects</div>
+				</a>
 			`
 			container.appendChild(card)
 		})

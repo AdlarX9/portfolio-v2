@@ -72,7 +72,7 @@ section::before {
 }
 #card p {
 	width: 85%;
-	letter-spacing: .1rem;
+	letter-spacing: 0.1rem;
 	font-weight: 300;
 	margin: 0;
 	margin-bottom: 30px;
@@ -96,6 +96,7 @@ section p {
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	max-width: 70vw;
+	margin-bottom: 300px;
 }
 
 .program-card {
@@ -109,6 +110,7 @@ section p {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
 	overflow: hidden;
+	position: relative;
 }
 
 .program-card h3 {
@@ -119,35 +121,69 @@ section p {
 
 .program-card img {
 	width: 100%;
-	height: auto;
+	max-height: 500px;
+	object-fit: cover;
 }
 
 .program-card p {
 	padding: 0 30px;
-	letter-spacing: .1rem;
+	letter-spacing: 0.1rem;
 }
 
 .description {
 	margin: 0;
-	color: var(--light-two)
+	color: var(--light-two);
 }
 
 .languages {
 	margin: 0;
-	margin-top: 30px;
-	font-weight: 200;
+	margin-top: 40px;
+	margin-bottom: 60px;
+	font-weight: 100;
+	font-size: 1.6rem;
+	width: 85%;
+}
+
+.languages-pill {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	margin-right: 8px;
+	margin-left: 15px;
+	vertical-align: middle;
 }
 
 .program-card aside {
 	margin-top: 50px;
 	margin-bottom: 40px;
-	justify-self: end;
+	margin-top: auto;
 	font-weight: 100;
-	
+
 	p {
 		font-size: 1.3rem;
 		margin: 0;
 	}
+}
+
+.program-overlay {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.program-card:hover .program-overlay {
+	opacity: 1;
 }
 
 .drawings-stroke {
@@ -220,45 +256,82 @@ section p {
 }
 
 .printings-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    aspect-ratio: 9/10;
-    margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1.2fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 15px;
+	width: 100%;
+	max-width: 900px;
+	height: auto;
+	aspect-ratio: 9/10;
+	margin: 0 auto;
 	margin-bottom: 400px;
 }
 
 .printing-el {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--dark-two, #333), var(--dark-one, #111));
-    border: 1px solid var(--middle-one, #555);
-    border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, var(--dark-two, #333), var(--dark-one, #111));
+	border: 1px solid var(--middle-one, #555);
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.printing-el img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+	opacity: 0.75;
+}
+
+.printing-overlay {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.printing-el:hover .printing-overlay {
+	opacity: 1;
+}
+.printing-el:hover img {
+	transform: scale(1.02);
+}
+.view-more-prints {
+	padding: 0 20px;
+	text-align: center;
 }
 
 #pe-1 {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
 }
 #pe-2 {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
 }
 #pe-3 {
-    grid-column: 2 / 4;
-    grid-row: 1 / 2;
+	grid-column: 2 / 4;
+	grid-row: 1 / 2;
 }
 #pe-4 {
-    grid-column: 3 / 4;
-    grid-row: 2 / 4;
+	grid-column: 3 / 4;
+	grid-row: 2 / 4;
 }
 #pe-5 {
-    grid-column: 1 / 3;
-    grid-row: 3 / 4;
+	grid-column: 1 / 3;
+	grid-row: 3 / 4;
 }
 
 .about {
@@ -289,5 +362,5 @@ section p {
 .about-2 p {
 	margin: 0;
 	max-width: 85%;
-	margin-left: 40px
+	margin-left: 40px;
 }

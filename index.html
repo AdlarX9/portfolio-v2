@@ -1,94 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles/main.css">
-	<link rel="stylesheet" href="styles/back.css">
-	<link rel="stylesheet" href="./index.css">
-	<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
-	<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script> 
-	<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script> 
-	<script src="js/main.js" type="module" defer></script>
-	<title>Portfolio</title>
-</head>
-<body class="sho">
-	<div id="back"></div>
-	<main class="sections">
-
-		<section class="main">
-			<h1 class="title-font">Alexis' Portfolio</h1>
-			<div class="stroke-font main-stroke">code, paint, print</div>
-			<div class="track">
-				<div class="main-cards">
-					<div id="card">
-						<h3>Code</h3>
-						<p>Hey, I'm a passionnate developer that likes to create innovative stuff through code.</p>
-						<p>I've gone through multiple projects and technologies from full-stack web development to video games, simulators and engines.</p>
-						<p>I've really started coding in 2023 and I'm always looking to learn something different and aquire new skills.</p>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles/main.css" />
+		<link rel="stylesheet" href="styles/back.css" />
+		<link rel="stylesheet" href="./index.css" />
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
+		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
+		<script src="js/imgLoader.js" defer></script>
+		<script src="js/main.js" type="module" defer></script>
+		<title>Portfolio</title>
+	</head>
+	<body class="sho">
+		<div id="back"></div>
+		<main class="sections">
+			<section class="main">
+				<h1 class="title-font">Alexis' Portfolio</h1>
+				<div class="stroke-font main-stroke">code, paint, print</div>
+				<div class="track">
+					<div class="main-cards">
+						<div id="card">
+							<h3>Code</h3>
+							<p>Hey, I'm a passionnate developer that likes to create innovative stuff through code.</p>
+							<p>
+								I've gone through multiple projects and technologies from full-stack web development to
+								video games, simulators and engines.
+							</p>
+							<p>
+								I've really started coding in 2023 and I'm always looking to learn something different
+								and aquire new skills.
+							</p>
+						</div>
+						<div id="card">
+							<h3>Paint</h3>
+							<p>
+								I also paint once a week. I've done this for years, which gave me a lot of skills and
+								experience in this area.
+							</p>
+							<p>
+								Therefore, I have accomplished many paintings from different techniques such as gray
+								pencil, acrylic, watercolor, gouache and oil pastels.
+							</p>
+							<p>
+								Moreover, I've been able to translate those skills onto 3D surfaces, providing me with
+								great 3D printed figurines and cosplay props...
+							</p>
+						</div>
+						<div id="card">
+							<h3>Print</h3>
+							<p>
+								Ever since I was a kid, I've been fascinated by 3D printing and its potential to create
+								real objects like the ones you can buy on the market.
+							</p>
+							<p>
+								I received my first 3D printer in 2018 and I've been learning how to print whatever I
+								wanted to with it. I got since there a second one and a resin printer, always searching
+								to improve my creations.
+							</p>
+							<p>
+								I have now created a lot of 3D printed figurines and cosplay props for my friends and
+								me. Some of them required me a lot of time and accumulate hundreds of hours of printing.
+							</p>
+						</div>
 					</div>
-					<div id="card">
-						<h3>Paint</h3>
-						<p>I also paint once a week. I've done this for years, which gave me a lot of skills and experience in this area.</p>
-						<p>Therefore, I have accomplished many paintings from different techniques such as gray pencil, acrylic, watercolor, gouache and oil pastels.</p>
-						<p>Moreover, I've been able to translate those skills onto 3D surfaces, providing me with great 3D printed figurines and cosplay props...</p>
+				</div>
+			</section>
+			<div class="separator"></div>
+
+			<section class="programs">
+				<h2>Code</h2>
+				<p>A small selection of recent projects</p>
+				<div id="program-cards"></div>
+			</section>
+			<div class="separator"></div>
+
+			<section class="drawings">
+				<h2>Draw</h2>
+				<div class="stroke-font drawings-stroke main-stroke">nice drawings</div>
+				<p>Creativity.</p>
+				<div class="drawings-track">
+					<div class="drawing-card" id="dc-1">
+						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 1" />
 					</div>
-					<div id="card">
-						<h3>Print</h3>
-						<p>Ever since I was a kid, I've been fascinated by 3D printing and its potential to create real objects like the ones you can buy on the market.</p>
-						<p>I received my first 3D printer in 2018 and I've been learning how to print whatever I wanted to with it. I got since there a second one and a resin printer, always searching to improve my creations.</p>
-						<p>I have now created a lot of 3D printed figurines and cosplay props for my friends and me. Some of them required me a lot of time and accumulate hundreds of hours of printing.</p>
+					<div class="drawing-card" id="dc-2">
+						<img src="./assets/drawings/preview/19-chute.jpg" alt="Drawing 2" />
+					</div>
+					<div class="drawing-card" id="dc-3">
+						<img src="./assets/drawings/preview/18-whisky.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
-			</div>
-		</section>
-		<div class="separator"></div>
+			</section>
+			<div class="separator"></div>
 
-		<section class="programs">
-			<h2>Code</h2>
-			<p>A small selection of recent projects</p>
-			<div id="program-cards"></div>
-		</section>
-		<div class="separator"></div>
-
-		<section class="drawings">
-			<h2>Draw</h2>
-			<div class="stroke-font drawings-stroke main-stroke">nice drawings</div>
-			<p>Creativity.</p>
-			<div class="drawings-track">
-				<div class="drawing-card" id="dc-1">
-					<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 1">
+			<section class="printings">
+				<h2>Print</h2>
+				<p>I build cosplay props with my 3D printer</p>
+				<div class="printings-grid">
+					<div class="printing-el" id="pe-1">
+						<img src="./assets/prints/preview/13-marteau.jpeg" alt="" />
+					</div>
+					<div class="printing-el" id="pe-2">
+						<img src="./assets/prints/preview/17-leviathan.jpeg" alt="" />
+					</div>
+					<div class="printing-el" id="pe-3">
+						<img src="./assets/prints/preview/18-bouclier.jpeg" alt="" />
+					</div>
+					<div class="printing-el" id="pe-4">
+						<img src="./assets/prints/preview/16-mjolnir.jpeg" alt="" />
+					</div>
+					<div class="printing-el" id="pe-5">
+						<img src="./assets/prints/preview/19-chaos.jpeg" alt="" />
+					</div>
 				</div>
-				<div class="drawing-card" id="dc-2">
-					<img src="./assets/drawings/preview/19-chute.jpg" alt="Drawing 2">
+			</section>
+			<div class="separator"></div>
+
+			<section class="about">
+				<div class="about-1"><h2>About Me</h2></div>
+				<div class="about-2">
+					<p>
+						Hi! I'm Alexis, a passionate developer and artist. I love creating innovative solutions through
+						code and expressing my creativity through drawing and 3D printing. Welcome to my portfolio!
+					</p>
 				</div>
-				<div class="drawing-card" id="dc-3">
-					<img src="./assets/drawings/preview/18-whisky.jpeg" alt="Drawing 3">
-				</div>
-			</div>
-		</section>
-		<div class="separator"></div>
-
-		<section class="printings">
-			<h2>Print</h2>
-			<p>I build cosplay props with my 3D printer</p>
-			<div class="printings-grid">
-				<div class="printing-el" id="pe-1"></div>
-				<div class="printing-el" id="pe-2"></div>
-				<div class="printing-el" id="pe-3"></div>
-				<div class="printing-el" id="pe-4"></div>
-				<div class="printing-el" id="pe-5"></div>
-			</div>
-		</section>
-		<div class="separator"></div>
-
-		<section class="about">
-			<div class="about-1"><h2>About Me</h2></div>
-			<div class="about-2">
-				<p>Hi! I'm Alexis, a passionate developer and artist. I love creating innovative solutions through code and expressing my creativity through drawing and 3D printing. Welcome to my portfolio!</p>
-			</div>
-		</section>
-
-	</main>
-</body>
+			</section>
+		</main>
+	</body>
 </html>
