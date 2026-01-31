@@ -158,7 +158,7 @@ export function createIndexProgramCards(container) {
 					<p><strong>Last Updated:</strong> ${project.updatedAt}</p>
 					<p><strong>⭐ Stars:</strong> ${project.stars}</p>
 				</aside>
-				<a class="program-overlay" href="./pages/code.html">
+				<a class="program-overlay" href="/code">
 					<div>View more projects</div>
 				</a>
 			`

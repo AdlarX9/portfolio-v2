@@ -1,40 +1,16 @@
-// smooth scroll
-const lenis = new Lenis()
-
-// Use requestAnimationFrame to continuously update the scroll
-function raf(time) {
-	lenis.raf(time)
-	requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
-
-import { hackerEffect } from './hacker.js'
-import { createColumns } from './back.js'
-import { positionCards } from './mainCards.js'
-import { createIndexProgramCards } from './code.js'
+import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
 
-const hackerWords = document.querySelectorAll('#hacker')
+const DELTA_ANGLE = 30
 
-hackerWords.forEach(word => {
-	word.addEventListener('load', hackerEffect(word))
-})
-
-const back = document.getElementById('back')
-const columns = createColumns(back, 50)
-
-let lastTime = Date.now()
-function updateColumns(present) {
-	const deltaTime = present - lastTime
-	columns.forEach(column => {
-		column.update(deltaTime)
-		column.render()
+function positionCards(cards, angle = DELTA_ANGLE) {
+	const RADIUS = 2 * 800
+	cards.forEach((card, i) => {
+		const coordX = RADIUS * Math.sin((((i - 1) * DELTA_ANGLE + angle) * Math.PI) / 180)
+		const coordZ = -RADIUS * (1 - Math.cos((((i - 1) * DELTA_ANGLE + angle) * Math.PI) / 180))
+		card.style.transform = `translateX(${coordX}px) translateZ(${coordZ}px) rotate3d(0, 1, 0, ${(i - 1) * DELTA_ANGLE + angle}deg)`
 	})
-	lastTime = present
 }
-
-// requestAnimationFrame(updateColumns)
 
 const cards = document.querySelectorAll('#card')
 const easing = bezier(0.29, 0, 0.66, 0.99)
@@ -79,7 +55,7 @@ ScrollTrigger.create({
 const drawingsCards = document.querySelectorAll('.drawing-card')
 drawingsCards.forEach(card => {
 	const overlay = document.createElement('a')
-	overlay.href = '/pages/drawings.html'
+	overlay.href = '/paint'
 	overlay.classList.add('drawing-overlay')
 	overlay.innerHTML = '<div>View more drawings</div>'
 	card.appendChild(overlay)
@@ -88,7 +64,7 @@ drawingsCards.forEach(card => {
 const printingCards = document.querySelectorAll('.printing-el')
 printingCards.forEach(card => {
 	const overlay = document.createElement('a')
-	overlay.href = '/pages/prints.html'
+	overlay.href = '/print'
 	overlay.classList.add('printing-overlay')
 	overlay.innerHTML = '<div class="view-more-prints">View more prints</div>'
 	card.appendChild(overlay)
