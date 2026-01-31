@@ -75,3 +75,12 @@ ScrollTrigger.create({
 	pinSpacing: true,
 	markers: false
 })
+
+const drawingsCards = document.querySelectorAll('.drawing-card')
+drawingsCards.forEach(card => {
+	const overlay = document.createElement('a')
+	overlay.href = "/pages/drawings.html"
+	overlay.classList.add('drawing-overlay')
+	overlay.innerHTML = '<div>View more drawings</div>'
+	card.appendChild(overlay)
+})

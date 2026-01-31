@@ -22,6 +22,7 @@ section::before {
 	height: 10%;
 	background: rgb(67, 0, 111);
 	filter: blur(2000px);
+	z-index: -1;
 }
 
 .separator {
@@ -69,6 +70,13 @@ section::before {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	font-size: 3rem;
 }
+#card p {
+	width: 85%;
+	letter-spacing: .1rem;
+	font-weight: 300;
+	margin: 0;
+	margin-bottom: 30px;
+}
 
 section h2 {
 	font-family: 'Zalando Sans Expanded', sans-serif;
@@ -87,19 +95,59 @@ section p {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
+	max-width: 70vw;
 }
 
 .program-card {
 	border: 1px solid var(--middle-one);
-	height: 150px;
-	width: 300px;
 	margin: 20px;
 	border-radius: 10px;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
+	overflow: hidden;
+}
+
+.program-card h3 {
+	margin-bottom: 60px;
+	font-size: 3rem;
+	color: white;
+}
+
+.program-card img {
+	width: 100%;
+	height: auto;
+}
+
+.program-card p {
+	padding: 0 30px;
+	letter-spacing: .1rem;
+}
+
+.description {
+	margin: 0;
+	color: var(--light-two)
+}
+
+.languages {
+	margin: 0;
+	margin-top: 30px;
+	font-weight: 200;
+}
+
+.program-card aside {
+	margin-top: 50px;
+	margin-bottom: 40px;
+	justify-self: end;
+	font-weight: 100;
+	
+	p {
+		font-size: 1.3rem;
+		margin: 0;
+	}
 }
 
 .drawings-stroke {
@@ -116,13 +164,45 @@ section p {
 }
 
 .drawing-card {
-	width: 800px;
-	height: 600px;
 	border: 1px solid var(--middle-one);
 	margin: 20px;
 	border-radius: 10px;
 	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
 	position: absolute;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.drawing-card img {
+	height: 600px;
+	width: auto;
+	opacity: 0.8;
+	transition: transform 0.3s ease;
+}
+
+.drawing-overlay {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.drawing-card:hover .drawing-overlay {
+	opacity: 1;
+}
+.drawing-card:hover img {
+	transform: scale(1.02);
 }
 
 #dc-1 {

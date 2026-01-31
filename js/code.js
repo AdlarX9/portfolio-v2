@@ -79,11 +79,9 @@ async function getProjects() {
 	return new Promise((res, rej) => {
 		let data
 		if (localStorage.getItem('codingProjects')) {
-			console.log('pas fetching.')
 			data = JSON.parse(localStorage.getItem('codingProjects'))
 			res(data)
 		} else {
-			console.log('fetching...')
 			getReposDetails('AdlarX9', PROJECTS)
 			.then(repos => {
 				data = repos
@@ -103,9 +101,19 @@ export function createIndexProgramCards(container) {
 	getProjects().then(projects => {
 		projects = projects.filter(project => INDEX_PROJECTS.includes(project.name))
 		projects.forEach(project => {
+			console.log(project)
 			const card = document.createElement('div')
 			card.classList.add('program-card')
-			card.innerText = NAME_MAP[project.name]
+			card.innerHTML = `
+				<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
+				<h3>${NAME_MAP[project.name]}</h3>
+				<p class="description">${project.description}</p>
+				<p class="languages">${project.languages.map(lang => `${lang.name} (${lang.percentage})`).join(', ')}</p>
+				<aside>
+					<p><strong>Last Updated:</strong> ${project.updatedAt}</p>
+					<p><strong>⭐ Stars:</strong> ${project.stars}</p>
+				</aside>
+			`
 			container.appendChild(card)
 		})
 	})

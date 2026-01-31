@@ -43,8 +43,8 @@ body {
 
 .stroke-font {
 	font-family: 'Zalando Sans Expanded', sans-serif;
-	-webkit-text-stroke: 1px var(--dark-four);
-	color: var(--dark-two);
+	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 0.03);
 	font-weight: 900;
 	font-size: 10rem;
 	text-transform: uppercase;
