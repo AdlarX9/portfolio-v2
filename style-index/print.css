@@ -1,0 +1,50 @@
+.printings-grid {
+	display: grid;
+	grid-template-columns: 1fr 1.2fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 15px;
+	width: 100%;
+	max-width: 900px;
+	height: auto;
+	aspect-ratio: 9/10;
+	margin: 0 auto;
+	margin-bottom: 400px;
+}
+
+.printing-el {
+	width: 100%;
+	height: 100%;
+}
+
+.printing-el img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0.75;
+}
+
+.view-more-prints {
+	padding: 0 20px;
+	text-align: center;
+}
+
+#pe-1 {
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+}
+#pe-2 {
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
+}
+#pe-3 {
+	grid-column: 2 / 4;
+	grid-row: 1 / 2;
+}
+#pe-4 {
+	grid-column: 3 / 4;
+	grid-row: 2 / 4;
+}
+#pe-5 {
+	grid-column: 1 / 3;
+	grid-row: 3 / 4;
+}

@@ -54,18 +54,20 @@ ScrollTrigger.create({
 
 const drawingsCards = document.querySelectorAll('.drawing-card')
 drawingsCards.forEach(card => {
-	const overlay = document.createElement('a')
-	overlay.href = '/paint'
-	overlay.classList.add('drawing-overlay')
-	overlay.innerHTML = '<div>View more drawings</div>'
+	card.classList.add('preview')
+	const overlay = document.createElement('button')
+	overlay.dataset.type = 'drawings'
+	overlay.classList.add('overlay')
+	overlay.innerHTML = '<div class="white body">View more drawings</div>'
 	card.appendChild(overlay)
 })
 
 const printingCards = document.querySelectorAll('.printing-el')
 printingCards.forEach(card => {
-	const overlay = document.createElement('a')
-	overlay.href = '/print'
-	overlay.classList.add('printing-overlay')
-	overlay.innerHTML = '<div class="view-more-prints">View more prints</div>'
+	card.classList.add('preview')
+	const overlay = document.createElement('button')
+	overlay.dataset.type = 'prints'
+	overlay.classList.add('overlay')
+	overlay.innerHTML = '<div class="view-more-prints white body">View more prints</div>'
 	card.appendChild(overlay)
 })

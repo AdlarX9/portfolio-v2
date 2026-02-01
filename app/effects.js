@@ -1,3 +1,25 @@
+const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/`~"
+
+function randomString(length) {
+	let result = ''
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * LETTERS.length)
+		result += LETTERS[randomIndex]
+	}
+	return result
+}
+
+export function hackerEffect(element) {
+	const originalText = element.innerText
+	const repeat = 3
+	const period = 15
+	for (let i = 0; i <= originalText.length * repeat; i++) {
+		setTimeout(() => {
+			element.innerText = originalText.substring(0, i / repeat) + randomString(originalText.length - i / repeat)
+		}, period * i)
+	}
+}
+
 const NUMBERS = '0123456789'
 
 class Column {
@@ -21,7 +43,7 @@ class Column {
 			charElement.innerText = char
 			this.element.appendChild(charElement)
 		}
-		this.x += Column.horizontalSpeed * deltaTime * (this.x - 0.5) / 16
+		this.x += (Column.horizontalSpeed * deltaTime * (this.x - 0.5)) / 16
 	}
 
 	render() {

@@ -13,9 +13,11 @@
 	--secondary-contrast: rgb(255, 237, 242);
 	--accent: rgb(0, 255, 136);
 
-	font-family: 'Work Sans', sans-serif;
 	font-optical-sizing: auto;
-	font-weight: 400;
+	font-family: 'Work Sans', sans-serif;
+	color: var(--light-one);
+	font-weight: 300;
+	letter-spacing: 0.1rem;
 	font-style: normal;
 }
 
@@ -27,29 +29,6 @@ body {
 	color: var(--light-one);
 }
 
-.title-font {
-	font-family: 'Zalando Sans Expanded', sans-serif;
-	font-weight: 900;
-	font-size: 8rem;
-	letter-spacing: -0.2rem;
-	color: var(--accent);
-}
-
-.mono-font {
-	font-family: 'Roboto Mono', monospace;
-	font-weight: 900;
-	font-size: 10rem;
-}
-
-.stroke-font {
-	font-family: 'Zalando Sans Expanded', sans-serif;
-	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-	color: rgba(255, 255, 255, 0.03);
-	font-weight: 900;
-	font-size: 10rem;
-	text-transform: uppercase;
-}
-
 .show {
 	border: 1px solid red !important;
 }
@@ -58,12 +37,129 @@ body {
 	border: 1px solid red !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.popup {
+	display: none;
+	opacity: 0;
+}
+
+.stroke-title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
+	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 0.03);
+	font-weight: 900;
+	font-size: 10rem;
+	text-transform: uppercase;
+}
+
+.big-title {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	font-weight: 900;
+	font-size: 8rem;
+	letter-spacing: -0.2rem;
+
+	background: linear-gradient(to bottom, var(--accent), rgb(0, 126, 94));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.title {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	font-size: 5rem;
+	font-weight: 700;
+
+	background: linear-gradient(to bottom, var(--light-two), var(--middle-three));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.subtitle {
+	font-family: 'Zalando Sans Expanded', sans-serif;
+	font-size: 3rem;
+	color: var(--light-two);
+	font-weight: 600;
+}
+
+.body {
+	font-family: 'Work Sans', sans-serif;
+	font-size: 2rem;
+	color: var(--light-one);
+	font-weight: 300;
+	letter-spacing: 0.1rem;
+}
+
+.sub-body {
+	font-family: 'Work Sans', sans-serif;
+	color: var(--light-one);
+	font-weight: 200;
+	font-size: 1.6rem;
+	letter-spacing: 0.2rem;
+}
+
+.detail-txt {
+	font-family: 'Work Sans', sans-serif;
+	color: var(--light-one);
+	font-size: 1.3rem;
+	font-weight: 100;
+	letter-spacing: 0.25rem;
+}
+
+.gradient-card {
+	border: 1px solid var(--middle-one);
+	border-radius: 10px;
+	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+}
+
+.overlay-card {
+	position: relative;
+	overflow: hidden;
+}
+
+.overlay-card .overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.overlay-card:hover .overlay {
+	opacity: 1;
+}
+
+.overlay-card img {
+	transition: transform 0.3s ease;
+}
+.overlay-card:hover img {
+	transform: scale(1.03);
+}
+
+.image-card {
+	border: 1px solid var(--middle-one);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.bordered {
+	border: 1px solid var(--middle-one);
+	border-radius: 20px;
+}
+
+.white {
 	color: var(--light-two);
 }

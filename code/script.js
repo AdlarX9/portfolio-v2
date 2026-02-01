@@ -29,7 +29,8 @@ const NAME_MAP = {
 	playground: 'Playground'
 }
 
-const TROPHEES_DESCRIPTION = "an open-world game where players help the Allies win World War II by decrypting Nazi communications. Set in Bletchley Park, the game teaches the origins of cryptography through educational missions featuring systems like Enigma and the Bombe, while remaining fun and engaging."
+const TROPHEES_DESCRIPTION =
+	'an open-world game where players help the Allies win World War II by decrypting Nazi communications. Set in Bletchley Park, the game teaches the origins of cryptography through educational missions featuring systems like Enigma and the Bombe, while remaining fun and engaging.'
 
 /**
  * Récupère les détails de repositories spécifiques avec un minimum de requêtes.
@@ -148,18 +149,18 @@ export function createIndexProgramCards(container) {
 		projects = projects.filter(project => INDEX_PROJECTS.includes(project.name))
 		projects.forEach(project => {
 			const card = document.createElement('div')
-			card.classList.add('program-card')
+			card.classList.add('overlay-card', 'gradient-card', 'program-card')
 			card.innerHTML = `
 				<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
-				<h3>${NAME_MAP[project.name]}</h3>
-				<p class="description">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
-				<div class="languages">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
+				<h3 class="subtitle">${NAME_MAP[project.name]}</h3>
+				<p class="description white body">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
+				<div class="languages sub-body">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
 				<aside>
-					<p><strong>Last Updated:</strong> ${project.updatedAt}</p>
-					<p><strong>⭐ Stars:</strong> ${project.stars}</p>
+					<p class="detail-txt"><strong>Last Updated:</strong> ${project.updatedAt}</p>
+					<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
 				</aside>
-				<a class="program-overlay" href="/code">
-					<div>View more projects</div>
+				<a class="overlay" href="https://github.com/${project.owner}/${project.name}">
+					<div>See more details</div>
 				</a>
 			`
 			container.appendChild(card)

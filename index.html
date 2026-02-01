@@ -5,7 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="app/main.css" />
 		<link rel="stylesheet" href="app/back.css" />
-		<link rel="stylesheet" href="index.css" />
+		<link rel="stylesheet" href="style-index/general.css" />
+		<link rel="stylesheet" href="style-index/code.css" />
+		<link rel="stylesheet" href="style-index/paint.css" />
+		<link rel="stylesheet" href="style-index/print.css" />
+		<link rel="stylesheet" href="style-index/about.css" />
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
 		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
@@ -13,16 +17,16 @@
 		<script src="index.js" type="module" defer></script>
 		<title>Portfolio</title>
 	</head>
-	<body class="sho">
+	<body>
 		<div id="back"></div>
 		<main class="sections">
 			<section class="main">
-				<h1 class="title-font">Alexis' Portfolio</h1>
-				<div class="stroke-font main-stroke">code, paint, print</div>
+				<h1 class="big-title">Alexis' Portfolio</h1>
+				<div class="stroke-title main-stroke">code, paint, print</div>
 				<div class="track">
 					<div class="main-cards">
-						<div id="card">
-							<h3>Code</h3>
+						<div class="gradient-card bordered" id="card">
+							<h3 class="subtitle">Code</h3>
 							<p>Hey, I'm a passionnate developer that likes to create innovative stuff through code.</p>
 							<p>
 								I've gone through multiple projects and technologies from full-stack web development to
@@ -33,8 +37,8 @@
 								and aquire new skills.
 							</p>
 						</div>
-						<div id="card">
-							<h3>Paint</h3>
+						<div class="gradient-card bordered" id="card">
+							<h3 class="subtitle">Paint</h3>
 							<p>
 								I also paint once a week. I've done this for years, which gave me a lot of skills and
 								experience in this area.
@@ -48,8 +52,8 @@
 								great 3D printed figurines and cosplay props...
 							</p>
 						</div>
-						<div id="card">
-							<h3>Print</h3>
+						<div class="gradient-card bordered" id="card">
+							<h3 class="subtitle">Print</h3>
 							<p>
 								Ever since I was a kid, I've been fascinated by 3D printing and its potential to create
 								real objects like the ones you can buy on the market.
@@ -70,55 +74,58 @@
 			<div class="separator"></div>
 
 			<section class="programs">
-				<h2>Code</h2>
+				<h2 class="title">Code</h2>
 				<p>A small selection of recent projects</p>
 				<div id="program-cards"></div>
+				<a class="section-button" href="/code">View more projects</a>
 			</section>
 			<div class="separator"></div>
 
 			<section class="drawings">
-				<h2>Draw</h2>
-				<div class="stroke-font drawings-stroke main-stroke">nice drawings</div>
+				<h2 class="title">Draw</h2>
+				<div class="stroke-title drawings-stroke main-stroke">nice drawings</div>
 				<p>Creativity.</p>
 				<div class="drawings-track">
-					<div class="drawing-card" id="dc-1">
+					<div class="drawing-card image-card overlay-card" id="dc-1">
 						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 1" />
 					</div>
-					<div class="drawing-card" id="dc-2">
+					<div class="drawing-card image-card overlay-card" id="dc-2">
 						<img src="./assets/drawings/preview/19-chute.jpg" alt="Drawing 2" />
 					</div>
-					<div class="drawing-card" id="dc-3">
+					<div class="drawing-card image-card overlay-card" id="dc-3">
 						<img src="./assets/drawings/preview/18-whisky.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
+				<a class="section-button" href="/draw">View more drawings</a>
 			</section>
 			<div class="separator"></div>
 
 			<section class="printings">
-				<h2>Print</h2>
+				<h2 class="title">Print</h2>
 				<p>I build cosplay props with my 3D printer</p>
 				<div class="printings-grid">
-					<div class="printing-el" id="pe-1">
+					<div class="printing-el image-card overlay-card" id="pe-1">
 						<img src="./assets/prints/preview/13-marteau.jpeg" alt="" />
 					</div>
-					<div class="printing-el" id="pe-2">
+					<div class="printing-el image-card overlay-card" id="pe-2">
 						<img src="./assets/prints/preview/17-leviathan.jpeg" alt="" />
 					</div>
-					<div class="printing-el" id="pe-3">
+					<div class="printing-el image-card overlay-card" id="pe-3">
 						<img src="./assets/prints/preview/18-bouclier.jpeg" alt="" />
 					</div>
-					<div class="printing-el" id="pe-4">
+					<div class="printing-el image-card overlay-card" id="pe-4">
 						<img src="./assets/prints/preview/16-mjolnir.jpeg" alt="" />
 					</div>
-					<div class="printing-el" id="pe-5">
+					<div class="printing-el image-card overlay-card" id="pe-5">
 						<img src="./assets/prints/preview/19-chaos.jpeg" alt="" />
 					</div>
 				</div>
+				<a class="section-button" href="/print">View more prints</a>
 			</section>
 			<div class="separator"></div>
 
 			<section class="about">
-				<div class="about-1"><h2>About Me</h2></div>
+				<div class="about-1"><h2 class="title">About Me</h2></div>
 				<div class="about-2">
 					<p>
 						Hi! I'm Alexis, a passionate developer and artist. I love creating innovative solutions through
