@@ -37,11 +37,6 @@ body {
 	border: 1px solid red !important;
 }
 
-.popup {
-	display: none;
-	opacity: 0;
-}
-
 .stroke-title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);

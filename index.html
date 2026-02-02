@@ -5,11 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="app/main.css" />
 		<link rel="stylesheet" href="app/back.css" />
+		<link rel="stylesheet" href="app/popup.css" />
 		<link rel="stylesheet" href="style-index/general.css" />
 		<link rel="stylesheet" href="style-index/code.css" />
 		<link rel="stylesheet" href="style-index/paint.css" />
 		<link rel="stylesheet" href="style-index/print.css" />
 		<link rel="stylesheet" href="style-index/about.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
 		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
@@ -86,13 +89,13 @@
 				<div class="stroke-title drawings-stroke main-stroke">nice drawings</div>
 				<p>Creativity.</p>
 				<div class="drawings-track">
-					<div class="drawing-card image-card overlay-card" id="dc-1">
+					<div class="drawing-card image-card overlay-card" id="dc-1" data-type="drawing" data-id="24-bebe">
 						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 1" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-2">
-						<img src="./assets/drawings/preview/19-chute.jpg" alt="Drawing 2" />
+					<div class="drawing-card image-card overlay-card" id="dc-2" data-type="drawing" data-id="19-chute">
+						<img src="./assets/drawings/preview/19-chute.jpeg" alt="Drawing 2" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-3">
+					<div class="drawing-card image-card overlay-card" id="dc-3" data-type="drawing" data-id="18-whisky">
 						<img src="./assets/drawings/preview/18-whisky.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
@@ -104,19 +107,19 @@
 				<h2 class="title">Print</h2>
 				<p>I build cosplay props with my 3D printer</p>
 				<div class="printings-grid">
-					<div class="printing-el image-card overlay-card" id="pe-1">
+					<div class="printing-el image-card overlay-card" id="pe-1" data-type="print" data-id="13-marteau">
 						<img src="./assets/prints/preview/13-marteau.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card" id="pe-2">
+					<div class="printing-el image-card overlay-card" id="pe-2" data-type="print" data-id="17-leviathan">
 						<img src="./assets/prints/preview/17-leviathan.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card" id="pe-3">
+					<div class="printing-el image-card overlay-card" id="pe-3" data-type="print" data-id="18-bouclier">
 						<img src="./assets/prints/preview/18-bouclier.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card" id="pe-4">
+					<div class="printing-el image-card overlay-card" id="pe-4" data-type="print" data-id="16-mjolnir">
 						<img src="./assets/prints/preview/16-mjolnir.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card" id="pe-5">
+					<div class="printing-el image-card overlay-card" id="pe-5" data-type="print" data-id="19-chaos">
 						<img src="./assets/prints/preview/19-chaos.jpeg" alt="" />
 					</div>
 				</div>
