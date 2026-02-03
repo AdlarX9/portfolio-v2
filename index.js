@@ -17,16 +17,28 @@ const easing = bezier(0.29, 0, 0.66, 0.99)
 positionCards(cards)
 
 gsap.registerPlugin(ScrollTrigger)
-ScrollTrigger.create({
-	trigger: '.main-cards',
-	start: 'center center',
-	endTrigger: '.main-cards',
-	end: 'bottom top',
-	pin: true,
-	scrub: true,
-	markers: false, // dev
-	onUpdate: self => {
-		positionCards(cards, -easing(self.progress) * 60 + 30)
+let mm = gsap.matchMedia()
+
+// On ajoute la condition : "exécute ceci seulement si la largeur est min 768px"
+mm.add('(min-width: 768px)', () => {
+	// Ton code original se place ici
+	ScrollTrigger.create({
+		trigger: '.main-cards',
+		start: 'center center',
+		endTrigger: '.main-cards',
+		end: 'bottom top',
+		pin: true,
+		scrub: true,
+		markers: false, // dev
+		onUpdate: self => {
+			positionCards(cards, -easing(self.progress) * 60 + 30)
+		}
+	})
+
+	// Optionnel : Fonction de nettoyage
+	// Si tu veux réinitialiser la position des cartes quand on repasse en mobile
+	return () => {
+		// Ex: positionCards(cards, 0);
 	}
 })
 

@@ -25,6 +25,26 @@ section::before {
 	z-index: -1;
 }
 
+section h2 {
+	margin-bottom: 0;
+}
+
+section > p {
+	margin-top: 15px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.section-button {
+	position: absolute;
+	bottom: 50px;
+	text-decoration: none;
+	color: var(--accent);
+	border-radius: 9000px;
+	padding: 10px 25px;
+	border: 1px solid var(--accent);
+}
+
 .separator {
 	height: 1px;
 	width: 95%;
@@ -40,7 +60,8 @@ section::before {
 .track {
 	width: 100%;
 	overflow: hidden;
-	height: 160vh;
+	height: auto;
+	margin-bottom: 200px;
 }
 
 .main-cards {
@@ -50,13 +71,13 @@ section::before {
 	transform-style: preserve-3d;
 	perspective: 50vh;
 	width: 100%;
-	height: 70vh;
+	height: 90vh;
 }
 
 #card {
 	margin-top: 150px;
-	height: 900px;
-	width: 800px;
+	min-height: min(50vh, 900px);
+	width: min(80vw, 800px);
 	position: absolute;
 }
 #card p {
@@ -65,21 +86,20 @@ section::before {
 	margin-bottom: 30px;
 }
 
-section h2 {
-	margin-bottom: 0;
-}
-
-section p {
-	margin-top: 15px;
-	margin-bottom: 100px;
-}
-
-.section-button {
-	position: absolute;
-	bottom: 50px;
-	text-decoration: none;
-	color: var(--accent);
-	border-radius: 9000px;
-	padding: 10px 25px;
-	border: 1px solid var(--accent);
+@media screen and (max-width: 768px) {
+	.main-cards {
+		height: auto;
+		flex-direction: column;
+		perspective: none;
+	}
+	#card {
+		position: static;
+		margin-top: 50px;
+		width: 90vw;
+		min-height: auto;
+		transform: none !important;
+	}
+	.track {
+		height: auto;
+	}
 }
