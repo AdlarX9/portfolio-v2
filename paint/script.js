@@ -72,6 +72,27 @@ export const DATA = {
 		number: 2
 	},
 	'25-mer': {
-		number: 2
+		number: 3
 	}
+}
+
+function createAllPaintings(container) {
+	const paintings = Object.keys(DATA)
+	paintings.reverse().forEach((painting, i) => {
+		const card = document.createElement('div')
+		card.classList.add('card')
+		card.dataset.type = 'painting'
+		card.dataset.id = painting
+		card.innerHTML = `
+			<div class="image-card overlay-card preview" data-type="drawing" data-id="${painting}">
+				<img src="/assets/drawings/preview/${painting}.jpeg" alt="Drawing ${i + 1}" />
+			</div>
+		`
+		container.appendChild(card)
+	})
+}
+
+const allPaintings = document.querySelector('.all-paintings')
+if (allPaintings) {
+	createAllPaintings(allPaintings)
 }

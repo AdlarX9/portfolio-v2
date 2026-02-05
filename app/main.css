@@ -36,6 +36,25 @@ body {
 	border: 1px solid red !important;
 }
 
+.back {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 4rem;
+	left: 4rem;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 99999px;
+	background: rgba(0, 0, 0, 0.5);
+	color: var(--light-two);
+	border: 1px solid var(--middle-one);
+	cursor: pointer;
+	z-index: 1001;
+	font-weight: 500;
+	text-decoration: none;
+}
+
 .stroke-title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);

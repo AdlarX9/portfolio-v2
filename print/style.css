@@ -1,0 +1,37 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.all-prints {
+	max-width: min(90%, 2000px);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 500px);
+	gap: 30px;
+	grid-template-rows: repeat(2, auto);
+	justify-content: center;
+	margin-bottom: 200px;
+}
+
+.all-prints > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.all-prints img {
+	width: 500px;
+	height: auto;
+}
+
+@media screen and (max-width: 767px) {
+	.all-prints {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(5, auto);
+	}
+	.all-prints img {
+		width: 95vw;
+		height: auto;
+	}
+}

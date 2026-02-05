@@ -57,3 +57,24 @@ export const DATA = {
 		number: 1
 	}
 }
+
+function createAllPrints(container) {
+	const prints = Object.keys(DATA)
+	prints.reverse().forEach((print, i) => {
+		const card = document.createElement('div')
+		card.classList.add('card')
+		card.dataset.type = 'print'
+		card.dataset.id = print
+		card.innerHTML = `
+			<div class="image-card overlay-card preview" data-type="print" data-id="${print}">
+				<img src="/assets/prints/preview/${print}.jpeg" alt="Print ${i + 1}" />
+			</div>
+		`
+		container.appendChild(card)
+	})
+}
+
+const allPrints = document.querySelector('.all-prints')
+if (allPrints) {
+	createAllPrints(allPrints)
+}

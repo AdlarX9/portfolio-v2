@@ -79,7 +79,7 @@ async function getReposDetails(username, repoNames) {
 					name: repo.name,
 					description: repo.description || 'Pas de description',
 					// Astuce : Pas besoin d'API pour l'image, on utilise le générateur d'assets GitHub
-					imageUrl: `./assets/code/${repo.name}.jpeg`,
+					imageUrl: `/assets/code/${repo.name}.jpeg`,
 					owner: username,
 					updatedAt: repo.updated_at.split('T')[0], // Format YYYY-MM-DD
 					stars: repo.stargazers_count,
@@ -113,7 +113,7 @@ async function getProjects() {
 						.then(trophees => {
 							data = data.concat(trophees)
 							data.sort((a, b) => {
-								return new Date(b.updatedAt) - new Date(a.updatedAt)
+								return PROJECTS.indexOf(a.name) - PROJECTS.indexOf(b.name)
 							})
 							localStorage.setItem('codingProjects', JSON.stringify(data))
 							res(data)
@@ -131,7 +131,6 @@ async function getProjects() {
 	})
 }
 
-const INDEX_PROJECTS = ['nitflex', 'project-p', 'trophees-nsi', '3d-engine-ascii']
 const COLORS = {
 	JavaScript: '#f1e05a',
 	HTML: '#e34c26',
@@ -144,26 +143,52 @@ const COLORS = {
 	SCSS: '#c6538c',
 	Go: '#00ADD8'
 }
+
+function getCardContent(project) {
+	return `
+		<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
+		<h3 class="subtitle">${NAME_MAP[project.name]}</h3>
+		<p class="description white body">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
+		<div class="languages sub-body">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
+		<aside>
+			<p class="detail-txt"><strong>Last Updated:</strong> ${project.updatedAt}</p>
+			<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
+		</aside>
+		<a class="overlay" href="https://github.com/${project.owner}/${project.name}" target="_blank" rel="noopener noreferrer">
+			<div>See more details</div>
+		</a>
+	`
+}
+
+function createCard(project) {
+	const card = document.createElement('div')
+	card.classList.add('overlay-card', 'gradient-card', 'program-card')
+	card.innerHTML = getCardContent(project)
+	return card
+}
+
+function createAllCards(container) {
+	getProjects().then(projects => {
+		console.log(projects)
+		projects.forEach(project => {
+			const card = createCard(project)
+			container.appendChild(card)
+		})
+	})
+}
+
+const INDEX_PROJECTS = ['nitflex', 'project-p', 'trophees-nsi', '3d-engine-ascii']
 export function createIndexProgramCards(container) {
 	getProjects().then(projects => {
 		projects = projects.filter(project => INDEX_PROJECTS.includes(project.name))
 		projects.forEach(project => {
-			const card = document.createElement('div')
-			card.classList.add('overlay-card', 'gradient-card', 'program-card')
-			card.innerHTML = `
-				<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
-				<h3 class="subtitle">${NAME_MAP[project.name]}</h3>
-				<p class="description white body">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
-				<div class="languages sub-body">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
-				<aside>
-					<p class="detail-txt"><strong>Last Updated:</strong> ${project.updatedAt}</p>
-					<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
-				</aside>
-				<a class="overlay" href="https://github.com/${project.owner}/${project.name}">
-					<div>See more details</div>
-				</a>
-			`
+			const card = createCard(project)
 			container.appendChild(card)
 		})
 	})
+}
+
+const allProjectsContainer = document.querySelector('.all-projects')
+if (allProjectsContainer) {
+	createAllCards(allProjectsContainer)
 }
