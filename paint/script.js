@@ -86,6 +86,7 @@ function createAllPaintings(container) {
 		card.innerHTML = `
 			<div class="image-card overlay-card preview" data-type="drawing" data-id="${painting}">
 				<img src="/assets/drawings/preview/${painting}.jpeg" alt="Drawing ${i + 1}" />
+				<div class="overlay">See more details</div>
 			</div>
 		`
 		container.appendChild(card)

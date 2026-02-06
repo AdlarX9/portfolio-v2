@@ -14,6 +14,10 @@ section {
 	position: relative;
 }
 
+section:not(:last-of-type) {
+	padding-bottom: 300px;
+}
+
 section::before {
 	content: '';
 	display: block;
@@ -56,12 +60,111 @@ section > p {
 	margin-top: -12rem;
 	z-index: -1;
 }
+.main-stroke::before {
+	content: attr(data-text);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	color: transparent;
+	background: radial-gradient(ellipse at top, rgb(47, 0, 88) 20%, var(--dark-one) 80%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-stroke: 0;
+	z-index: 1;
+}
+
+.first-banner {
+	margin-top: 300px;
+}
+
+.swiper-banner {
+	height: 100px;
+	width: 80%;
+	max-width: 1800px;
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+	mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.banner {
+	display: flex;
+	gap: 50px;
+	width: max-content;
+	animation: scroll-banner 80s linear infinite;
+}
+
+.reverse-banner {
+	animation: scroll-banner 80s linear infinite reverse;
+}
+
+@keyframes scroll-banner {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-50% - 25px));
+	}
+}
+
+.banner-el {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	gap: 20px;
+	padding: 0 50px;
+	height: 50px;
+	background: var(--dark-one);
+	border-radius: 9999px;
+	border: 1px solid transparent;
+	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+	background:
+		radial-gradient(ellipse at top, var(--dark-three) 10%, var(--dark-one) 90%) padding-box,
+		linear-gradient(to right, var(--dark-three), var(--middle-three), var(--dark-three)) border-box;
+}
+
+.banner-el img {
+	max-height: 60%;
+	object-fit: contain;
+}
+
+.general-info {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 70%;
+	max-width: 1400px;
+	gap: 50px;
+	margin: 100px 0;
+}
+
+.general-info h2 {
+	margin: 0;
+}
+
+.general-info > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.general-info p {
+	margin: 20px 0;
+}
+
+@media screen and (max-width: 1000px) {
+	.general-info {
+		grid-template-columns: 1fr;
+	}
+}
 
 .track {
 	width: 100%;
 	overflow: hidden;
 	height: auto;
 	margin-bottom: 200px;
+	margin-top: -150px;
 }
 
 .main-cards {
@@ -80,13 +183,17 @@ section > p {
 	width: min(80vw, 800px);
 	position: absolute;
 }
+
 #card p {
 	width: 85%;
 	margin: 0;
 	margin-bottom: 30px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+	section:not(:last-of-type) {
+		padding-bottom: 150px;
+	}
 	.main-cards {
 		height: auto;
 		flex-direction: column;
@@ -101,5 +208,13 @@ section > p {
 	}
 	.track {
 		height: auto;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.swiper-banner {
+		display: none;
+	}
+	.main-stroke {
+		display: none;
 	}
 }

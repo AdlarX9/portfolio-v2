@@ -1,5 +1,5 @@
 .drawings-stroke {
-	margin-top: -80px;
+	margin-top: -5rem;
 	margin-bottom: -40px;
 }
 
@@ -9,7 +9,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 300px;
 }
 
 .drawing-card {
@@ -38,4 +37,25 @@
 	margin-top: 100px;
 	z-index: 1;
 	transform: scale(0.9);
+}
+
+@media screen and (max-width: 767px) {
+	.drawings-stroke {
+		display: none;
+	}
+	.drawings-track {
+		height: auto;
+	}
+	.drawing-card {
+		position: relative;
+	}
+	#dc-2 img {
+		margin-top: 0;
+		transform: none;
+		max-width: 70vw;
+	}
+	#dc-3 {
+		margin-top: 0;
+		transform: none;
+	}
 }

@@ -17,7 +17,7 @@
 	font-weight: 300;
 	letter-spacing: 0.1rem;
 	font-style: normal;
-	font-size: clamp(10px, 0.888vw, 16px)
+	font-size: clamp(8px, 0.888vw, 16px);
 }
 
 body {
@@ -57,12 +57,30 @@ body {
 
 .stroke-title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
-	-webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-	color: rgba(255, 255, 255, 0.03);
 	font-weight: 900;
 	font-size: 10rem;
 	text-transform: uppercase;
 	text-align: center;
+	position: relative;
+	background: linear-gradient(to bottom, var(--middle-one), var(--dark-three));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-stroke: 2px transparent;
+}
+
+.stroke-title::before {
+	content: attr(data-text);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	color: transparent;
+	background: radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-stroke: 0;
+	z-index: 1;
 }
 
 .big-title {
@@ -72,7 +90,7 @@ body {
 	letter-spacing: -0.2rem;
 	text-align: center;
 
-	background: linear-gradient(to bottom, var(--accent), rgb(0, 126, 94));
+	background: linear-gradient(to bottom, var(--accent), rgb(0, 117, 105));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -152,15 +170,17 @@ body {
 	text-decoration: none;
 }
 
-.overlay-card:hover .overlay {
-	opacity: 1;
-}
-
 .overlay-card img {
 	transition: transform 0.3s ease;
 }
-.overlay-card:hover img {
-	transform: scale(1.03);
+
+@media (hover: hover) {
+	.overlay-card:hover .overlay {
+		opacity: 1;
+	}
+	.overlay-card:hover img {
+		transform: scale(1.03);
+	}
 }
 
 .image-card {
@@ -173,8 +193,11 @@ body {
 }
 
 .bordered {
-	border: 1px solid var(--middle-one);
+	border: 1px solid transparent;
 	border-radius: 20px;
+	background:
+		linear-gradient(135deg, var(--dark-two), var(--dark-one)) padding-box,
+		linear-gradient(45deg, var(--middle-three), var(--middle-two), var(--middle-three)) border-box;
 }
 
 .white {

@@ -3,20 +3,6 @@
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	max-width: 70vw;
-	margin-bottom: 300px;
-}
-
-@media screen and (max-width: 1600px) {
-	#program-cards {
-		max-width: 90vw;
-	}
-}
-
-@media screen and (max-width: 1200px) {
-	#program-cards {
-		grid-template-rows: repeat(4, 1fr);
-		grid-template-columns: 1fr;
-	}
 }
 
 .program-card {
@@ -66,5 +52,24 @@
 
 	p {
 		margin: 0;
+	}
+}
+
+@media screen and (max-width: 1600px) {
+	#program-cards {
+		max-width: 90vw;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	#program-cards {
+		grid-template-rows: repeat(4, 1fr);
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.program-card {
+		margin: 20px 0;
 	}
 }

@@ -10,8 +10,9 @@
 			href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Special+Gothic+Expanded+One&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+		<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
 		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
@@ -32,7 +33,74 @@
 		<main class="sections">
 			<section class="main">
 				<h1 class="big-title">Alexis' Portfolio</h1>
-				<div class="stroke-title main-stroke">code, paint, print</div>
+				<div class="stroke-title main-stroke" data-text="code, paint, print">code, paint, print</div>
+
+				<div class="swiper-banner first-banner">
+					<div class="banner"></div>
+				</div>
+				<div class="general-info">
+					<div class="id">
+						<h2 class="title">Who am I?</h2>
+						<p><strong>age: </strong>17</p>
+						<p><strong>status: </strong>student</p>
+						<p>
+							I'm a passionnate learner, always looking for more knowledges when it comes to mathematics
+							and physics. I also do other stuff you will discover down below, enjoy !
+						</p>
+					</div>
+					<div class="awards">
+						<h2 class="title">Prize winner</h2>
+						<p>
+							National Best Project Prize (11th grade) at the 2025
+							<a href="https://trophees-nsi.fr" target="_blank" rel="noopener noreferrer">Trophées NSI</a>
+						</p>
+						<p>
+							10th at the 2025
+							<a
+								href="https://pedagogie.ac-toulouse.fr/mathematiques/node/67"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Mathematics Olympiads
+							</a>
+							of Toulouse
+						</p>
+						<p>
+							11th at the 2025
+							<a
+								href="https://pedagogie.ac-toulouse.fr/informatique/olympiades-de-nsi"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Informatics Olympiads </a
+							>of Toulouse
+						</p>
+						<p>
+							14th place at the 2025
+							<a
+								href="https://etab.ac-reunion.fr/lyc-pierre-lagourgue/wp-content/uploads/sites/146/2025/03/PTHD-Resultats-PreBac.pdf"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Passe Ton Hack D'abord</a
+							>
+						</p>
+						<p>
+							9th place at the 2026
+							<a
+								href="https://www.defense.gouv.fr/comcyber/evenements/passe-ton-hack-dabord-2026"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Passe Ton Hack D'abord</a
+							>
+						</p>
+					</div>
+				</div>
+				<div class="swiper-banner">
+					<div class="banner reverse-banner"></div>
+				</div>
+
 				<div class="track">
 					<div class="main-cards">
 						<div class="gradient-card bordered" id="card">
@@ -93,17 +161,17 @@
 
 			<section class="drawings">
 				<h2 class="title">Paint</h2>
-				<div class="stroke-title drawings-stroke main-stroke">nice drawings</div>
+				<div class="stroke-title drawings-stroke main-stroke" data-text="nice drawings">nice drawings</div>
 				<p>Creativity.</p>
 				<div class="drawings-track">
-					<div class="drawing-card image-card overlay-card" id="dc-1" data-type="drawing" data-id="24-bebe">
-						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 1" />
+					<div class="drawing-card image-card overlay-card" id="dc-1" data-type="drawing" data-id="25-mer">
+						<img src="./assets/drawings/preview/25-mer.jpeg" alt="Drawing 1" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-2" data-type="drawing" data-id="19-chute">
-						<img src="./assets/drawings/preview/19-chute.jpeg" alt="Drawing 2" />
+					<div class="drawing-card image-card overlay-card" id="dc-2" data-type="drawing" data-id="24-bebe">
+						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 2" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-3" data-type="drawing" data-id="18-whisky">
-						<img src="./assets/drawings/preview/18-whisky.jpeg" alt="Drawing 3" />
+					<div class="drawing-card image-card overlay-card" id="dc-3" data-type="drawing" data-id="19-chute">
+						<img src="./assets/drawings/preview/19-chute.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
 				<a class="section-button" href="/paint">View more drawings</a>

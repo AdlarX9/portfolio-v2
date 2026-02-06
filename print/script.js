@@ -68,6 +68,7 @@ function createAllPrints(container) {
 		card.innerHTML = `
 			<div class="image-card overlay-card preview" data-type="print" data-id="${print}">
 				<img src="/assets/prints/preview/${print}.jpeg" alt="Print ${i + 1}" />
+				<div class="overlay">See more details</div>
 			</div>
 		`
 		container.appendChild(card)

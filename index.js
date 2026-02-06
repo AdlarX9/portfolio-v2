@@ -1,6 +1,37 @@
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
 
+const banners = document.querySelectorAll('.banner')
+const LANGUAGES = [
+	'html5',
+	'css3',
+	'javascript',
+	'php',
+	'python',
+	'cplusplus',
+	'swift',
+	'c',
+	'go',
+	'typescript',
+	'rust',
+	'mysql',
+	'postgresql',
+	'bash',
+	'docker',
+	'git',
+	'react'
+]
+
+for (let i = 0; i < 2; i++) {
+	LANGUAGES.forEach(language => {
+		const el = document.createElement('div')
+		el.classList.add('banner-el')
+		const url = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${language}/${language}-original.svg`
+		el.innerHTML = `<img src="${url}" alt="${language} logo" />${language === 'cplusplus' ? 'c++' : language}`
+		banners.forEach(banner => banner.appendChild(el.cloneNode(true)))
+	})
+}
+
 const DELTA_ANGLE = 30
 
 function positionCards(cards, angle = DELTA_ANGLE) {
@@ -35,33 +66,33 @@ mm.add('(min-width: 768px)', () => {
 		}
 	})
 
+	const programsSection = document.getElementById('program-cards')
+	createIndexProgramCards(programsSection)
+
+	ScrollTrigger.create({
+		pin: '#dc-2',
+		trigger: '#dc-1',
+		start: 'top center',
+		end: 'bottom center',
+		pinSpacing: true,
+		markers: false
+	})
+
+	ScrollTrigger.create({
+		pin: '#dc-3',
+		trigger: '#dc-1',
+		start: 'top center',
+		endTrigger: '#dc-1',
+		end: () => `bottom center-=${document.querySelector('#dc-2').offsetHeight}`,
+		pinSpacing: true,
+		markers: false
+	})
+
 	// Optionnel : Fonction de nettoyage
 	// Si tu veux réinitialiser la position des cartes quand on repasse en mobile
 	return () => {
 		// Ex: positionCards(cards, 0);
 	}
-})
-
-const programsSection = document.getElementById('program-cards')
-createIndexProgramCards(programsSection)
-
-ScrollTrigger.create({
-	pin: '#dc-2',
-	trigger: '#dc-1',
-	start: 'top center',
-	end: 'bottom center',
-	pinSpacing: true,
-	markers: false
-})
-
-ScrollTrigger.create({
-	pin: '#dc-3',
-	trigger: '#dc-1',
-	start: 'top center',
-	endTrigger: '#dc-1',
-	end: () => `bottom center-=${document.querySelector('#dc-2').offsetHeight}`,
-	pinSpacing: true,
-	markers: false
 })
 
 const drawingsCards = document.querySelectorAll('.drawing-card')

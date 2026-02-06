@@ -180,6 +180,7 @@ function createAllCards(container) {
 const INDEX_PROJECTS = ['nitflex', 'project-p', 'trophees-nsi', '3d-engine-ascii']
 export function createIndexProgramCards(container) {
 	getProjects().then(projects => {
+		container.innerHTML = ''
 		projects = projects.filter(project => INDEX_PROJECTS.includes(project.name))
 		projects.forEach(project => {
 			const card = createCard(project)
