@@ -75,6 +75,68 @@ section > p {
 	z-index: 1;
 }
 
+.stars {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80rem;
+	z-index: -1;
+	background: transparent;
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+	mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+}
+
+.star {
+	position: absolute;
+	background: white;
+	border-radius: 50%;
+	opacity: 0.8;
+	width: 2px;
+	height: 2px;
+	animation:
+		twinkle 3s infinite,
+		float-star var(--move-duration, 60s) var(--move-delay, 0s) ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+@keyframes float-star {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(var(--move-x, 20px), var(--move-y, 20px));
+	}
+}
+
+#renderSurface {
+	display: none;
+}
+@media (hover: hover) {
+	#renderSurface {
+		display: block;
+		background-color: black;
+		width: 100vw;
+		height: 100%;
+		position: absolute;
+		z-index: -1;
+		bottom: 0;
+		opacity: 0.2;
+		-webkit-mask-image: linear-gradient(to top, black 0%, black 50%, transparent 100%);
+		mask-image: linear-gradient(to top, black 0%, black 50%, transparent 100%);
+	}
+}
+
 .first-banner {
 	margin-top: 300px;
 }
@@ -216,5 +278,8 @@ section > p {
 	}
 	.main-stroke {
 		display: none;
+	}
+	.stars {
+		height: 150rem;
 	}
 }

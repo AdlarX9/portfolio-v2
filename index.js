@@ -1,5 +1,75 @@
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
+import { createStars } from './app/effects.js'
+
+const stars = document.querySelector('.stars')
+if (stars) {
+	createStars(stars, 150)
+}
+
+const canvas = document.getElementById('renderSurface')
+
+if (canvas && typeof Fluid !== 'undefined') {
+	let myFluid = new Fluid(canvas)
+	myFluid.mapBehaviors({
+		sim_resolution: 256,
+		dye_resolution: 512,
+
+		paused: false,
+		embedded_dither: true,
+
+		dissipation: 0.97,
+		velocity: 0.98,
+		pressure: 0.8,
+		pressure_iteration: 20,
+		curl: 10,
+		emitter_size: 256 / Math.max(canvas.width, canvas.height),
+
+		render_shaders: true,
+		multi_color: true,
+
+		render_bloom: false,
+		bloom_iterations: 8,
+		bloom_resolution: 256,
+		intensity: 0.8,
+		threshold: 0.6,
+		soft_knee: 0.7,
+
+		background_color: { r: 13, g: 6, b: 26 },
+		transparent: false
+	})
+
+	document.addEventListener('mousemove', e => {
+		const rect = canvas.getBoundingClientRect()
+		// Position actuelle de la souris
+		const x = e.clientX - rect.left
+		const y = e.clientY - rect.top
+
+		if (myFluid.pointers && myFluid.pointers.length > 0) {
+			const pointer = myFluid.pointers[0]
+			pointer.dx = (x - pointer.x) * 5.0
+			pointer.dy = (y - pointer.y) * 5.0
+			pointer.x = x
+			pointer.y = y
+			pointer.down = true
+			pointer.moved = true
+			pointer.color = generateColor()
+		}
+	})
+	myFluid.activate()
+}
+function getSmartResolution() {
+	let resolution = Math.round(canvas.clientWidth / 20)
+	// On garde des bornes raisonnables pour la performance (min 128, max 1024)
+	return Math.max(128, Math.min(resolution, 1024))
+}
+function generateColor() {
+	return {
+		r: 0.15,
+		g: 0.1,
+		b: 0.2
+	}
+}
 
 const banners = document.querySelectorAll('.banner')
 const LANGUAGES = [

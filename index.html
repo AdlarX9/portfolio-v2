@@ -25,13 +25,15 @@
 		<link rel="stylesheet" href="style-index/paint.css" />
 		<link rel="stylesheet" href="style-index/print.css" />
 		<link rel="stylesheet" href="style-index/about.css" />
+		<script src="lib/fluid.min.js" defer></script>
 		<script src="index.js" type="module" defer></script>
 		<title>Portfolio</title>
 	</head>
 	<body>
-		<div id="back"></div>
 		<main class="sections">
 			<section class="main">
+				<div class="stars"></div>
+				<canvas id="renderSurface"></canvas>
 				<h1 class="big-title">Alexis' Portfolio</h1>
 				<div class="stroke-title main-stroke" data-text="code, paint, print">code, paint, print</div>
 
