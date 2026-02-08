@@ -1,6 +1,6 @@
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
-import { createStars } from './app/effects.js'
+import { createColumns, createStars } from './app/effects.js'
 
 const stars = document.querySelector('.stars')
 if (stars) {
@@ -53,22 +53,14 @@ if (canvas && typeof Fluid !== 'undefined') {
 			pointer.y = y
 			pointer.down = true
 			pointer.moved = true
-			pointer.color = generateColor()
+			pointer.color = {
+				r: 0.15,
+				g: 0.1,
+				b: 0.2
+			}
 		}
 	})
 	myFluid.activate()
-}
-function getSmartResolution() {
-	let resolution = Math.round(canvas.clientWidth / 20)
-	// On garde des bornes raisonnables pour la performance (min 128, max 1024)
-	return Math.max(128, Math.min(resolution, 1024))
-}
-function generateColor() {
-	return {
-		r: 0.15,
-		g: 0.1,
-		b: 0.2
-	}
 }
 
 const banners = document.querySelectorAll('.banner')
@@ -120,9 +112,7 @@ positionCards(cards)
 gsap.registerPlugin(ScrollTrigger)
 let mm = gsap.matchMedia()
 
-// On ajoute la condition : "exécute ceci seulement si la largeur est min 768px"
 mm.add('(min-width: 768px)', () => {
-	// Ton code original se place ici
 	ScrollTrigger.create({
 		trigger: '.main-cards',
 		start: 'center center',
@@ -138,6 +128,24 @@ mm.add('(min-width: 768px)', () => {
 
 	const programsSection = document.getElementById('program-cards')
 	createIndexProgramCards(programsSection)
+	const programs = document.querySelector('.programs')
+	const columns = createColumns(programs, 50)
+	let lastTime = new Date().getTime()
+	function animateColumns() {
+		const currentTime = new Date().getTime()
+		const deltaTime = currentTime - lastTime
+		lastTime = currentTime
+		columns.forEach(column => {
+			column.update(deltaTime)
+		})
+		columns.forEach(column => {
+			column.render()
+		})
+		requestAnimationFrame(animateColumns)
+	}
+	window.addEventListener('load', () => {
+		animateColumns()
+	})
 
 	ScrollTrigger.create({
 		pin: '#dc-2',
@@ -158,11 +166,7 @@ mm.add('(min-width: 768px)', () => {
 		markers: false
 	})
 
-	// Optionnel : Fonction de nettoyage
-	// Si tu veux réinitialiser la position des cartes quand on repasse en mobile
-	return () => {
-		// Ex: positionCards(cards, 0);
-	}
+	return () => {}
 })
 
 const drawingsCards = document.querySelectorAll('.drawing-card')
@@ -171,7 +175,7 @@ drawingsCards.forEach(card => {
 	const overlay = document.createElement('button')
 	overlay.dataset.type = 'drawings'
 	overlay.classList.add('overlay')
-	overlay.innerHTML = '<div class="white body">View more drawings</div>'
+	overlay.innerHTML = '<div class="white body">See more details</div>'
 	card.appendChild(overlay)
 })
 
@@ -181,6 +185,6 @@ printingCards.forEach(card => {
 	const overlay = document.createElement('button')
 	overlay.dataset.type = 'prints'
 	overlay.classList.add('overlay')
-	overlay.innerHTML = '<div class="view-more-prints white body">View more prints</div>'
+	overlay.innerHTML = '<div class="view-more-prints white body">See more details</div>'
 	card.appendChild(overlay)
 })
