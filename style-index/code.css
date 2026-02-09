@@ -118,6 +118,12 @@
 	}
 }
 
+@media (hover: hover) {
+	.program-card:hover {
+		filter: url(#glitch-filter);
+	}
+}
+
 @media screen and (max-width: 1600px) {
 	#program-cards {
 		max-width: 90vw;

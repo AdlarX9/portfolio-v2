@@ -94,6 +94,46 @@ for (let i = 0; i < 2; i++) {
 	})
 }
 
+// === BANNER EL GLARE ===
+// Doit être après la création des éléments banner-el
+
+const bannerEls = document.querySelectorAll('.banner-el')
+
+let bannerGlareMouseX = 0
+let bannerGlareMouseY = 0
+let bannerGlareIsTicking = false
+
+function updateBannerGlares() {
+	bannerEls.forEach(el => {
+		const rect = el.getBoundingClientRect()
+
+		// Si l'élément n'est pas visible à l'écran, on saute le calcul (Perf++)
+		if (rect.bottom < 0 || rect.top > window.innerHeight) return
+
+		// Calcul position relative
+		const x = bannerGlareMouseX - rect.left
+		const y = bannerGlareMouseY - rect.top
+
+		// Injection CSS
+		el.style.setProperty('--x', `${x}px`)
+		el.style.setProperty('--y', `${y}px`)
+	})
+}
+
+// Tracking global de la souris
+window.addEventListener('mousemove', e => {
+	bannerGlareMouseX = e.clientX
+	bannerGlareMouseY = e.clientY
+
+	if (!bannerGlareIsTicking) {
+		window.requestAnimationFrame(() => {
+			updateBannerGlares()
+			bannerGlareIsTicking = false
+		})
+		bannerGlareIsTicking = true
+	}
+})
+
 const DELTA_ANGLE = 30
 
 function positionCards(cards, angle = DELTA_ANGLE) {
@@ -112,6 +152,9 @@ positionCards(cards)
 gsap.registerPlugin(ScrollTrigger)
 let mm = gsap.matchMedia()
 
+const programsSection = document.getElementById('program-cards')
+createIndexProgramCards(programsSection)
+
 mm.add('(min-width: 768px)', () => {
 	ScrollTrigger.create({
 		trigger: '.main-cards',
@@ -126,10 +169,8 @@ mm.add('(min-width: 768px)', () => {
 		}
 	})
 
-	const programsSection = document.getElementById('program-cards')
-	createIndexProgramCards(programsSection)
 	const programs = document.querySelector('.programs')
-	const columns = createColumns(programs, 50)
+	const columns = createColumns(programs, 40)
 	let lastTime = new Date().getTime()
 	function animateColumns() {
 		const currentTime = new Date().getTime()
@@ -188,3 +229,92 @@ printingCards.forEach(card => {
 	overlay.innerHTML = '<div class="view-more-prints white body">See more details</div>'
 	card.appendChild(overlay)
 })
+
+const turbulence = document.querySelector('feTurbulence')
+
+function animateGlitch() {
+	const freq = Math.random() < 0.1 ? 0.01 : Math.random() * 0.4
+
+	turbulence.setAttribute('baseFrequency', `0 ${freq}`)
+
+	requestAnimationFrame(animateGlitch)
+}
+animateGlitch()
+
+const elements = document.querySelectorAll('.scatter-text')
+let allLetters = []
+
+// 1. SETUP DOM (Inchangé)
+elements.forEach(element => {
+	const text = element.textContent.trim()
+	element.innerHTML = ''
+	const words = text.split(/\s+/)
+	words.forEach(wordText => {
+		const wordWrapper = document.createElement('span')
+		wordWrapper.classList.add('word-wrapper')
+		wordText.split('').forEach(char => {
+			const span = document.createElement('span')
+			span.classList.add('letter')
+			span.textContent = char
+			wordWrapper.appendChild(span)
+			allLetters.push({
+				element: span,
+				rect: null,
+				x: 0,
+				y: 0,
+				currentX: 0,
+				currentY: 0
+			})
+		})
+		element.appendChild(wordWrapper)
+	})
+})
+
+let mouse = { x: -1000, y: -1000 }
+const RADIUS = 150
+const FORCE = 100
+
+// 2. Tracking souris (Inchangé)
+window.addEventListener('mousemove', e => {
+	mouse.x = e.clientX
+	mouse.y = e.clientY
+})
+
+// 3. Mise à jour des positions (Optimisée)
+function updateRects() {
+	allLetters.forEach(letter => {
+		letter.rect = letter.element.getBoundingClientRect()
+		letter.x = letter.rect.left + letter.rect.width / 2
+		letter.y = letter.rect.top + letter.rect.height / 2
+	})
+}
+window.addEventListener('resize', updateRects)
+window.addEventListener('scroll', updateRects, { passive: true })
+
+// Init initial
+setTimeout(updateRects, 100)
+
+function animate() {
+	allLetters.forEach(letter => {
+		const dx = mouse.x - letter.x
+		const dy = mouse.y - letter.y
+		const distance = Math.sqrt(dx * dx + dy * dy)
+		let targetX = 0
+		let targetY = 0
+		if (distance < RADIUS) {
+			const angle = Math.atan2(dy, dx)
+			const spread = (RADIUS - distance) / RADIUS
+			targetX = -Math.cos(angle) * spread * FORCE
+			targetY = -Math.sin(angle) * spread * FORCE
+		}
+		letter.currentX += (targetX - letter.currentX) * 0.1
+		letter.currentY += (targetY - letter.currentY) * 0.1
+		if (Math.abs(letter.currentX) > 0.05 || Math.abs(letter.currentY) > 0.05) {
+			letter.element.style.transform = `translate(${letter.currentX}px, ${letter.currentY}px)`
+		}
+	})
+
+	requestAnimationFrame(animate)
+}
+
+animate()

@@ -47,12 +47,39 @@ section > p {
 	border-radius: 9000px;
 	padding: 10px 25px;
 	border: 1px solid var(--accent);
+	overflow: hidden;
+	z-index: 1;
+	transition: color 0.4s ease;
+}
+.section-button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--accent);
+	z-index: -1;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.section-button:hover {
+	color: black;
+}
+.section-button:hover::before {
+	transform: scaleX(1);
+	transform-origin: left;
 }
 
 .separator {
 	height: 1px;
 	width: 95%;
 	background: linear-gradient(to right, transparent, var(--middle-two), transparent);
+}
+
+.main {
+	padding-bottom: 0px !important;
 }
 
 .main-stroke {
@@ -181,9 +208,16 @@ section > p {
 	border-radius: 9999px;
 	border: 1px solid transparent;
 	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+	--x: -100px;
+	--y: -100px;
 	background:
 		radial-gradient(ellipse at top, var(--dark-three) 10%, var(--dark-one) 90%) padding-box,
+		radial-gradient(circle 200px at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)
+			padding-box,
+		radial-gradient(circle 200px at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)
+			border-box,
 		linear-gradient(to right, var(--dark-three), var(--middle-three), var(--dark-three)) border-box;
+	will-change: background-position;
 }
 
 .banner-el img {
@@ -255,6 +289,9 @@ section > p {
 @media screen and (max-width: 767px) {
 	section:not(:last-of-type) {
 		padding-bottom: 150px;
+	}
+	.main {
+		padding-bottom: 150px !important;
 	}
 	.main-cards {
 		height: auto;

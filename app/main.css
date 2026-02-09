@@ -26,6 +26,7 @@ body {
 	font-size: 2rem;
 	background: var(--dark-one);
 	color: var(--light-one);
+	-ms-overflow-style: none;
 }
 
 .show {
@@ -62,12 +63,25 @@ body {
 	text-transform: uppercase;
 	text-align: center;
 	position: relative;
-	background: linear-gradient(to bottom, var(--middle-one), var(--dark-three));
+	background:
+		radial-gradient(
+			circle at var(--x, -50%) var(--y, -50%),
+			rgba(255, 255, 255, 1) 0%,
+			rgba(255, 255, 255, 0.5) 10%,
+			transparent 20%
+		),
+		linear-gradient(to bottom, var(--middle-one), var(--dark-three));
+	background-blend-mode: screen, normal;
 	-webkit-background-clip: text;
 	background-clip: text;
+	color: transparent;
 	-webkit-text-stroke: 2px transparent;
+	transition:
+		--x 0.1s,
+		--y 0.1s;
 }
 
+/* Votre pseudo-élément pour le "corps" du texte (inchangé ou presque) */
 .stroke-title::before {
 	content: attr(data-text);
 	position: absolute;
@@ -75,12 +89,39 @@ body {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	color: transparent;
+
+	/* Le remplissage intérieur du texte */
 	background: radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
-	-webkit-text-stroke: 0;
-	z-index: 1;
+
+	color: transparent;
+	-webkit-text-stroke: 0; /* Pas de bordure sur le corps, juste sur le parent */
+	z-index: -1; /* IMPORTANT : On le met DERRIÈRE pour que le glare du parent (le stroke) soit visible */
+}
+
+@media (hover: hover) {
+	.scatter-text {
+		cursor: default;
+		/* On autorise le retour à la ligne normal */
+		white-space: normal;
+		/* Optionnel : pour éviter que le texte déborde horizontalement */
+		max-width: 100%;
+	}
+
+	/* Le conteneur "mot" (ajouté par le JS) */
+	.word-wrapper {
+		display: inline-block; /* Le mot est un bloc */
+		white-space: nowrap; /* Le mot ne peut pas être coupé */
+		margin-right: 0.25em; /* L'espace entre les mots */
+	}
+
+	/* La lettre individuelle (inchangé) */
+	.scatter-text span.letter {
+		display: inline-block;
+		transition: transform 0.1s linear;
+		will-change: transform;
+	}
 }
 
 .big-title {
@@ -96,12 +137,26 @@ body {
 	color: transparent;
 }
 
+.big-title span.letter {
+	background: linear-gradient(to bottom, var(--accent), rgb(0, 117, 105));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
 .title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	font-size: 5rem;
 	font-weight: 700;
 	text-align: center;
 
+	background: linear-gradient(to bottom, var(--light-two), var(--middle-three));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.title span.letter {
 	background: linear-gradient(to bottom, var(--light-two), var(--middle-three));
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -124,6 +179,20 @@ body {
 	letter-spacing: 0.1rem;
 }
 
+@media (hover: hover) {
+	* {
+		cursor: none !important;
+	}
+}
+@media (hover: none) {
+	* {
+		cursor: default !important;
+	}
+	.glass-cursor {
+		display: none !important;
+	}
+}
+
 .sub-body {
 	font-family: 'Work Sans', sans-serif;
 	color: var(--light-one);
@@ -138,6 +207,20 @@ body {
 	font-size: 1.3rem;
 	font-weight: 100;
 	letter-spacing: 0.25rem;
+}
+
+.text-glare {
+	position: relative;
+	color: transparent;
+	--x: -100px;
+	--y: -100px;
+	background-image:
+		radial-gradient(circle 350px at var(--x) var(--y), white 0%, rgba(255, 255, 255, 0) 50%),
+		linear-gradient(to right, var(--light-one), var(--light-one));
+	-webkit-background-clip: text;
+	background-clip: text;
+	will-change: background-position;
+	cursor: default;
 }
 
 .gradient-card {
@@ -193,13 +276,120 @@ body {
 }
 
 .bordered {
+	position: relative;
 	border: 1px solid transparent;
 	border-radius: 20px;
+	--x: -1000px;
+	--y: -1000px;
 	background:
 		linear-gradient(135deg, var(--dark-two), var(--dark-one)) padding-box,
-		linear-gradient(45deg, var(--middle-three), var(--middle-two), var(--middle-three)) border-box;
+		radial-gradient(circle 500px at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 60%)
+			border-box,
+		linear-gradient(to bottom, var(--middle-two), var(--dark-three)) border-box;
+	/* Optimisation */
+	will-change: background-position;
 }
 
 .white {
 	color: var(--light-two);
+}
+
+/* === CURSOR === */
+
+.glass-cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+
+	background: rgba(138, 43, 226, 0.15);
+	backdrop-filter: blur(4px);
+	border: 1px solid rgba(138, 43, 226, 0.3);
+	box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	z-index: 9999;
+	transition: transform 0.1s ease;
+	will-change: top, left;
+}
+.glass-cursor::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 6px;
+	height: 6px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 50%;
+}
+.glass-cursor.hovered {
+	transform: translate(-50%, -50%) scale(1.5);
+	background: rgba(138, 43, 226, 0.05);
+	border-color: rgba(138, 43, 226, 0.6);
+}
+
+/* === SCROLLBAR === */
+
+body::-webkit-scrollbar {
+	display: none;
+	width: 0;
+}
+.cyber-scrollbar-track {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 12px; /* Zone sensible pour la souris */
+	height: 100vh;
+	background: rgba(0, 0, 0, 0); /* Invisible par défaut */
+	z-index: 9999;
+	/* Une petite ligne fine pour guider l'œil */
+	border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- 3. Le Curseur (Thumb) --- */
+.cyber-scrollbar-thumb {
+	position: absolute;
+	top: 0;
+	right: 2px; /* Un peu décalé pour l'esthétique */
+	width: 6px; /* Très fin au repos */
+	height: 0; /* Sera calculé en JS */
+
+	/* Style Cyber */
+	background: var(--accent); /* Ta couleur verte */
+	border-radius: 10px;
+	cursor: pointer;
+
+	/* L'effet Glare / Neon */
+	box-shadow:
+		0 0 10px var(--accent),
+		inset 0 0 5px rgba(255, 255, 255, 0.5);
+
+	/* Performance */
+	transform-origin: top center;
+	will-change: transform;
+	transition:
+		width 0.3s ease,
+		background-color 0.3s ease;
+}
+
+/* --- Interactions --- */
+
+/* Au survol de la zone, le curseur grossit */
+.cyber-scrollbar-track:hover .cyber-scrollbar-thumb {
+	width: 10px;
+	background: #fff; /* Devient blanc chaud au survol */
+	box-shadow:
+		0 0 15px var(--accent),
+		0 0 5px white;
+}
+
+/* Quand on "attrape" le curseur (active) */
+.cyber-scrollbar-track.grabbing .cyber-scrollbar-thumb {
+	width: 10px;
+	background: #fff;
+	cursor: grabbing;
 }

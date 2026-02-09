@@ -1,3 +1,35 @@
+// star effect
+
+export function createStars(container, count) {
+	for (let i = 0; i < count; i++) {
+		const star = document.createElement('div')
+		star.classList.add('star')
+		const x = Math.random() * 100
+		const y = Math.random() * 100
+		star.style.left = `${x}%`
+		star.style.top = `${y}%`
+
+		// Délai aléatoire pour désynchroniser les animations
+		const twinkleDelay = Math.random() * 5
+		const twinkleDuration = 2 + Math.random() * 3
+		star.style.animationDelay = `${twinkleDelay}s`
+		star.style.animationDuration = `${twinkleDuration}s`
+
+		// Mouvement lent aléatoire
+		const moveDelay = Math.random() * 10
+		const moveDuration = 40 + Math.random() * 30
+		const moveDistance = 20 + Math.random() * 30
+		const angle = Math.random() * Math.PI * 2
+
+		star.style.setProperty('--move-delay', `${moveDelay}s`)
+		star.style.setProperty('--move-duration', `${moveDuration}s`)
+		star.style.setProperty('--move-x', `${Math.cos(angle) * moveDistance}px`)
+		star.style.setProperty('--move-y', `${Math.sin(angle) * moveDistance}px`)
+
+		container.appendChild(star)
+	}
+}
+
 // hacker effect
 
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/`~"
@@ -30,16 +62,19 @@ const observer = new ResizeObserver(entries => {
 		programsHeight = entry.contentRect.height
 	}
 })
-observer.observe(document.querySelector('.programs'))
+const programsSection = document.querySelector('.programs')
+if (programsSection) {
+	observer.observe(programsSection)
+}
 
 const MATRIX_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
 
 class Column {
 	static downSpeed = 8 // vitesse de descente (caractères par seconde)
 	static horizontalSpeed = 0.008 // vitesse d'étalement horizontal
-	static closingSpeed = 0.0008 // vitesse de rapprochement
+	static closingSpeed = 0.008 // vitesse de rapprochement
 	static fadeLength = 10 // nombre de caractères qui s'estompent progressivement
-	static maxChars = 20 // marge de suppression des caractères invisibles
+	static maxChars = 12 // marge de suppression des caractères invisibles
 	static container = document.querySelector('.programs')
 	static lineHeight = 1.2
 
@@ -57,7 +92,7 @@ class Column {
 
 	update(deltaTime) {
 		this.sinceLastMove += deltaTime
-		this.deepness = Math.min(1, this.deepness + (Column.closingSpeed * deltaTime) / 1000)
+		this.deepness = Math.min(1, this.deepness - (Column.closingSpeed * deltaTime) / 1000)
 
 		const speed = Column.downSpeed * (1.5 - this.deepness * 0.5)
 		if (this.sinceLastMove > 1000 / speed) {
@@ -142,36 +177,4 @@ export function createColumns(container, count) {
 		columns.push(column)
 	}
 	return columns
-}
-
-// star effect
-
-export function createStars(container, count) {
-	for (let i = 0; i < count; i++) {
-		const star = document.createElement('div')
-		star.classList.add('star')
-		const x = Math.random() * 100
-		const y = Math.random() * 100
-		star.style.left = `${x}%`
-		star.style.top = `${y}%`
-
-		// Délai aléatoire pour désynchroniser les animations
-		const twinkleDelay = Math.random() * 5
-		const twinkleDuration = 2 + Math.random() * 3
-		star.style.animationDelay = `${twinkleDelay}s`
-		star.style.animationDuration = `${twinkleDuration}s`
-
-		// Mouvement lent aléatoire
-		const moveDelay = Math.random() * 10
-		const moveDuration = 40 + Math.random() * 30
-		const moveDistance = 20 + Math.random() * 30
-		const angle = Math.random() * Math.PI * 2
-
-		star.style.setProperty('--move-delay', `${moveDelay}s`)
-		star.style.setProperty('--move-duration', `${moveDuration}s`)
-		star.style.setProperty('--move-x', `${Math.cos(angle) * moveDistance}px`)
-		star.style.setProperty('--move-y', `${Math.sin(angle) * moveDistance}px`)
-
-		container.appendChild(star)
-	}
 }
