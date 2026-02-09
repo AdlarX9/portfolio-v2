@@ -1,6 +1,6 @@
 .about {
 	flex-direction: row;
-	min-height: 300px;
+	min-height: 18.75rem;
 	margin-bottom: 0;
 }
 
@@ -22,7 +22,7 @@
 	align-items: center;
 	justify-content: start;
 	height: 50vh;
-	min-height: 300px;
+	min-height: 18.75rem;
 	border-left: 1px solid var(--dark-three);
 	background: linear-gradient(to right, var(--dark-two) 50%, transparent);
 }
@@ -30,7 +30,7 @@
 .about-2 p {
 	margin: 0;
 	max-width: 85%;
-	margin-left: 40px;
+	margin-left: 2.5rem;
 }
 
 @media screen and (max-width: 767px) {

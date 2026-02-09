@@ -6,11 +6,11 @@ body {
 
 .all-projects {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, clamp(400px, 40vw, 900px));
+	grid-template-columns: repeat(auto-fill, clamp(25rem, 40vw, 56.25rem));
 	grid-template-rows: repeat(2, auto);
 	width: 80%;
 	justify-content: center;
-	margin-bottom: 200px;
+	margin-bottom: 12.5rem;
 }
 
 @media screen and (max-width: 1000px) {

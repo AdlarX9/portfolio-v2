@@ -2,9 +2,9 @@
 	display: grid;
 	grid-template-columns: 1fr 1.2fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
-	gap: 15px;
+	gap: 1rem;
 	width: 90%;
-	max-width: 900px;
+	max-width: 56.25rem;
 	height: auto;
 	aspect-ratio: 9/10;
 	margin: 0 auto;
@@ -23,7 +23,7 @@
 }
 
 .view-more-prints {
-	padding: 0 20px;
+	padding: 0 1.25rem;
 	text-align: center;
 }
 

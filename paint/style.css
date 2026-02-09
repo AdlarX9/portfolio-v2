@@ -5,13 +5,13 @@ body {
 }
 
 .all-paintings {
-	max-width: min(90%, 2000px);
+	max-width: min(90%, 125rem);
 	display: grid;
-	grid-template-columns: repeat(auto-fill, 500px);
-	gap: 30px;
+	grid-template-columns: repeat(auto-fill, 31.25rem);
+	gap: 2rem;
 	grid-template-rows: repeat(2, auto);
 	justify-content: center;
-	margin-bottom: 200px;
+	margin-bottom: 12.5rem;
 }
 
 .all-paintings > div {
@@ -21,7 +21,7 @@ body {
 }
 
 .all-paintings img {
-	width: 500px;
+	width: 31.25rem;
 	height: auto;
 }
 

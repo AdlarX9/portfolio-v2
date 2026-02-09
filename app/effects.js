@@ -1,3 +1,5 @@
+// === EFFECTS ===
+
 // star effect
 
 export function createStars(container, count) {
@@ -177,4 +179,95 @@ export function createColumns(container, count) {
 		columns.push(column)
 	}
 	return columns
+}
+
+// glare effects
+
+let isTicking = false
+
+export function updateGlareEffects(elements, e) {
+	if (!isTicking) {
+		window.requestAnimationFrame(() => {
+			elements.forEach(el => {
+				const rect = el.getBoundingClientRect()
+				if (rect.bottom < 0 || rect.top > window.innerHeight) return
+				const x = e.clientX - rect.left
+				const y = e.clientY - rect.top
+				el.style.setProperty('--x', `${x}px`)
+				el.style.setProperty('--y', `${y}px`)
+			})
+			isTicking = false
+		})
+		isTicking = true
+	}
+}
+
+// scatter effect
+
+let allLetters = []
+let mouse = { x: -1000, y: -1000 }
+const RADIUS = 150
+const FORCE = 100
+
+export function setupScatterElements(elements) {
+	elements.forEach(element => {
+		const text = element.textContent.trim()
+		element.innerHTML = ''
+		const words = text.split(/\s+/)
+		words.forEach(wordText => {
+			const wordWrapper = document.createElement('span')
+			wordWrapper.classList.add('word-wrapper')
+			wordText.split('').forEach(char => {
+				const span = document.createElement('span')
+				span.classList.add('letter')
+				span.textContent = char
+				wordWrapper.appendChild(span)
+				allLetters.push({
+					element: span,
+					rect: null,
+					x: 0,
+					y: 0,
+					currentX: 0,
+					currentY: 0
+				})
+			})
+			element.appendChild(wordWrapper)
+		})
+	})
+}
+
+export function trackMouseForScatterEffect(e) {
+	mouse.x = e.clientX
+	mouse.y = e.clientY
+}
+
+export function updateRects() {
+	allLetters.forEach(letter => {
+		letter.rect = letter.element.getBoundingClientRect()
+		letter.x = letter.rect.left + letter.rect.width / 2
+		letter.y = letter.rect.top + letter.rect.height / 2
+	})
+}
+
+export function animateScatterEffect() {
+	allLetters.forEach(letter => {
+		const dx = mouse.x - letter.x
+		const dy = mouse.y - letter.y
+		const distance = Math.sqrt(dx * dx + dy * dy)
+		let targetX = 0
+		let targetY = 0
+		if (distance < RADIUS) {
+			const angle = Math.atan2(dy, dx)
+			const spread = (RADIUS - distance) / RADIUS
+			targetX = -Math.cos(angle) * spread * FORCE
+			targetY = -Math.sin(angle) * spread * FORCE
+		}
+		letter.currentX += (targetX - letter.currentX) * 0.1
+		letter.currentY += (targetY - letter.currentY) * 0.1
+		if (Math.abs(letter.currentX) > 0.05 || Math.abs(letter.currentY) > 0.05) {
+			letter.element.style.transform = `translate(${letter.currentX}px, ${letter.currentY}px)`
+		}
+	})
+
+	requestAnimationFrame(animateScatterEffect)
 }

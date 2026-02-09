@@ -1,10 +1,10 @@
 .drawings-stroke {
 	margin-top: -5rem;
-	margin-bottom: -40px;
+	margin-bottom: -2.5rem;
 }
 
 .drawings-track {
-	height: clamp(1650px, max(200vw, 150vh), 2000px);
+	height: clamp(103.125rem, max(200vw, 150vh), 125rem);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -12,7 +12,7 @@
 }
 
 .drawing-card {
-	margin: 20px;
+	margin: 1.3rem;
 	background: black;
 	position: absolute;
 }
@@ -20,7 +20,7 @@
 .drawing-card img {
 	width: auto;
 	max-width: 90vw;
-	max-height: 600px;
+	max-height: 37.5rem;
 	opacity: 0.8;
 	transition: transform 0.3s ease;
 }
@@ -29,12 +29,12 @@
 	z-index: 3;
 }
 #dc-2 {
-	margin-top: 60px;
+	margin-top: 3.75rem;
 	z-index: 2;
 	transform: scale(0.95);
 }
 #dc-3 {
-	margin-top: 100px;
+	margin-top: 6.25rem;
 	z-index: 1;
 	transform: scale(0.9);
 }

@@ -1,3 +1,5 @@
+/* === GENERAL STYLES === */
+
 :root {
 	--dark-one: rgb(13, 6, 26);
 	--dark-two: rgb(20, 11, 43);
@@ -10,6 +12,9 @@
 	--light-two: rgb(230, 232, 233);
 	--secondary-contrast: rgb(255, 237, 242);
 	--accent: rgb(0, 255, 136);
+
+	--circle: 350px;
+	--big-circle: 500px;
 
 	font-optical-sizing: auto;
 	font-family: 'Work Sans', sans-serif;
@@ -29,6 +34,14 @@ body {
 	-ms-overflow-style: none;
 }
 
+/* === UTILS === */
+
+.white {
+	color: var(--light-two);
+}
+
+/* === SHOW CLASS === */
+
 .show {
 	border: 1px solid red !important;
 }
@@ -36,6 +49,8 @@ body {
 .show * {
 	border: 1px solid red !important;
 }
+
+/* === BACK BUTTON ===  */
 
 .back {
 	position: absolute;
@@ -55,6 +70,8 @@ body {
 	font-weight: 500;
 	text-decoration: none;
 }
+
+/* === TITLES SECTION === */
 
 .stroke-title {
 	font-family: 'Zalando Sans Expanded', sans-serif;
@@ -80,8 +97,6 @@ body {
 		--x 0.1s,
 		--y 0.1s;
 }
-
-/* Votre pseudo-élément pour le "corps" du texte (inchangé ou presque) */
 .stroke-title::before {
 	content: attr(data-text);
 	position: absolute;
@@ -89,34 +104,25 @@ body {
 	top: 0;
 	width: 100%;
 	height: 100%;
-
-	/* Le remplissage intérieur du texte */
 	background: radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
-
 	color: transparent;
-	-webkit-text-stroke: 0; /* Pas de bordure sur le corps, juste sur le parent */
-	z-index: -1; /* IMPORTANT : On le met DERRIÈRE pour que le glare du parent (le stroke) soit visible */
+	-webkit-text-stroke: 0;
+	z-index: -1;
 }
 
 @media (hover: hover) {
 	.scatter-text {
 		cursor: default;
-		/* On autorise le retour à la ligne normal */
 		white-space: normal;
-		/* Optionnel : pour éviter que le texte déborde horizontalement */
 		max-width: 100%;
 	}
-
-	/* Le conteneur "mot" (ajouté par le JS) */
 	.word-wrapper {
-		display: inline-block; /* Le mot est un bloc */
-		white-space: nowrap; /* Le mot ne peut pas être coupé */
-		margin-right: 0.25em; /* L'espace entre les mots */
+		display: inline-block;
+		white-space: nowrap;
+		margin-right: 0.25em;
 	}
-
-	/* La lettre individuelle (inchangé) */
 	.scatter-text span.letter {
 		display: inline-block;
 		transition: transform 0.1s linear;
@@ -171,6 +177,8 @@ body {
 	text-align: center;
 }
 
+/* === TEXT SECTION === */
+
 .body {
 	font-family: 'Work Sans', sans-serif;
 	font-size: 2rem;
@@ -215,7 +223,7 @@ body {
 	--x: -100px;
 	--y: -100px;
 	background-image:
-		radial-gradient(circle 350px at var(--x) var(--y), white 0%, rgba(255, 255, 255, 0) 50%),
+		radial-gradient(circle var(--circle) at var(--x) var(--y), white 0%, rgba(255, 255, 255, 0) 50%),
 		linear-gradient(to right, var(--light-one), var(--light-one));
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -223,9 +231,11 @@ body {
 	cursor: default;
 }
 
+/* === CARDS SECTION === */
+
 .gradient-card {
 	border: 1px solid var(--middle-one);
-	border-radius: 10px;
+	border-radius: 0.8rem;
 	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
 	display: flex;
 	flex-direction: column;
@@ -268,7 +278,7 @@ body {
 
 .image-card {
 	border: 1px solid var(--middle-one);
-	border-radius: 10px;
+	border-radius: 0.8rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -278,20 +288,20 @@ body {
 .bordered {
 	position: relative;
 	border: 1px solid transparent;
-	border-radius: 20px;
+	border-radius: 1.5rem;
 	--x: -1000px;
 	--y: -1000px;
 	background:
 		linear-gradient(135deg, var(--dark-two), var(--dark-one)) padding-box,
-		radial-gradient(circle 500px at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 60%)
+		radial-gradient(
+				circle var(--big-circle) at var(--x) var(--y),
+				rgba(255, 255, 255, 0.8) 0%,
+				rgba(255, 255, 255, 0) 60%
+			)
 			border-box,
 		linear-gradient(to bottom, var(--middle-two), var(--dark-three)) border-box;
 	/* Optimisation */
 	will-change: background-position;
-}
-
-.white {
-	color: var(--light-two);
 }
 
 /* === CURSOR === */
@@ -300,14 +310,14 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 40px;
-	height: 40px;
+	width: 2.5rem;
+	height: 2.5rem;
 	border-radius: 50%;
 
 	background: rgba(138, 43, 226, 0.15);
 	backdrop-filter: blur(4px);
 	border: 1px solid rgba(138, 43, 226, 0.3);
-	box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+	box-shadow: 0 0 1rem rgba(138, 43, 226, 0.4);
 
 	transform: translate(-50%, -50%);
 	pointer-events: none;
@@ -321,8 +331,8 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 6px;
-	height: 6px;
+	width: 0.4rem;
+	height: 0.4rem;
 	background: rgba(255, 255, 255, 0.8);
 	border-radius: 50%;
 }
@@ -342,54 +352,39 @@ body::-webkit-scrollbar {
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 12px; /* Zone sensible pour la souris */
+	width: 1rem;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0); /* Invisible par défaut */
+	background: rgba(0, 0, 0, 0);
 	z-index: 9999;
-	/* Une petite ligne fine pour guider l'œil */
 	border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
-
-/* --- 3. Le Curseur (Thumb) --- */
 .cyber-scrollbar-thumb {
 	position: absolute;
 	top: 0;
-	right: 2px; /* Un peu décalé pour l'esthétique */
-	width: 6px; /* Très fin au repos */
-	height: 0; /* Sera calculé en JS */
-
-	/* Style Cyber */
-	background: var(--accent); /* Ta couleur verte */
-	border-radius: 10px;
+	right: 0.125rem;
+	width: 0.4rem;
+	height: 0;
+	background: var(--accent);
+	border-radius: 0.8rem;
 	cursor: pointer;
-
-	/* L'effet Glare / Neon */
 	box-shadow:
-		0 0 10px var(--accent),
-		inset 0 0 5px rgba(255, 255, 255, 0.5);
-
-	/* Performance */
+		0 0 0.8rem var(--accent),
+		inset 0 0 0.3rem rgba(255, 255, 255, 0.5);
 	transform-origin: top center;
 	will-change: transform;
 	transition:
 		width 0.3s ease,
 		background-color 0.3s ease;
 }
-
-/* --- Interactions --- */
-
-/* Au survol de la zone, le curseur grossit */
 .cyber-scrollbar-track:hover .cyber-scrollbar-thumb {
-	width: 10px;
-	background: #fff; /* Devient blanc chaud au survol */
+	width: 0.8rem;
+	background: #fff;
 	box-shadow:
-		0 0 15px var(--accent),
-		0 0 5px white;
+		0 0 1rem var(--accent),
+		0 0 0.5rem white;
 }
-
-/* Quand on "attrape" le curseur (active) */
 .cyber-scrollbar-track.grabbing .cyber-scrollbar-thumb {
-	width: 10px;
+	width: 0.8rem;
 	background: #fff;
 	cursor: grabbing;
 }
