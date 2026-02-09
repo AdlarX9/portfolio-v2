@@ -3,7 +3,7 @@
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
 import { createColumns, createStars } from './app/effects.js'
-import { setupGlareEffects } from './app/main.js'
+import { isBigScreen, manageEffects } from './app/main.js'
 
 // === STARS BACKGROUND ===
 
@@ -100,14 +100,20 @@ for (let i = 0; i < 2; i++) {
 	})
 }
 
-setupGlareEffects()
+manageEffects()
 
 // === MAIN CARDS POSITIONNING ===
 
 const DELTA_ANGLE = 30
+function getCardWidth() {
+    const valVW = window.innerWidth * 0.80; 
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const valREM = rootFontSize * 50;
+    return Math.min(valVW, valREM);
+}
 
 function positionCards(cards, angle = DELTA_ANGLE) {
-	const RADIUS = 2 * 800
+	const RADIUS = 2 * getCardWidth()
 	cards.forEach((card, i) => {
 		const coordX = RADIUS * Math.sin((((i - 1) * DELTA_ANGLE + angle) * Math.PI) / 180)
 		const coordZ = -RADIUS * (1 - Math.cos((((i - 1) * DELTA_ANGLE + angle) * Math.PI) / 180))
@@ -127,8 +133,9 @@ createIndexProgramCards(programsSection)
 // === MATRIX EFFECT ===
 
 const programs = document.querySelector('.programs')
-const columns = createColumns(programs, 40)
-let lastTime = new Date().getTime()
+let columns = null
+let lastTime = null
+let animationID = null
 function animateColumns() {
 	const currentTime = new Date().getTime()
 	const deltaTime = currentTime - lastTime
@@ -139,9 +146,22 @@ function animateColumns() {
 	columns.forEach(column => {
 		column.render()
 	})
-	requestAnimationFrame(animateColumns)
+	animationID = requestAnimationFrame(animateColumns)
 }
-window.addEventListener('load', animateColumns)
+window.addEventListener('load', handleMatrixEffect)
+
+function handleMatrixEffect() {
+	if (isBigScreen.matches) {
+		lastTime = new Date().getTime()
+		columns = createColumns(programs, 40)
+		animateColumns()
+	} else {
+		columns.forEach(column => column.destroy())
+		cancelAnimationFrame(animationID)
+	}
+}
+
+isBigScreen.addEventListener('change', handleMatrixEffect)
 
 // === PREVIEW CARDS OVERLAY GENERATION ===
 

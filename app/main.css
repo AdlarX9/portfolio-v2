@@ -22,7 +22,7 @@
 	font-weight: 300;
 	letter-spacing: 0.1rem;
 	font-style: normal;
-	font-size: clamp(8px, 0.888vw, 16px);
+	font-size: clamp(8px, min(0.695vw, 1.0425vh), 16px);
 }
 
 body {
@@ -112,22 +112,20 @@ body {
 	z-index: -1;
 }
 
-@media (hover: hover) {
-	.scatter-text {
-		cursor: default;
-		white-space: normal;
-		max-width: 100%;
-	}
-	.word-wrapper {
-		display: inline-block;
-		white-space: nowrap;
-		margin-right: 0.25em;
-	}
-	.scatter-text span.letter {
-		display: inline-block;
-		transition: transform 0.1s linear;
-		will-change: transform;
-	}
+.scatter-text {
+	cursor: default;
+	white-space: normal;
+	max-width: 100%;
+}
+.word-wrapper {
+	display: inline-block;
+	white-space: nowrap;
+	margin-right: 0.25em;
+}
+.scatter-text span.letter {
+	display: inline-block;
+	transition: transform 0.1s linear;
+	will-change: transform;
 }
 
 .big-title {

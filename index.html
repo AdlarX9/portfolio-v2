@@ -216,9 +216,7 @@
 		<svg style="display: none">
 			<defs>
 				<filter id="glitch-filter">
-					<!-- FeTurbulence génère du bruit aléatoire -->
 					<feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" result="noise" />
-					<!-- FeDisplacementMap utilise le bruit pour tordre l'image source -->
 					<feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
 				</filter>
 			</defs>

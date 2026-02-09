@@ -257,10 +257,9 @@ section > p {
 
 .track {
 	width: 100%;
-	overflow: hidden;
 	height: auto;
 	margin-bottom: 12.5rem;
-	margin-top: -9.3rem;
+	margin-top: 10rem;
 }
 
 .main-cards {
@@ -270,13 +269,12 @@ section > p {
 	transform-style: preserve-3d;
 	perspective: 50vh;
 	width: 100%;
-	height: 90vh;
+	height: max(54vh, 60rem) !important;
 }
 
 #card {
-	margin-top: 9.3rem;
 	min-height: min(50vh, 56rem);
-	width: min(80vw, 50rem);
+	width: clamp(40rem, 80vw, 50rem);
 	position: absolute;
 }
 

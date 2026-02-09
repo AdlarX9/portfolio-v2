@@ -169,6 +169,10 @@ class Column {
 		this.sinceLastMove = 0
 		this.element.innerHTML = ''
 	}
+
+	destroy() {
+		this.element.remove()
+	}
 }
 
 export function createColumns(container, count) {
@@ -210,16 +214,28 @@ const RADIUS = 150
 const FORCE = 100
 
 export function setupScatterElements(elements) {
+	// Reset pour éviter les doublons
+	allLetters = []
+
 	elements.forEach(element => {
+		// Sauvegarder le HTML original si ce n'est pas déjà fait
+		if (!element.dataset.originalHtml) {
+			element.dataset.originalHtml = element.innerHTML
+		}
+
 		const text = element.textContent.trim()
 		element.innerHTML = ''
 		const words = text.split(/\s+/)
-		words.forEach(wordText => {
+
+		words.forEach((wordText, index) => {
 			const wordWrapper = document.createElement('span')
 			wordWrapper.classList.add('word-wrapper')
+			wordWrapper.style.display = 'inline-block' // Assure que le wrapper se comporte comme un bloc inline
+
 			wordText.split('').forEach(char => {
 				const span = document.createElement('span')
 				span.classList.add('letter')
+				span.style.display = 'inline-block' // Permet les transformations
 				span.textContent = char
 				wordWrapper.appendChild(span)
 				allLetters.push({
@@ -232,6 +248,11 @@ export function setupScatterElements(elements) {
 				})
 			})
 			element.appendChild(wordWrapper)
+
+			// Ajouter un espace après chaque mot (sauf le dernier) pour préserver le layout
+			if (index < words.length - 1) {
+				element.appendChild(document.createTextNode(' '))
+			}
 		})
 	})
 }
@@ -249,6 +270,7 @@ export function updateRects() {
 	})
 }
 
+let scatterAnimationId = null
 export function animateScatterEffect() {
 	allLetters.forEach(letter => {
 		const dx = mouse.x - letter.x
@@ -269,5 +291,21 @@ export function animateScatterEffect() {
 		}
 	})
 
-	requestAnimationFrame(animateScatterEffect)
+	scatterAnimationId = requestAnimationFrame(animateScatterEffect)
+}
+
+export function stopScatterEffect() {
+	if (scatterAnimationId) {
+		cancelAnimationFrame(scatterAnimationId)
+		scatterAnimationId = null
+	}
+	// Restaurer le HTML original
+	const elements = document.querySelectorAll('.scatter-text')
+	elements.forEach(element => {
+		if (element.dataset.originalHtml) {
+			element.innerHTML = element.dataset.originalHtml
+			delete element.dataset.originalHtml
+		}
+	})
+	allLetters = []
 }

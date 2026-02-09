@@ -4,6 +4,7 @@ import {
 	animateScatterEffect,
 	hackerEffect,
 	setupScatterElements,
+	stopScatterEffect,
 	trackMouseForScatterEffect,
 	updateGlareEffects,
 	updateRects
@@ -16,9 +17,6 @@ const DATA = {
 	print: PRINTS_DATA
 }
 
-// condition for effects to be enabled
-export const isMobile = window.matchMedia('(min-width: 768px) and (hover: hover)')
-
 // === SMOOTH SCROLL ===
 
 const lenis = new Lenis()
@@ -27,12 +25,6 @@ function raf(time) {
 	requestAnimationFrame(raf)
 }
 requestAnimationFrame(raf)
-
-const hackerWords = document.querySelectorAll('#hacker')
-
-hackerWords.forEach(word => {
-	word.addEventListener('load', hackerEffect(word))
-})
 
 // === POPUP ===
 
@@ -154,18 +146,16 @@ document.querySelectorAll('a, button, .clickable').forEach(el => {
 
 // === TEXT GLARE ===
 
-// On cible toutes les classes qui ont besoin de l'effet glare
-export function setupGlareEffects() {
-	const glareElements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el')
-
-	window.addEventListener('mousemove', e => {
-		updateGlareEffects(glareElements, e)
-	})
+let glareElements = null
+function reactGlareEffect(e) {
+	updateGlareEffects(glareElements, e)
 }
-export function removeGlareEffects() {
-	window.removeEventListener('mousemove', e => {
-		updateGlareEffects(glareElements, e)
-	})
+function setupGlareEffects() {
+	glareElements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el')
+	window.addEventListener('mousemove', reactGlareEffect)
+}
+function removeGlareEffects() {
+	window.removeEventListener('mousemove', reactGlareEffect)
 }
 
 // === SCROLLBAR ===
@@ -238,10 +228,45 @@ updateThumbSize()
 
 // === SCATTER EFFECT ===
 
-const elements = document.querySelectorAll('.scatter-text')
-setupScatterElements(elements)
-window.addEventListener('mousemove', e => trackMouseForScatterEffect(e))
-window.addEventListener('resize', updateRects)
-window.addEventListener('scroll', updateRects, { passive: true })
-setTimeout(updateRects, 100)
-animateScatterEffect()
+const scatterElements = document.querySelectorAll('.scatter-text')
+
+// === HACKER EFFECT ===
+
+const hackerWords = document.querySelectorAll('#hacker')
+function initHackerEffect() {
+	hackerWords.forEach(word => {
+		hackerEffect(word)
+	})
+}
+
+// === OPTIMIZATION ===
+
+// condition for effects to be enabled
+export const isEnabled = window.matchMedia('(min-width: 768px) and (hover: hover)')
+export const isBigScreen = window.matchMedia('(min-width: 768px)')
+
+export function manageEffects() {
+	if (isEnabled.matches) {
+		setupGlareEffects()
+
+		setupScatterElements(scatterElements)
+		window.addEventListener('mousemove', trackMouseForScatterEffect)
+		window.addEventListener('resize', updateRects)
+		window.addEventListener('scroll', updateRects, { passive: true })
+		setTimeout(updateRects, 100)
+		animateScatterEffect()
+
+		window.addEventListener('load', initHackerEffect)
+	} else {
+		removeGlareEffects()
+
+		window.removeEventListener('mousemove', trackMouseForScatterEffect)
+		window.removeEventListener('resize', updateRects)
+		window.removeEventListener('scroll', updateRects)
+		stopScatterEffect()
+
+		window.removeEventListener('load', initHackerEffect)
+	}
+}
+
+isEnabled.addEventListener('change', manageEffects)
