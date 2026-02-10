@@ -14,6 +14,24 @@ if (stars) {
 
 // === FLUID SIMULATION ===
 
+function parseColorString(colorString) {
+	const matches = colorString.match(/\d+/g)
+	if (!matches || matches.length < 3) {
+		throw new Error('Format de couleur invalide')
+	}
+
+	return {
+		r: parseInt(matches[0], 10),
+		g: parseInt(matches[1], 10),
+		b: parseInt(matches[2], 10)
+	}
+}
+function getCssColor(variableName) {
+	const style = getComputedStyle(document.documentElement)
+	const color = style.getPropertyValue(variableName).trim()
+	return parseColorString(color)
+}
+
 const canvas = document.getElementById('renderSurface')
 if (canvas && typeof Fluid !== 'undefined') {
 	let myFluid = new Fluid(canvas)
@@ -41,13 +59,16 @@ if (canvas && typeof Fluid !== 'undefined') {
 		threshold: 0.6,
 		soft_knee: 0.7,
 
-		background_color: { r: 13, g: 6, b: 26 },
+		background_color: getCssColor('--dark-one'),
 		transparent: false
 	})
 	document.addEventListener('mousemove', e => {
 		const rect = canvas.getBoundingClientRect()
 		const x = e.clientX - rect.left
 		const y = e.clientY - rect.top
+
+		const { r, g, b } = getCssColor('--accent')
+		const factor = 1500
 
 		if (myFluid.pointers && myFluid.pointers.length > 0) {
 			const pointer = myFluid.pointers[0]
@@ -57,11 +78,7 @@ if (canvas && typeof Fluid !== 'undefined') {
 			pointer.y = y
 			pointer.down = true
 			pointer.moved = true
-			pointer.color = {
-				r: 0.15,
-				g: 0.1,
-				b: 0.2
-			}
+			pointer.color = { r: r / factor, g: g / factor, b: b / factor }
 		}
 	})
 	myFluid.activate()
@@ -106,10 +123,10 @@ manageEffects()
 
 const DELTA_ANGLE = 30
 function getCardWidth() {
-    const valVW = window.innerWidth * 0.80; 
-    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const valREM = rootFontSize * 50;
-    return Math.min(valVW, valREM);
+	const valVW = window.innerWidth * 0.8
+	const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
+	const valREM = rootFontSize * 50
+	return Math.min(valVW, valREM)
 }
 
 function positionCards(cards, angle = DELTA_ANGLE) {
@@ -171,7 +188,7 @@ printingCards.forEach(card => {
 	const overlay = document.createElement('button')
 	overlay.dataset.type = 'prints'
 	overlay.classList.add('overlay')
-	overlay.innerHTML = '<div class="view-more-prints white body">See more details</div>'
+	overlay.innerHTML = '<div class="view-more-prints accent body">See more details</div>'
 	card.appendChild(overlay)
 })
 
@@ -181,7 +198,7 @@ drawingsCards.forEach(card => {
 	const overlay = document.createElement('button')
 	overlay.dataset.type = 'drawings'
 	overlay.classList.add('overlay')
-	overlay.innerHTML = '<div class="white body">See more details</div>'
+	overlay.innerHTML = '<div class="accent body">See more details</div>'
 	card.appendChild(overlay)
 })
 
@@ -237,3 +254,45 @@ mm.add('(min-width: 768px)', () => {
 
 	return () => {}
 })
+
+// const container = document.getElementById('shutters');
+// const numberOfBars = 3; // Nombre de rectangles
+
+// // 1. Génération propre (Fragment pour perf)
+// const fragment = document.createDocumentFragment();
+// for (let i = 0; i < numberOfBars; i++) {
+//     const div = document.createElement('div');
+//     div.classList.add('shutter-bar');
+//     fragment.appendChild(div);
+// }
+// container.appendChild(fragment);
+
+// // 2. Animation Loop
+// let mouseX = 0, mouseY = 0;
+// let currentDelta = 0;
+
+// window.addEventListener('mousemove', e => {
+//     mouseX = e.clientX;
+//     mouseY = e.clientY;
+// });
+
+// function animate() {
+//     // Calcul du centre de l'écran
+//     const centerX = window.innerWidth / 2;
+//     const centerY = window.innerHeight / 2;
+
+//     // Calcul de la distance souris par rapport au centre
+//     // On projette ça sur une valeur simple
+//     const dist = (mouseX - centerX) + (mouseY - centerY);
+
+//     // Smooth Lerp (Interpolation linéaire pour la fluidité)
+//     // Facteur 0.05 = vitesse du retard (plus c'est bas, plus c'est "lourd")
+//     currentDelta += (dist - currentDelta);
+
+//     // Mise à jour CSS : On envoie juste un chiffre
+//     container.style.setProperty('--mouse-delta', currentDelta * 0.5); // 0.5 = sensibilité
+
+//     requestAnimationFrame(animate);
+// }
+
+// animate();

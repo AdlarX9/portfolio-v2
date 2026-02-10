@@ -13,6 +13,10 @@
 	--secondary-contrast: rgb(255, 237, 242);
 	--accent: rgb(0, 255, 136);
 
+	--matrix-color: var(--accent);
+	--cursor-color: 0, 255, 136;
+	--circle-color: var(--accent);
+
 	--circle: 350px;
 	--big-circle: 500px;
 
@@ -37,7 +41,11 @@ body {
 /* === UTILS === */
 
 .white {
-	color: var(--light-two);
+	color: var(--light-two) !important;
+}
+
+.accent {
+	color: var(--accent) !important;
 }
 
 /* === SHOW CLASS === */
@@ -83,9 +91,9 @@ body {
 	background:
 		radial-gradient(
 			circle at var(--x, -50%) var(--y, -50%),
-			rgba(255, 255, 255, 1) 0%,
-			rgba(255, 255, 255, 0.5) 10%,
-			transparent 20%
+			var(--circle-color) 0%,
+			rgba(from var(--circle-color) r g b / 80%) 10%,
+			transparent 25%
 		),
 		linear-gradient(to bottom, var(--middle-one), var(--dark-three));
 	background-blend-mode: screen, normal;
@@ -104,7 +112,13 @@ body {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
+	background:
+		radial-gradient(
+			circle at var(--x, -50%) var(--y, -50%),
+			rgba(from var(--circle-color) r g b / 7%) 0%,
+			transparent 20%
+		),
+		radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -221,7 +235,7 @@ body {
 	--x: -100px;
 	--y: -100px;
 	background-image:
-		radial-gradient(circle var(--circle) at var(--x) var(--y), white 0%, rgba(255, 255, 255, 0) 50%),
+		radial-gradient(circle var(--circle) at var(--x) var(--y), var(--circle-color) 0%, rgba(255, 255, 255, 0) 50%),
 		linear-gradient(to right, var(--light-one), var(--light-one));
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -293,7 +307,7 @@ body {
 		linear-gradient(135deg, var(--dark-two), var(--dark-one)) padding-box,
 		radial-gradient(
 				circle var(--big-circle) at var(--x) var(--y),
-				rgba(255, 255, 255, 0.8) 0%,
+				var(--circle-color) 0%,
 				rgba(255, 255, 255, 0) 60%
 			)
 			border-box,
@@ -305,25 +319,31 @@ body {
 /* === CURSOR === */
 
 .glass-cursor {
+	/* ... propriétés de position inchangées ... */
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 50%;
-
-	background: rgba(138, 43, 226, 0.15);
-	backdrop-filter: blur(4px);
-	border: 1px solid rgba(138, 43, 226, 0.3);
-	box-shadow: 0 0 1rem rgba(138, 43, 226, 0.4);
-
 	transform: translate(-50%, -50%);
 	pointer-events: none;
 	z-index: 9999;
 	transition: transform 0.1s ease;
 	will-change: top, left;
+
+	/* 2. Syntaxe RGBA Classique : var, alpha */
+	background: rgba(var(--cursor-color), 0.15);
+
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px); /* Important pour Safari */
+
+	border: 1px solid rgba(var(--cursor-color), 0.3);
+	box-shadow: 0 0 1rem rgba(var(--cursor-color), 0.4);
 }
+
 .glass-cursor::after {
+	/* ... inchangé ... */
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -334,12 +354,14 @@ body {
 	background: rgba(255, 255, 255, 0.8);
 	border-radius: 50%;
 }
+
 .glass-cursor.hovered {
 	transform: translate(-50%, -50%) scale(1.5);
-	background: rgba(138, 43, 226, 0.05);
-	border-color: rgba(138, 43, 226, 0.6);
-}
 
+	/* 3. Variantes au survol */
+	background: rgba(var(--cursor-color), 0.05);
+	border-color: rgba(var(--cursor-color), 0.6);
+}
 /* === SCROLLBAR === */
 
 body::-webkit-scrollbar {

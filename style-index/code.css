@@ -15,49 +15,26 @@
 	line-height: 1.2;
 }
 
-:root {
-	/* UNE SEULE variable à modifier pour tout changer */
-	--matrix-color: rgb(0, 255, 0);
-}
-
-/* Le caractère "Actif" (Tête de colonne) */
 .char-bright {
-	/* On mélange la couleur de base avec 70% de blanc pour l'effet "flash" */
 	color: color-mix(in srgb, var(--matrix-color), white 70%);
-
-	/* L'ombre reste la couleur pure, très intense */
 	text-shadow: 0 0 0.5rem var(--matrix-color);
 	font-weight: bold;
 }
-
-/* Les premiers caractères de la traînée (Dégradé vert clair) */
 .char-fade-0 {
-	/* Mélange avec 40% de blanc (pastel) */
 	color: color-mix(in srgb, var(--matrix-color), white 40%);
-	/* Ombre légèrement assombrie */
 	text-shadow: 0 0 0.4rem color-mix(in srgb, var(--matrix-color), black 20%);
 }
-
 .char-fade-1 {
-	/* Couleur quasi pure (mélangée avec 10% de noir) */
 	color: color-mix(in srgb, var(--matrix-color), black 10%);
 	text-shadow: 0 0 0.2rem color-mix(in srgb, var(--matrix-color), black 40%);
 }
-
-/* Les caractères suivants s'assombrissent progressivement vers le noir */
-
 .char-fade-2 {
-	/* 40% de noir */
 	color: color-mix(in srgb, var(--matrix-color), black 40%);
 }
-
 .char-fade-3 {
-	/* 60% de noir */
 	color: color-mix(in srgb, var(--matrix-color), black 60%);
 }
-
 .char-fade-4 {
-	/* 80% de noir (très sombre) */
 	color: color-mix(in srgb, var(--matrix-color), black 80%);
 }
 
@@ -121,6 +98,7 @@
 @media (hover: hover) {
 	.program-card:hover {
 		filter: url(#glitch-filter);
+		border-color: var(--accent);
 	}
 }
 

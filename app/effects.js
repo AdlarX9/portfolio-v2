@@ -1,7 +1,33 @@
 // === EFFECTS ===
 
+export class Effect {
+	constructor() {
+		// Activate effect
+		this.mobile = false
+		// AND
+		this.smallScreen = false
+
+		// Init function
+		this.init = null
+		// Called in RequestAnimationFrame loop
+		this.update = null
+
+		// Window listeners
+		this.scroll = null
+		this.resize = null
+		this.mousemove = null
+		this.click = null
+		this.mousedown = null
+		this.mouseup = null
+		this.load = null
+
+		this.cleanup = null
+	}
+}
+
 // star effect
 
+// init
 export function createStars(container, count) {
 	for (let i = 0; i < count; i++) {
 		const star = document.createElement('div')
@@ -34,8 +60,8 @@ export function createStars(container, count) {
 
 // hacker effect
 
+// utils
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/`~"
-
 function randomString(length) {
 	let result = ''
 	for (let i = 0; i < length; i++) {
@@ -45,6 +71,7 @@ function randomString(length) {
 	return result
 }
 
+// load
 export function hackerEffect(element) {
 	const originalText = element.innerText
 	const repeat = 3
@@ -58,6 +85,7 @@ export function hackerEffect(element) {
 
 // matrix effect
 
+// utils
 let programsHeight = 0
 const observer = new ResizeObserver(entries => {
 	for (const entry of entries) {
@@ -68,7 +96,6 @@ const programsSection = document.querySelector('.programs')
 if (programsSection) {
 	observer.observe(programsSection)
 }
-
 const MATRIX_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
 
 class Column {
@@ -175,6 +202,7 @@ class Column {
 	}
 }
 
+// load
 export function createColumns(container, count) {
 	const columns = []
 	for (let i = 0; i < count; i++) {
@@ -187,8 +215,10 @@ export function createColumns(container, count) {
 
 // glare effects
 
+// utils
 let isTicking = false
 
+// mousemove
 export function updateGlareEffects(elements, e) {
 	if (!isTicking) {
 		window.requestAnimationFrame(() => {
@@ -208,11 +238,13 @@ export function updateGlareEffects(elements, e) {
 
 // scatter effect
 
+// utils
 let allLetters = []
 let mouse = { x: -1000, y: -1000 }
 const RADIUS = 150
 const FORCE = 100
 
+// load
 export function setupScatterElements(elements) {
 	// Reset pour éviter les doublons
 	allLetters = []
@@ -257,11 +289,13 @@ export function setupScatterElements(elements) {
 	})
 }
 
+// mousemove
 export function trackMouseForScatterEffect(e) {
 	mouse.x = e.clientX
 	mouse.y = e.clientY
 }
 
+// mousemove
 export function updateRects() {
 	allLetters.forEach(letter => {
 		letter.rect = letter.element.getBoundingClientRect()
@@ -270,6 +304,7 @@ export function updateRects() {
 	})
 }
 
+// update
 let scatterAnimationId = null
 export function animateScatterEffect() {
 	allLetters.forEach(letter => {
@@ -294,6 +329,7 @@ export function animateScatterEffect() {
 	scatterAnimationId = requestAnimationFrame(animateScatterEffect)
 }
 
+// cleanup
 export function stopScatterEffect() {
 	if (scatterAnimationId) {
 		cancelAnimationFrame(scatterAnimationId)

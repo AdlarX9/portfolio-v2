@@ -74,8 +74,14 @@ section > p {
 
 .separator {
 	height: 1px;
-	width: 95%;
-	background: linear-gradient(to right, transparent, var(--middle-two), transparent);
+	width: 100%;
+	background:
+		radial-gradient(
+			circle var(--big-circle) at var(--x) var(--y),
+			var(--circle-color) 0%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		linear-gradient(to right, transparent 5%, var(--middle-two), transparent 95%);
 }
 
 .main {
@@ -95,7 +101,13 @@ section > p {
 	width: 100%;
 	height: 100%;
 	color: transparent;
-	background: radial-gradient(ellipse at top, rgb(47, 0, 88) 20%, var(--dark-one) 80%);
+	background:
+		radial-gradient(
+			circle at var(--x, -50%) var(--y, -50%),
+			rgba(from var(--circle-color) r g b / 7%) 0%,
+			transparent 20%
+		),
+		radial-gradient(ellipse at top, rgb(47, 0, 88) 20%, var(--dark-one) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-stroke: 0;
@@ -154,13 +166,13 @@ section > p {
 		display: block;
 		background-color: black;
 		width: 100vw;
-		height: 100%;
+		height: calc(100% - 90vh);
 		position: absolute;
 		z-index: -1;
 		bottom: 0;
 		opacity: 0.2;
-		-webkit-mask-image: linear-gradient(to top, black 0%, black 50%, transparent 100%);
-		mask-image: linear-gradient(to top, black 0%, black 50%, transparent 100%);
+		-webkit-mask-image: linear-gradient(to top, black 0%, black 50%, rgba(0, 0, 0, 0.05) 90%, transparent 100%);
+		mask-image: linear-gradient(to top, black 0%, black 50%, rgba(0, 0, 0, 0.05) 90%, transparent 100%);
 	}
 }
 
@@ -211,10 +223,14 @@ section > p {
 	--x: -100px;
 	--y: -100px;
 	background:
-		radial-gradient(ellipse at top, var(--dark-three) 10%, var(--dark-one) 90%) padding-box,
-		radial-gradient(circle var(--circle) at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)
+		radial-gradient(
+				circle var(--circle) at var(--x) var(--y),
+				rgba(from var(--circle-color) r g b / 10%) 0%,
+				rgba(255, 255, 255, 0) 100%
+			)
 			padding-box,
-		radial-gradient(circle var(--circle) at var(--x) var(--y), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)
+		radial-gradient(ellipse at top, var(--dark-three) 10%, var(--dark-one) 90%) padding-box,
+		radial-gradient(circle var(--circle) at var(--x) var(--y), var(--circle-color) 0%, rgba(255, 255, 255, 0) 100%)
 			border-box,
 		linear-gradient(to right, var(--dark-three), var(--middle-three), var(--dark-three)) border-box;
 	will-change: background-position;

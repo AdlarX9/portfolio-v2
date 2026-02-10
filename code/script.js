@@ -155,7 +155,7 @@ function getCardContent(project) {
 			<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
 		</aside>
 		<a class="overlay" href="https://github.com/${project.owner}/${project.name}" target="_blank" rel="noopener noreferrer">
-			<div>See more details</div>
+			<div class="accent body">See more details</div>
 		</a>
 	`
 }

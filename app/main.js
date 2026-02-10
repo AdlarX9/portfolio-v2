@@ -139,19 +139,32 @@ document.addEventListener('mousemove', e => {
 	cursor.style.left = e.clientX + 'px'
 	cursor.style.top = e.clientY + 'px'
 })
-document.querySelectorAll('a, button, .clickable').forEach(el => {
-	el.addEventListener('mouseenter', () => cursor.classList.add('hovered'))
-	el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'))
-})
+window.addEventListener('mousemove', (e) => {
+    // 1. On récupère TOUS les éléments sous la souris à cette position
+    const elementsUnder = document.elementsFromPoint(e.clientX, e.clientY);
+    
+    // 2. On vérifie si L'UN d'eux est un élément interactif
+    // On cherche si dans la pile, il y a un <a>, un <button> ou un .clickable
+    const isHoveringClickable = elementsUnder.some(el => {
+        return el.matches('a, button, .clickable') || el.closest('a, button, .clickable');
+    });
 
-// === TEXT GLARE ===
+    // 3. On applique la classe
+    if (isHoveringClickable) {
+        cursor.classList.add('hovered');
+    } else {
+        cursor.classList.remove('hovered');
+    }
+});
+
+// === GLARE ===
 
 let glareElements = null
 function reactGlareEffect(e) {
 	updateGlareEffects(glareElements, e)
 }
 function setupGlareEffects() {
-	glareElements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el')
+	glareElements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el, .separator')
 	window.addEventListener('mousemove', reactGlareEffect)
 }
 function removeGlareEffects() {

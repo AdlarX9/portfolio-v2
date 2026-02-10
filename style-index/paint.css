@@ -1,3 +1,46 @@
+/* :root {
+	--rectangles-color: 138, 43, 226;
+	--angle: -45deg;
+	--spacing: 40px;
+	--bar-width: 60px;
+}
+.shutter-container {
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	z-index: -1;
+	transform: rotate(var(--angle));
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing);
+	mask-image: radial-gradient(circle, black 40%, transparent 80%);
+	-webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+	--mouse-delta: 0;
+}
+.shutter-bar {
+	width: 100%;
+	height: var(--bar-width);
+	background: rgba(var(--rectangles-color), 0.1);
+	border: 1px solid rgba(var(--rectangles-color), 0.2);
+	backdrop-filter: blur(2px);
+	box-shadow: 0 0 20px rgba(var(--rectangles-color), 0.1);
+	border-radius: 4px;
+	will-change: transform;
+	transition: transform 0.1s linear;
+}
+.shutter-bar:nth-child(odd) {
+	transform: translateX(calc(var(--mouse-delta) * 1px));
+	background: linear-gradient(90deg, transparent, rgba(var(--rectangles-color), 0.2), transparent);
+}
+.shutter-bar:nth-child(even) {
+	transform: translateX(calc(var(--mouse-delta) * -1px));
+	background: linear-gradient(270deg, transparent, rgba(var(--rectangles-color), 0.2), transparent);
+} */
+
 .drawings-stroke {
 	margin-top: -5rem;
 	margin-bottom: -2.5rem;
