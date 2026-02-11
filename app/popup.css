@@ -23,8 +23,8 @@
 	align-items: center;
 	border-radius: 99999px;
 	background: rgba(0, 0, 0, 0.5);
-	color: var(--light-two);
-	border: 1px solid var(--middle-one);
+	color: rgb(var(--light-two));
+	border: 1px solid rgb(var(--middle-one));
 	cursor: pointer;
 	z-index: 1001;
 }

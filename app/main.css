@@ -1,28 +1,28 @@
 /* === GENERAL STYLES === */
 
 :root {
-	--dark-one: rgb(13, 6, 26);
-	--dark-two: rgb(20, 11, 43);
-	--dark-three: rgb(38, 31, 49);
-	--dark-four: rgb(35, 25, 63);
-	--middle-one: rgb(149, 133, 203);
-	--middle-two: rgb(159, 156, 164);
-	--middle-three: rgb(175, 153, 250);
-	--light-one: rgb(170, 163, 194);
-	--light-two: rgb(230, 232, 233);
-	--secondary-contrast: rgb(255, 237, 242);
-	--accent: rgb(0, 255, 136);
+	--dark-one: 13, 6, 26;
+	--dark-two: 20, 11, 43;
+	--dark-three: 38, 31, 49;
+	--dark-four: 35, 25, 63;
+	--middle-one: 149, 133, 203;
+	--middle-two: 159, 156, 164;
+	--middle-three: 175, 153, 250;
+	--light-one: 170, 163, 194;
+	--light-two: 230, 232, 233;
+	--secondary-contrast: 255, 237, 242;
+	--accent: 0, 255, 136;
 
-	--matrix-color: var(--accent);
+	--matrix-color: 0, 255, 136;
 	--cursor-color: 0, 255, 136;
-	--circle-color: var(--accent);
+	--circle-color: 0, 255, 136;
 
 	--circle: 350px;
 	--big-circle: 500px;
 
 	font-optical-sizing: auto;
 	font-family: 'Work Sans', sans-serif;
-	color: var(--light-one);
+	color: rgb(var(--light-one));
 	font-weight: 300;
 	letter-spacing: 0.1rem;
 	font-style: normal;
@@ -33,19 +33,19 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 2rem;
-	background: var(--dark-one);
-	color: var(--light-one);
+	background: rgb(var(--dark-one));
+	color: rgb(var(--light-one));
 	-ms-overflow-style: none;
 }
 
 /* === UTILS === */
 
 .white {
-	color: var(--light-two) !important;
+	color: rgb(var(--light-two)) !important;
 }
 
 .accent {
-	color: var(--accent) !important;
+	color: rgb(var(--accent)) !important;
 }
 
 /* === SHOW CLASS === */
@@ -71,8 +71,8 @@ body {
 	height: 3.5rem;
 	border-radius: 99999px;
 	background: rgba(0, 0, 0, 0.5);
-	color: var(--light-two);
-	border: 1px solid var(--middle-one);
+	color: rgb(var(--light-two));
+	border: 1px solid rgb(var(--middle-one));
 	cursor: pointer;
 	z-index: 1001;
 	font-weight: 500;
@@ -91,11 +91,11 @@ body {
 	background:
 		radial-gradient(
 			circle at var(--x, -50%) var(--y, -50%),
-			var(--circle-color) 0%,
-			rgba(from var(--circle-color) r g b / 80%) 10%,
+			rgb(var(--circle-color)) 0%,
+			rgba(var(--circle-color), 0.8) 10%,
 			transparent 25%
 		),
-		linear-gradient(to bottom, var(--middle-one), var(--dark-three));
+		linear-gradient(to bottom, rgb(var(--middle-one)), rgb(var(--dark-three)));
 	background-blend-mode: screen, normal;
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -113,12 +113,8 @@ body {
 	width: 100%;
 	height: 100%;
 	background:
-		radial-gradient(
-			circle at var(--x, -50%) var(--y, -50%),
-			rgba(from var(--circle-color) r g b / 7%) 0%,
-			transparent 20%
-		),
-		radial-gradient(ellipse at top, var(--dark-two) 20%, var(--dark-one) 80%);
+		radial-gradient(circle at var(--x, -50%) var(--y, -50%), rgba(var(--circle-color), 0.07) 0%, transparent 20%),
+		radial-gradient(ellipse at top, rgb(var(--dark-two)) 20%, rgb(var(--dark-one)) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -149,14 +145,14 @@ body {
 	letter-spacing: -0.2rem;
 	text-align: center;
 
-	background: linear-gradient(to bottom, var(--accent), rgb(0, 117, 105));
+	background: linear-gradient(to bottom, rgb(var(--accent)), rgb(0, 117, 105));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
 .big-title span.letter {
-	background: linear-gradient(to bottom, var(--accent), rgb(0, 117, 105));
+	background: linear-gradient(to bottom, rgb(var(--accent)), rgb(0, 117, 105));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -168,14 +164,14 @@ body {
 	font-weight: 700;
 	text-align: center;
 
-	background: linear-gradient(to bottom, var(--light-two), var(--middle-three));
+	background: linear-gradient(to bottom, rgb(var(--light-two)), rgb(var(--middle-three)));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
 .title span.letter {
-	background: linear-gradient(to bottom, var(--light-two), var(--middle-three));
+	background: linear-gradient(to bottom, rgb(var(--light-two)), rgb(var(--middle-three)));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -184,7 +180,7 @@ body {
 .subtitle {
 	font-family: 'Zalando Sans Expanded', sans-serif;
 	font-size: 3rem;
-	color: var(--light-two);
+	color: rgb(var(--light-two));
 	font-weight: 600;
 	text-align: center;
 }
@@ -194,7 +190,7 @@ body {
 .body {
 	font-family: 'Work Sans', sans-serif;
 	font-size: 2rem;
-	color: var(--light-one);
+	color: rgb(var(--light-one));
 	font-weight: 300;
 	letter-spacing: 0.1rem;
 }
@@ -215,7 +211,7 @@ body {
 
 .sub-body {
 	font-family: 'Work Sans', sans-serif;
-	color: var(--light-one);
+	color: rgb(var(--light-one));
 	font-weight: 200;
 	font-size: 1.6rem;
 	letter-spacing: 0.2rem;
@@ -223,7 +219,7 @@ body {
 
 .detail-txt {
 	font-family: 'Work Sans', sans-serif;
-	color: var(--light-one);
+	color: rgb(var(--light-one));
 	font-size: 1.3rem;
 	font-weight: 100;
 	letter-spacing: 0.25rem;
@@ -235,8 +231,12 @@ body {
 	--x: -100px;
 	--y: -100px;
 	background-image:
-		radial-gradient(circle var(--circle) at var(--x) var(--y), var(--circle-color) 0%, rgba(255, 255, 255, 0) 50%),
-		linear-gradient(to right, var(--light-one), var(--light-one));
+		radial-gradient(
+			circle var(--circle) at var(--x) var(--y),
+			rgb(var(--circle-color)) 0%,
+			rgba(255, 255, 255, 0) 50%
+		),
+		linear-gradient(to right, rgb(var(--light-one)), rgb(var(--light-one)));
 	-webkit-background-clip: text;
 	background-clip: text;
 	will-change: background-position;
@@ -246,9 +246,9 @@ body {
 /* === CARDS SECTION === */
 
 .gradient-card {
-	border: 1px solid var(--middle-one);
+	border: 1px solid rgb(var(--middle-one));
 	border-radius: 0.8rem;
-	background: linear-gradient(135deg, var(--dark-two), var(--dark-one));
+	background: linear-gradient(135deg, rgb(var(--dark-two)), rgb(var(--dark-one)));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -289,7 +289,7 @@ body {
 }
 
 .image-card {
-	border: 1px solid var(--middle-one);
+	border: 1px solid rgb(var(--middle-one));
 	border-radius: 0.8rem;
 	display: flex;
 	align-items: center;
@@ -304,14 +304,14 @@ body {
 	--x: -1000px;
 	--y: -1000px;
 	background:
-		linear-gradient(135deg, var(--dark-two), var(--dark-one)) padding-box,
+		linear-gradient(135deg, rgb(var(--dark-two)), rgb(var(--dark-one))) padding-box,
 		radial-gradient(
 				circle var(--big-circle) at var(--x) var(--y),
-				var(--circle-color) 0%,
+				rgb(var(--circle-color)) 0%,
 				rgba(255, 255, 255, 0) 60%
 			)
 			border-box,
-		linear-gradient(to bottom, var(--middle-two), var(--dark-three)) border-box;
+		linear-gradient(to bottom, rgb(var(--middle-two)), rgb(var(--dark-three))) border-box;
 	/* Optimisation */
 	will-change: background-position;
 }
@@ -384,11 +384,11 @@ body::-webkit-scrollbar {
 	right: 0.125rem;
 	width: 0.4rem;
 	height: 0;
-	background: var(--accent);
+	background: rgb(var(--accent));
 	border-radius: 0.8rem;
 	cursor: pointer;
 	box-shadow:
-		0 0 0.8rem var(--accent),
+		0 0 0.8rem rgb(var(--accent)),
 		inset 0 0 0.3rem rgba(255, 255, 255, 0.5);
 	transform-origin: top center;
 	will-change: transform;
@@ -400,7 +400,7 @@ body::-webkit-scrollbar {
 	width: 0.8rem;
 	background: #fff;
 	box-shadow:
-		0 0 1rem var(--accent),
+		0 0 1rem rgb(var(--accent)),
 		0 0 0.5rem white;
 }
 .cyber-scrollbar-track.grabbing .cyber-scrollbar-thumb {

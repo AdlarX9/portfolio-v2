@@ -16,26 +16,26 @@
 }
 
 .char-bright {
-	color: color-mix(in srgb, var(--matrix-color), white 70%);
-	text-shadow: 0 0 0.5rem var(--matrix-color);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), white 70%);
+	text-shadow: 0 0 0.5rem rgb(var(--matrix-color));
 	font-weight: bold;
 }
 .char-fade-0 {
-	color: color-mix(in srgb, var(--matrix-color), white 40%);
-	text-shadow: 0 0 0.4rem color-mix(in srgb, var(--matrix-color), black 20%);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), white 40%);
+	text-shadow: 0 0 0.4rem color-mix(in srgb, rgb(var(--matrix-color)), black 20%);
 }
 .char-fade-1 {
-	color: color-mix(in srgb, var(--matrix-color), black 10%);
-	text-shadow: 0 0 0.2rem color-mix(in srgb, var(--matrix-color), black 40%);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), black 10%);
+	text-shadow: 0 0 0.2rem color-mix(in srgb, rgb(var(--matrix-color)), black 40%);
 }
 .char-fade-2 {
-	color: color-mix(in srgb, var(--matrix-color), black 40%);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), black 40%);
 }
 .char-fade-3 {
-	color: color-mix(in srgb, var(--matrix-color), black 60%);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), black 60%);
 }
 .char-fade-4 {
-	color: color-mix(in srgb, var(--matrix-color), black 80%);
+	color: color-mix(in srgb, rgb(var(--matrix-color)), black 80%);
 }
 
 #program-cards {
@@ -98,7 +98,7 @@
 @media (hover: hover) {
 	.program-card:hover {
 		filter: url(#glitch-filter);
-		border-color: var(--accent);
+		border-color: rgb(var(--accent));
 	}
 }
 

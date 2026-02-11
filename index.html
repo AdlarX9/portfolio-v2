@@ -15,16 +15,13 @@
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
 		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
+
+		<script src="lib/fluid.js" defer></script>
 		<script src="app/main.js" type="module" defer></script>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style-index/general.css" />
-		<link rel="stylesheet" href="style-index/code.css" />
-		<link rel="stylesheet" href="style-index/paint.css" />
-		<link rel="stylesheet" href="style-index/print.css" />
-		<link rel="stylesheet" href="style-index/about.css" />
-		<script src="lib/fluid.min.js" defer></script>
+		<link rel="stylesheet" href="index.css" />
 		<script src="index.js" type="module" defer></script>
 		<title>Portfolio</title>
 	</head>
@@ -106,7 +103,9 @@
 					<div class="main-cards">
 						<div class="gradient-card bordered" id="card">
 							<h3 class="subtitle">Code</h3>
-							<p class="text-glare">Hey, I'm a passionnate developer that likes to create innovative stuff through code.</p>
+							<p class="text-glare">
+								Hey, I'm a passionnate developer that likes to create innovative stuff through code.
+							</p>
 							<p class="text-glare">
 								I've gone through multiple projects and technologies from full-stack web development to
 								video games, simulators and engines.
@@ -166,13 +165,13 @@
 				<div class="stroke-title drawings-stroke main-stroke" data-text="nice drawings">nice drawings</div>
 				<p class="text-glare">Creativity.</p>
 				<div class="drawings-track">
-					<div class="drawing-card image-card overlay-card" id="dc-1" data-type="drawing" data-id="25-mer">
+					<div class="drawing-card image-card overlay-card liquid" id="dc-1" data-type="drawing" data-id="25-mer">
 						<img src="./assets/drawings/preview/25-mer.jpeg" alt="Drawing 1" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-2" data-type="drawing" data-id="24-bebe">
+					<div class="drawing-card image-card overlay-card liquid" id="dc-2" data-type="drawing" data-id="24-bebe">
 						<img src="./assets/drawings/preview/24-bebe.jpeg" alt="Drawing 2" />
 					</div>
-					<div class="drawing-card image-card overlay-card" id="dc-3" data-type="drawing" data-id="19-chute">
+					<div class="drawing-card image-card overlay-card liquid" id="dc-3" data-type="drawing" data-id="19-chute">
 						<img src="./assets/drawings/preview/19-chute.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
@@ -184,19 +183,44 @@
 				<h2 class="title scatter-text">Print</h2>
 				<p class="text-glare">I build cosplay props with my 3D printer</p>
 				<div class="printings-grid">
-					<div class="printing-el image-card overlay-card bordered" id="pe-1" data-type="print" data-id="13-marteau">
+					<div
+						class="printing-el image-card overlay-card bordered"
+						id="pe-1"
+						data-type="print"
+						data-id="13-marteau"
+					>
 						<img src="./assets/prints/preview/13-marteau.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card bordered" id="pe-2" data-type="print" data-id="17-leviathan">
+					<div
+						class="printing-el image-card overlay-card bordered"
+						id="pe-2"
+						data-type="print"
+						data-id="17-leviathan"
+					>
 						<img src="./assets/prints/preview/17-leviathan.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card bordered" id="pe-3" data-type="print" data-id="18-bouclier">
+					<div
+						class="printing-el image-card overlay-card bordered"
+						id="pe-3"
+						data-type="print"
+						data-id="18-bouclier"
+					>
 						<img src="./assets/prints/preview/18-bouclier.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card bordered" id="pe-4" data-type="print" data-id="16-mjolnir">
+					<div
+						class="printing-el image-card overlay-card bordered"
+						id="pe-4"
+						data-type="print"
+						data-id="16-mjolnir"
+					>
 						<img src="./assets/prints/preview/16-mjolnir.jpeg" alt="" />
 					</div>
-					<div class="printing-el image-card overlay-card bordered" id="pe-5" data-type="print" data-id="19-chaos">
+					<div
+						class="printing-el image-card overlay-card bordered"
+						id="pe-5"
+						data-type="print"
+						data-id="19-chaos"
+					>
 						<img src="./assets/prints/preview/19-chaos.jpeg" alt="" />
 					</div>
 				</div>
@@ -214,16 +238,44 @@
 				</div>
 			</section>
 		</main>
-		<svg style="display: none">
-			<defs>
-				<filter id="glitch-filter">
-					<feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" result="noise" />
-					<feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
-				</filter>
-			</defs>
-		</svg>
 		<div class="cyber-scrollbar-track">
 			<div class="cyber-scrollbar-thumb"></div>
 		</div>
+		<svg style="display: none">
+			<defs>
+				<!-- 1. FILTRE GLITCH (Existant) -->
+				<filter id="glitch-filter">
+					<!-- J'ai ajouté l'ID 'turb-glitch' pour le cibler en JS -->
+					<feTurbulence
+						id="turb-glitch"
+						type="fractalNoise"
+						baseFrequency="0.5"
+						numOctaves="1"
+						result="noise"
+					/>
+					<feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
+				</filter>
+
+				<!-- 2. FILTRE LIQUID (Nouveau) -->
+				<filter id="liquid-filter">
+					<!-- J'ai ajouté les ID 'turb-liquid' et 'disp-liquid' -->
+					<feTurbulence
+						id="turb-liquid"
+						type="fractalNoise"
+						baseFrequency="0.02 0.03"
+						numOctaves="1"
+						result="noise"
+					/>
+					<feDisplacementMap
+						id="disp-liquid"
+						in="SourceGraphic"
+						in2="noise"
+						scale="0"
+						xChannelSelector="R"
+						yChannelSelector="G"
+					/>
+				</filter>
+			</defs>
+		</svg>
 	</body>
 </html>

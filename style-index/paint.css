@@ -1,9 +1,10 @@
-/* :root {
+:root {
 	--rectangles-color: 138, 43, 226;
-	--angle: -45deg;
+	--angle: -40deg;
 	--spacing: 40px;
-	--bar-width: 60px;
+	--bar-width: 5rem;
 }
+
 .shutter-container {
 	position: absolute;
 	top: -50%;
@@ -11,35 +12,58 @@
 	width: 200%;
 	height: 200%;
 	z-index: -1;
-	transform: rotate(var(--angle));
+
+	/* On bouge tout le conteneur sur le GPU */
+	transform: rotate(var(--angle)) translateZ(0);
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: var(--spacing);
-	mask-image: radial-gradient(circle, black 40%, transparent 80%);
-	-webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+
+	/* OPTIMISATION : On enlève le mask-image lourd. 
+	   Si tu veux vraiment l'effet fondu, utilise un overlay statique par dessus */
+	pointer-events: none;
+
+	/* Variable pilotée par le JS */
 	--mouse-delta: 0;
 }
+
 .shutter-bar {
 	width: 100%;
 	height: var(--bar-width);
-	background: rgba(var(--rectangles-color), 0.1);
-	border: 1px solid rgba(var(--rectangles-color), 0.2);
-	backdrop-filter: blur(2px);
-	box-shadow: 0 0 20px rgba(var(--rectangles-color), 0.1);
-	border-radius: 4px;
+
+	/* FAKE GLASS : On utilise de l'opacité simple au lieu du blur */
+	background: rgba(var(--rectangles-color), 0.05);
+	border-top: 1px solid rgba(var(--accent), 0.3);
+	border-bottom: 1px solid rgba(var(--accent), 0.1);
+	border-left: 1px solid rgba(var(--accent), 0.1);
+	border-right: 1px solid rgba(var(--accent), 0.3);
+	border-radius: 0.5rem;
+
+	/* On garde un shadow léger mais sans grand rayon de flou */
+	box-shadow: 0 0 10px rgba(var(--rectangles-color), 0.05);
+
+	/* IMPORTANT : Pas de transition ici car le JS fait déjà l'interpolation (Lerp) */
+	/* transition: transform 0.1s linear; <--- SUPPRIMÉ */
+
 	will-change: transform;
-	transition: transform 0.1s linear;
+	/* translate3d force l'accélération matérielle */
+	transform: translate3d(0, 0, 0);
 }
+
+/* Optimisation des sélecteurs pour éviter les calculs complexes */
 .shutter-bar:nth-child(odd) {
-	transform: translateX(calc(var(--mouse-delta) * 1px));
-	background: linear-gradient(90deg, transparent, rgba(var(--rectangles-color), 0.2), transparent);
+	/* translate3d est vital pour la perf */
+	transform: translate3d(calc(var(--mouse-delta) * 0.1rem), 0, 0);
+	background: linear-gradient(90deg, transparent, rgba(var(--rectangles-color), 0.15), transparent);
 }
+
 .shutter-bar:nth-child(even) {
-	transform: translateX(calc(var(--mouse-delta) * -1px));
-	background: linear-gradient(270deg, transparent, rgba(var(--rectangles-color), 0.2), transparent);
-} */
+	transform: translate3d(calc(var(--mouse-delta) * -0.1rem), 0, 0);
+	background: linear-gradient(270deg, transparent, rgba(var(--rectangles-color), 0.15), transparent);
+}
 
 .drawings-stroke {
 	margin-top: -5rem;
@@ -80,6 +104,13 @@
 	margin-top: 6.25rem;
 	z-index: 1;
 	transform: scale(0.9);
+}
+
+@media (hover: hover) {
+	.liquid:hover {
+		filter: url(#liquid-filter);
+		will-change: filter;
+	}
 }
 
 @media screen and (max-width: 767px) {
