@@ -169,7 +169,6 @@ function createCard(project) {
 
 function createAllCards(container) {
 	getProjects().then(projects => {
-		console.log(projects)
 		projects.forEach(project => {
 			const card = createCard(project)
 			container.appendChild(card)

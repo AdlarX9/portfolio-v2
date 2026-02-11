@@ -61,7 +61,7 @@ distortionEffect.update = () => {
 		currentScale += (targetScale - currentScale) * DAMPING
 
 		// Application au DOM
-		dispLiquid.setAttribute('scale', currentScale)
+		dispLiquid.setAttribute('scale', currentScale + 30)
 
 		// Animation fluide de la texture de l'eau
 		const freqX = 0.02 + Math.sin(time) * 0.002

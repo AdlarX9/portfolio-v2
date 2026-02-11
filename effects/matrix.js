@@ -152,6 +152,7 @@ function cleanup() {
 }
 
 const matrixEffect = new Effect()
+matrixEffect.mobile = true
 matrixEffect.init = init
 matrixEffect.update = update
 matrixEffect.cleanup = cleanup

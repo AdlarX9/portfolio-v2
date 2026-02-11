@@ -1,7 +1,15 @@
 // === MAIN ===
 
 import { effectManager } from './effects.js'
-import { cursorEffect, glareEffect, hackerEffect, popupEffect, scatterEffect, scrollbarEffect, smoothScrollEffect } from '../effects/index.js'
+import {
+	cursorEffect,
+	glareEffect,
+	hackerEffect,
+	popupEffect,
+	scatterEffect,
+	scrollbarEffect,
+	smoothScrollEffect
+} from '../effects/index.js'
 
 // Setup effects for all pages
 

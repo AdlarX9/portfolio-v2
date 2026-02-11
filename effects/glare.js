@@ -1,12 +1,17 @@
-import { Effect } from "../app/effects.js"
+import { Effect } from '../app/effects.js'
 
 // utils
 let isTicking = false
-const elements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el, .separator')
+let elements = null
+
+// load
+function load() {
+	elements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el, .separator')
+}
 
 // mousemove
 function mousemove(e) {
-	if (!isTicking) {
+	if (!isTicking && elements) {
 		window.requestAnimationFrame(() => {
 			elements.forEach(el => {
 				const rect = el.getBoundingClientRect()
@@ -25,5 +30,6 @@ function mousemove(e) {
 const glareEffect = new Effect()
 glareEffect.smallScreen = true
 glareEffect.mousemove = mousemove
+glareEffect.load = load
 
 export default glareEffect

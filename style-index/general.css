@@ -130,8 +130,8 @@
 	border-radius: 9999px;
 	border: 1px solid transparent;
 	box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-	--x: -100px;
-	--y: -100px;
+	--x: -1000px;
+	--y: -1000px;
 	background:
 		radial-gradient(
 				circle var(--circle) at var(--x) var(--y),
@@ -177,11 +177,45 @@
 
 .general-info p {
 	margin: 1.25rem 0;
+	letter-spacing: 0.01ch;
 }
 
 @media screen and (max-width: 1000px) {
 	.general-info {
 		grid-template-columns: 1fr;
+	}
+}
+
+.id {
+	gap: 2rem;
+}
+
+.id p {
+	line-height: 1.2;
+}
+
+.awards > div {
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+
+.awards a {
+	flex-shrink: 0;
+}
+
+.awards svg {
+	width: 3rem;
+	height: 3rem;
+	margin-left: 1rem;
+	color: rgb(var(--accent));
+	opacity: 0.6;
+	transition: opacity 0.3s;
+}
+
+@media (hover: hover) {
+	.awards a:hover svg {
+		opacity: 1;
 	}
 }
 
@@ -197,9 +231,9 @@
 	align-items: center;
 	justify-content: center;
 	transform-style: preserve-3d;
-	perspective: 50vh;
+	perspective: 60rem;
 	width: 100%;
-	height: max(54vh, 60rem) !important;
+	height: max(70vh, 56rem) !important;
 }
 
 #card {
@@ -222,7 +256,7 @@
 		padding-bottom: 150px !important;
 	}
 	.main-cards {
-		height: auto;
+		height: auto !important;
 		flex-direction: column;
 		perspective: none;
 	}
@@ -246,5 +280,8 @@
 	}
 	.stars {
 		height: 150rem;
+	}
+	.general-info {
+		width: 90%;
 	}
 }

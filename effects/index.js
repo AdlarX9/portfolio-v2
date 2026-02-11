@@ -10,6 +10,7 @@ import popupEffect from './popup.js'
 import rectanglesEffect from './rectangles.js'
 import scatterEffect from './scatter.js'
 import scrollbarEffect from './scrollbar.js'
+import lightningEffect from './lightning.js'
 
 export {
 	glareEffect,
@@ -23,5 +24,6 @@ export {
 	popupEffect,
 	rectanglesEffect,
 	scatterEffect,
-	scrollbarEffect
+	scrollbarEffect,
+	lightningEffect
 }

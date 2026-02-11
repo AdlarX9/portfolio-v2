@@ -81,11 +81,17 @@ section > p {
 .separator {
 	height: 1px;
 	width: 100%;
-	background:
-		radial-gradient(
-			circle var(--big-circle) at var(--x) var(--y),
-			rgb(var(--circle-color)) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		linear-gradient(to right, transparent 5%, rgb(var(--middle-two)), transparent 95%);
+	background: linear-gradient(to right, transparent 5%, rgb(var(--middle-two)), transparent 95%);
+}
+
+@media (hover: hover) {
+	.separator {
+		background:
+			radial-gradient(
+				circle var(--big-circle) at var(--x) var(--y),
+				rgb(var(--circle-color)) 0%,
+				rgba(255, 255, 255, 0) 100%
+			),
+			linear-gradient(to right, transparent 5%, rgb(var(--middle-two)), transparent 95%);
+	}
 }

@@ -1,4 +1,4 @@
-import { Effect, effectManager } from "../app/effects.js"
+import { Effect, effectManager } from '../app/effects.js'
 
 // utils
 let allLetters = []

@@ -35,9 +35,14 @@ function init() {
 	}
 }
 
+// cleanup
+function cleanup() {
+	container.innerHTML = ''
+}
+
 const starsEffect = new Effect()
-starsEffect.smallScreen = true
 starsEffect.mobile = true
 starsEffect.init = init
+starsEffect.cleanup = cleanup
 
 export default starsEffect

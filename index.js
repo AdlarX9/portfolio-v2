@@ -2,8 +2,15 @@
 
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
-import { effectManager } from './app/effects.js'
-import { fluidEffect, distortionEffect, matrixEffect, rectanglesEffect, starsEffect } from './effects/index.js'
+import { Effect, effectManager } from './app/effects.js'
+import {
+	fluidEffect,
+	distortionEffect,
+	matrixEffect,
+	rectanglesEffect,
+	starsEffect,
+	lightningEffect
+} from './effects/index.js'
 
 // === BANNER GENERATION ===
 
@@ -41,6 +48,9 @@ for (let i = 0; i < 2; i++) {
 // === CARDS STUFF ===
 
 const DELTA_ANGLE = 30
+const cards = document.querySelectorAll('#card')
+let lastAngle = DELTA_ANGLE
+
 function getCardWidth() {
 	const valVW = window.innerWidth * 0.8
 	const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
@@ -48,7 +58,8 @@ function getCardWidth() {
 	return Math.min(valVW, valREM)
 }
 
-function positionCards(cards, angle = DELTA_ANGLE) {
+function positionCards(angle = lastAngle) {
+	lastAngle = angle
 	const RADIUS = 2 * getCardWidth()
 	cards.forEach((card, i) => {
 		const coordX = RADIUS * Math.sin((((i - 1) * DELTA_ANGLE + angle) * Math.PI) / 180)
@@ -57,9 +68,12 @@ function positionCards(cards, angle = DELTA_ANGLE) {
 	})
 }
 
-const cards = document.querySelectorAll('#card')
 const easing = bezier(0.29, 0, 0.66, 0.99)
-positionCards(cards)
+const cardEffect = new Effect()
+cardEffect.smallScreen = true
+cardEffect.mobile = true
+cardEffect.init = () => positionCards()
+cardEffect.resize = () => positionCards()
 
 const programsSection = document.getElementById('program-cards')
 createIndexProgramCards(programsSection)
@@ -99,7 +113,7 @@ mm.add('(min-width: 768px)', () => {
 		scrub: true,
 		markers: false, // dev
 		onUpdate: self => {
-			positionCards(cards, -easing(self.progress) * 60 + 30)
+			positionCards(-easing(self.progress) * 60 + 30)
 		}
 	})
 
@@ -132,3 +146,5 @@ effectManager.add(fluidEffect)
 effectManager.add(matrixEffect)
 effectManager.add(distortionEffect)
 effectManager.add(rectanglesEffect)
+effectManager.add(lightningEffect)
+effectManager.add(cardEffect)

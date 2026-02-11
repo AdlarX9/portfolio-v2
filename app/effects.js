@@ -88,11 +88,11 @@ class EffectsManager {
 		const shouldBeActive =
 			(effect.mobile ? true : !this.isMobile.matches) && (effect.smallScreen ? true : !this.isSmallScreen.matches)
 		if (shouldBeActive && !this.activeEffects.has(effect)) {
-			this.activeEffects.add(effect)
 			effect.init && effect.init()
-		} else {
-			this.activeEffects.delete(effect)
+			this.activeEffects.add(effect)
+		} else if (!shouldBeActive && this.activeEffects.has(effect)) {
 			effect.cleanup && effect.cleanup()
+			this.activeEffects.delete(effect)
 		}
 	}
 
