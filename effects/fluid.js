@@ -1,8 +1,8 @@
 import { Effect } from '../app/effects.js'
 
 // utils
-const canvas = document.getElementById('renderSurface')
-let myFluid = new Fluid(canvas)
+let canvas = null
+let myFluid = null
 
 function parseColorString(colorString) {
 	const matches = colorString.match(/\d+/g)
@@ -23,6 +23,9 @@ function getCssColor(variableName) {
 
 // init
 function init() {
+	canvas = document.getElementById('renderSurface')
+
+	myFluid = new Fluid(canvas)
 	myFluid.mapBehaviors({
 		sim_resolution: 256,
 		dye_resolution: 512,

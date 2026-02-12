@@ -16,29 +16,53 @@ if (programsSection) {
 const MATRIX_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
 
 class Column {
-	static downSpeed = 8 // vitesse de descente (caractères par seconde)
-	static horizontalSpeed = 0.008 // vitesse d'étalement horizontal
-	static closingSpeed = 0.008 // vitesse de rapprochement
-	static fadeLength = 10 // nombre de caractères qui s'estompent progressivement
-	static maxChars = 12 // marge de suppression des caractères invisibles
+	static downSpeed = 8
+	static horizontalSpeed = 0.008
+	static closingSpeed = 0.008
+	static fadeLength = 10
+	static maxChars = 12
 	static container = document.querySelector('.programs')
 	static lineHeight = 1.2
 
 	constructor(x, y, deepness) {
-		this.x = x // [0, 1], 0 = gauche, 1 = droite
-		this.deepness = deepness // [0, 1], 0 = proche, 1 = loin
-		this.sinceLastMove = 0 // durée depuis le dernier ajout d'un caractère
+		this.x = x // [0, 1]
+
+		// --- FIX 1 : Sécurisation de l'initialisation ---
+		// Si deepness est invalide ou hors borne, on force une valeur aléatoire correcte
+		if (isNaN(deepness) || deepness < 0 || deepness > 1) {
+			this.deepness = Math.random() * 0.7
+		} else {
+			this.deepness = deepness
+		}
+
+		this.sinceLastMove = 0
 		this.element = document.createElement('div')
 		this.element.classList.add('column')
-		const height = document.querySelector('.programs').scrollHeight
-		this.top = y * height - 200
+
+		// Sécurité si .programs n'est pas encore chargé
+		const containerHeight = document.querySelector('.programs')?.scrollHeight || window.innerHeight
+		this.top = y * containerHeight - 200
+
 		this.element.style.transform = `translateY(${this.top}px)`
 		this.fontSize = -1
 	}
 
 	update(deltaTime) {
 		this.sinceLastMove += deltaTime
-		this.deepness = Math.min(1, this.deepness - (Column.closingSpeed * deltaTime) / 1000)
+
+		// On fait avancer la profondeur (se rapproche)
+		this.deepness -= (Column.closingSpeed * deltaTime) / 1000
+
+		// --- FIX 2 : Limite basse ---
+		// Si l'objet dépasse l'écran (devient trop proche/négatif), on le régénère
+		// Sinon deepness descend à -14000 et fait bugger le rendu
+		if (this.deepness < -0.1) {
+			this.regenerate()
+			return
+		}
+
+		// On clamp la valeur max à 1 pour la logique mathématique (mais normalement on descend)
+		this.deepness = Math.min(1, this.deepness)
 
 		const speed = Column.downSpeed * (1.5 - this.deepness * 0.5)
 		if (this.sinceLastMove > 1000 / speed) {
@@ -46,7 +70,6 @@ class Column {
 			this.addChar()
 		}
 
-		// Supprimer les premiers caractères
 		const charHeight = Column.lineHeight * this.fontSize * this.getRem()
 		if (this.element.childElementCount > Column.maxChars) {
 			this.element.firstChild.remove()
@@ -54,8 +77,10 @@ class Column {
 		}
 		this.updateCharsFade()
 
-		// Régénérer si la colonne est descendue trop bas
-		if (this.top > programsHeight) {
+		// Régénérer si trop bas
+		// (On utilise window.innerHeight en fallback si programsHeight n'est pas défini globalement)
+		const limitHeight = typeof programsHeight !== 'undefined' ? programsHeight : window.innerHeight * 2
+		if (this.top > limitHeight) {
 			this.regenerate()
 			return
 		}
@@ -76,7 +101,9 @@ class Column {
 	}
 
 	addChar() {
-		const char = MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)]
+		// Vérification que MATRIX_CHARS existe (sinon fallback)
+		const chars = typeof MATRIX_CHARS !== 'undefined' ? MATRIX_CHARS : '01'
+		const char = chars[Math.floor(Math.random() * chars.length)]
 		const charElement = document.createElement('span')
 		charElement.textContent = char
 		this.element.appendChild(charElement)
@@ -100,15 +127,25 @@ class Column {
 
 	render() {
 		const xPos = Math.round(this.x * window.innerWidth)
-		const opacity = Math.round(Math.max(0.2, 1 - this.deepness) * 100) / 100
+
+		// Calculs sécurisés pour le rendu
+		// On s'assure que opacity est entre 0 et 1
+		let opacity = Math.max(0, Math.min(1, 1 - this.deepness))
+		opacity = Math.round(Math.max(0.2, opacity) * 100) / 100
+
 		const fontSize = Math.round((1 - this.deepness * 0.6) * 2.5 * 100) / 100
 		this.fontSize = fontSize
+
 		this.element.style.cssText = `transform: translate(${xPos}px, ${this.top}px); opacity: ${opacity}; font-size: ${fontSize}rem;`
 	}
 
 	regenerate() {
 		this.x = Math.random()
-		this.top = Math.random() * programsHeight - 200
+		// Fallback sécurisé pour la hauteur
+		const h = window.innerHeight
+		this.top = Math.random() * h - 200
+
+		// Reset deepness à une valeur saine [0, 0.7]
 		this.deepness = Math.random() * 0.7
 		this.sinceLastMove = 0
 		this.element.innerHTML = ''
