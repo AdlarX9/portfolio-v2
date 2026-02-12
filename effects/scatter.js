@@ -13,7 +13,7 @@ function updateRects() {
 	const now = Date.now()
 	if (now - lastUpdateTime < UPDATE_THROTTLE) return
 	lastUpdateTime = now
-	
+
 	allLetters.forEach(letter => {
 		letter.rect = letter.element.getBoundingClientRect()
 		letter.x = letter.rect.left + letter.rect.width / 2
@@ -70,19 +70,19 @@ function init() {
 // update
 function update() {
 	if (!effectManager.mouse) return
-	
+
 	const mouseX = effectManager.mouse.x
 	const mouseY = effectManager.mouse.y
 	const RADIUS_SQUARED = RADIUS * RADIUS // Éviter sqrt en comparant les carrés
-	
+
 	allLetters.forEach(letter => {
 		const dx = mouseX - letter.x
 		const dy = mouseY - letter.y
 		const distanceSquared = dx * dx + dy * dy
-		
+
 		let targetX = 0
 		let targetY = 0
-		
+
 		// Optimisation: comparer le carré pour éviter sqrt
 		if (distanceSquared < RADIUS_SQUARED) {
 			const distance = Math.sqrt(distanceSquared)
@@ -91,10 +91,10 @@ function update() {
 			targetX = -Math.cos(angle) * spread * FORCE
 			targetY = -Math.sin(angle) * spread * FORCE
 		}
-		
+
 		letter.currentX += (targetX - letter.currentX) * 0.1
 		letter.currentY += (targetY - letter.currentY) * 0.1
-		
+
 		// Ne modifier le DOM que si le déplacement est significatif
 		if (Math.abs(letter.currentX) > 0.05 || Math.abs(letter.currentY) > 0.05) {
 			letter.element.style.transform = `translate(${letter.currentX}px, ${letter.currentY}px)`

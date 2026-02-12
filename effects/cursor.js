@@ -32,7 +32,7 @@ function handleHoverOut(e) {
 
 function mousemove(e) {
 	// Utilise transform au lieu de left/top pour performance GPU
-	cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
+	cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0) scale(var(--cursor-scale))`
 }
 
 const cursorEffect = new Effect()

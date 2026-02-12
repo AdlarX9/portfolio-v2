@@ -36,7 +36,7 @@ function mousemove(e) {
 		if (Date.now() - lastResizeTime > RECT_CACHE_DURATION) {
 			updateRects()
 		}
-		
+
 		window.requestAnimationFrame(() => {
 			const winHeight = window.innerHeight
 			elementRects.forEach(({ el, rect }) => {

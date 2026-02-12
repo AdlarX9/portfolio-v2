@@ -8,10 +8,10 @@ const COUNT_MOBILE = 75 // Moins d'étoiles sur mobile pour la performance
 // init
 function init() {
 	if (!container) return
-	
+
 	const count = effectManager.isMobile.matches ? COUNT_MOBILE : COUNT_DESKTOP
 	const fragment = document.createDocumentFragment() // Batch DOM insertion
-	
+
 	for (let i = 0; i < count; i++) {
 		const star = document.createElement('div')
 		star.classList.add('star')
@@ -39,7 +39,7 @@ function init() {
 
 		fragment.appendChild(star)
 	}
-	
+
 	container.appendChild(fragment) // Une seule opération DOM
 }
 

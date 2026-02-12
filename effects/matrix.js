@@ -166,16 +166,16 @@ const programs = document.querySelector('.programs')
 // init
 function init() {
 	if (!programs) return
-	
+
 	const count = effectManager.isMobile.matches ? COUNT_MOBILE : COUNT_DESKTOP
 	const fragment = document.createDocumentFragment()
-	
+
 	for (let i = 0; i < count; i++) {
 		const column = new Column(Math.random(), Math.random(), Math.random() * 0.7)
 		fragment.appendChild(column.element)
 		columns.push(column)
 	}
-	
+
 	programs.appendChild(fragment)
 }
 

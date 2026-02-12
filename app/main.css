@@ -322,6 +322,12 @@ body {
 
 /* === CURSOR === */
 
+@property --cursor-scale {
+	syntax: '<number>';
+	inherits: false;
+	initial-value: 1;
+}
+
 .glass-cursor {
 	/* ... propriétés de position inchangées ... */
 	position: fixed;
@@ -330,10 +336,14 @@ body {
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 50%;
-	transform: translate(-50%, -50%);
 	pointer-events: none;
 	z-index: 9999;
 	will-change: transform;
+	--cursor-scale: 1;
+	transition:
+		--cursor-scale 0.1s ease,
+		background-color 0.1s ease,
+		border-color 0.1s ease;
 
 	/* 2. Syntaxe RGBA Classique : var, alpha */
 	background: rgba(var(--cursor-color), 0.15);
@@ -359,8 +369,7 @@ body {
 }
 
 .glass-cursor.hovered {
-	transform: translate(-50%, -50%) scale(1.5);
-
+	--cursor-scale: 1.5;
 	/* 3. Variantes au survol */
 	background: rgba(var(--cursor-color), 0.05);
 	border-color: rgba(var(--cursor-color), 0.6);

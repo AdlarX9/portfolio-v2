@@ -128,7 +128,7 @@ function cleanup() {
 	})
 	cardClickHandlers.clear()
 	previewCards = []
-	
+
 	// Détruire les swipers
 	if (swiperThumbs) {
 		swiperThumbs.destroy(true, true)
@@ -138,7 +138,7 @@ function cleanup() {
 		swiperMain.destroy(true, true)
 		swiperMain = null
 	}
-	
+
 	// Retirer le popup du DOM
 	if (popup.parentNode) {
 		popup.parentNode.removeChild(popup)
