@@ -253,6 +253,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: start;
+	contain: layout style paint;
 }
 
 .overlay-card {
@@ -273,10 +274,12 @@ body {
 	transition: opacity 0.3s ease;
 	cursor: pointer;
 	text-decoration: none;
+	will-change: opacity;
 }
 
 .overlay-card img {
 	transition: transform 0.3s ease;
+	will-change: transform;
 }
 
 @media (hover: hover) {
@@ -295,6 +298,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	contain: layout style paint;
 }
 
 .bordered {
@@ -329,8 +333,7 @@ body {
 	transform: translate(-50%, -50%);
 	pointer-events: none;
 	z-index: 9999;
-	transition: transform 0.1s ease;
-	will-change: top, left;
+	will-change: transform;
 
 	/* 2. Syntaxe RGBA Classique : var, alpha */
 	background: rgba(var(--cursor-color), 0.15);

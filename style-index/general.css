@@ -103,6 +103,8 @@
 	gap: 3rem;
 	width: max-content;
 	animation: scroll-banner 80s linear infinite;
+	will-change: transform;
+	contain: layout style;
 }
 
 .reverse-banner {
@@ -148,6 +150,7 @@
 			border-box,
 		linear-gradient(to right, rgb(var(--dark-three)), rgb(var(--middle-three)), rgb(var(--dark-three))) border-box;
 	will-change: background-position;
+	contain: layout style paint;
 }
 
 .banner-el img {

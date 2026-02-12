@@ -33,6 +33,8 @@ class EffectsManager {
 		this.activeEffects = new Set()
 		this.isSmallScreen = window.matchMedia('(max-width: 767px)')
 		this.isMobile = window.matchMedia('(hover: none)')
+		this.resizeTimeout = null
+		this.RESIZE_DEBOUNCE = 150 // ms
 	}
 
 	add(effect) {
@@ -53,9 +55,15 @@ class EffectsManager {
 		})
 	}
 	resize(e) {
-		this.activeEffects.forEach(effect => {
-			if (effect.resize) effect.resize(e)
-		})
+		// Debounce resize pour éviter trop d'appels
+		if (this.resizeTimeout) {
+			clearTimeout(this.resizeTimeout)
+		}
+		this.resizeTimeout = setTimeout(() => {
+			this.activeEffects.forEach(effect => {
+				if (effect.resize) effect.resize(e)
+			})
+		}, this.RESIZE_DEBOUNCE)
 	}
 	mousemove(e) {
 		this.mouse = { x: e.clientX, y: e.clientY }

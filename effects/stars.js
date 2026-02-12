@@ -1,11 +1,17 @@
-import { Effect } from '../app/effects.js'
+import { Effect, effectManager } from '../app/effects.js'
 
 // utils
 const container = document.querySelector('.stars')
-const count = 150
+const COUNT_DESKTOP = 150
+const COUNT_MOBILE = 75 // Moins d'étoiles sur mobile pour la performance
 
 // init
 function init() {
+	if (!container) return
+	
+	const count = effectManager.isMobile.matches ? COUNT_MOBILE : COUNT_DESKTOP
+	const fragment = document.createDocumentFragment() // Batch DOM insertion
+	
 	for (let i = 0; i < count; i++) {
 		const star = document.createElement('div')
 		star.classList.add('star')
@@ -31,8 +37,10 @@ function init() {
 		star.style.setProperty('--move-x', `${Math.cos(angle) * moveDistance}px`)
 		star.style.setProperty('--move-y', `${Math.sin(angle) * moveDistance}px`)
 
-		container.appendChild(star)
+		fragment.appendChild(star)
 	}
+	
+	container.appendChild(fragment) // Une seule opération DOM
 }
 
 // cleanup

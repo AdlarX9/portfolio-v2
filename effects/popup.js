@@ -29,8 +29,10 @@ function closePopup() {
 	popup.style.display = 'none'
 }
 
-let swiperThumbs
-let swiperMain
+let swiperThumbs = null
+let swiperMain = null
+let previewCards = []
+let cardClickHandlers = new Map() // Stocker les handlers pour pouvoir les nettoyer
 
 function createSlides(type, id, format) {
 	const data = DATA[type][id]
@@ -106,17 +108,47 @@ function onClick(card) {
 function load() {
 	document.body.appendChild(popup)
 	setTimeout(() => {
-		document.querySelectorAll('.preview').forEach(card => {
-			card.addEventListener('click', () => {
-				onClick(card)
-			})
+		previewCards = Array.from(document.querySelectorAll('.preview'))
+		previewCards.forEach(card => {
+			const handler = () => onClick(card)
+			cardClickHandlers.set(card, handler)
+			card.addEventListener('click', handler)
 		})
 	}, 500)
+}
+
+// cleanup
+function cleanup() {
+	// Nettoyer les event listeners
+	previewCards.forEach(card => {
+		const handler = cardClickHandlers.get(card)
+		if (handler) {
+			card.removeEventListener('click', handler)
+		}
+	})
+	cardClickHandlers.clear()
+	previewCards = []
+	
+	// Détruire les swipers
+	if (swiperThumbs) {
+		swiperThumbs.destroy(true, true)
+		swiperThumbs = null
+	}
+	if (swiperMain) {
+		swiperMain.destroy(true, true)
+		swiperMain = null
+	}
+	
+	// Retirer le popup du DOM
+	if (popup.parentNode) {
+		popup.parentNode.removeChild(popup)
+	}
 }
 
 const popupEffect = new Effect()
 popupEffect.mobile = true
 popupEffect.smallScreen = true
 popupEffect.load = load
+popupEffect.cleanup = cleanup
 
 export default popupEffect

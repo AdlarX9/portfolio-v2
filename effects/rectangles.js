@@ -1,7 +1,8 @@
 import { Effect, effectManager } from '../app/effects.js'
 
 // --- CONFIG ---
-const NUMBER_OF_BARS = 15 // Réduit de 20 à 15 (moins d'éléments = plus de fps)
+const NUMBER_OF_BARS_DESKTOP = 15
+const NUMBER_OF_BARS_MOBILE = 10 // Moins de bars sur mobile pour la performance
 const LER_FACTOR = 0.08 // Légèrement augmenté pour compenser l'absence de transition CSS
 const SENSITIVITY = 0.8 // Ajusté
 
@@ -18,8 +19,9 @@ rectanglesEffect.init = () => {
 
 	container.innerHTML = ''
 	const fragment = document.createDocumentFragment()
+	const barCount = effectManager.isMobile.matches ? NUMBER_OF_BARS_MOBILE : NUMBER_OF_BARS_DESKTOP
 
-	for (let i = 0; i < NUMBER_OF_BARS; i++) {
+	for (let i = 0; i < barCount; i++) {
 		const div = document.createElement('div')
 		div.classList.add('shutter-bar')
 		fragment.appendChild(div)

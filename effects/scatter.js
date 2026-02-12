@@ -6,8 +6,14 @@ let mouse = { x: -1000, y: -1000 }
 const RADIUS = 150
 const FORCE = 100
 const scatterElements = document.querySelectorAll('.scatter-text')
+let lastUpdateTime = 0
+const UPDATE_THROTTLE = 100 // ms - throttle updateRects
 
 function updateRects() {
+	const now = Date.now()
+	if (now - lastUpdateTime < UPDATE_THROTTLE) return
+	lastUpdateTime = now
+	
 	allLetters.forEach(letter => {
 		letter.rect = letter.element.getBoundingClientRect()
 		letter.x = letter.rect.left + letter.rect.width / 2
@@ -63,23 +69,40 @@ function init() {
 
 // update
 function update() {
+	if (!effectManager.mouse) return
+	
+	const mouseX = effectManager.mouse.x
+	const mouseY = effectManager.mouse.y
+	const RADIUS_SQUARED = RADIUS * RADIUS // Éviter sqrt en comparant les carrés
+	
 	allLetters.forEach(letter => {
-		if (!effectManager.mouse) return
-		const dx = effectManager.mouse.x - letter.x
-		const dy = effectManager.mouse.y - letter.y
-		const distance = Math.sqrt(dx * dx + dy * dy)
+		const dx = mouseX - letter.x
+		const dy = mouseY - letter.y
+		const distanceSquared = dx * dx + dy * dy
+		
 		let targetX = 0
 		let targetY = 0
-		if (distance < RADIUS) {
+		
+		// Optimisation: comparer le carré pour éviter sqrt
+		if (distanceSquared < RADIUS_SQUARED) {
+			const distance = Math.sqrt(distanceSquared)
 			const angle = Math.atan2(dy, dx)
 			const spread = (RADIUS - distance) / RADIUS
 			targetX = -Math.cos(angle) * spread * FORCE
 			targetY = -Math.sin(angle) * spread * FORCE
 		}
+		
 		letter.currentX += (targetX - letter.currentX) * 0.1
 		letter.currentY += (targetY - letter.currentY) * 0.1
+		
+		// Ne modifier le DOM que si le déplacement est significatif
 		if (Math.abs(letter.currentX) > 0.05 || Math.abs(letter.currentY) > 0.05) {
 			letter.element.style.transform = `translate(${letter.currentX}px, ${letter.currentY}px)`
+		} else if (letter.currentX !== 0 || letter.currentY !== 0) {
+			// Remettre à zéro si le mouvement est négligeable
+			letter.element.style.transform = ''
+			letter.currentX = 0
+			letter.currentY = 0
 		}
 	})
 }

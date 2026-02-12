@@ -1,6 +1,6 @@
 // matrix effect
 
-import { Effect } from '../app/effects.js'
+import { Effect, effectManager } from '../app/effects.js'
 
 // utils
 let programsHeight = 0
@@ -13,6 +13,10 @@ const programsSection = document.querySelector('.programs')
 if (programsSection) {
 	observer.observe(programsSection)
 }
+
+// Constantes optimisées
+const COUNT_DESKTOP = 40
+const COUNT_MOBILE = 20 // Moins de colonnes sur mobile
 const MATRIX_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
 
 class Column {
@@ -156,17 +160,23 @@ class Column {
 	}
 }
 
-const count = 40
 let columns = []
 const programs = document.querySelector('.programs')
 
 // init
 function init() {
+	if (!programs) return
+	
+	const count = effectManager.isMobile.matches ? COUNT_MOBILE : COUNT_DESKTOP
+	const fragment = document.createDocumentFragment()
+	
 	for (let i = 0; i < count; i++) {
 		const column = new Column(Math.random(), Math.random(), Math.random() * 0.7)
-		programs.appendChild(column.element)
+		fragment.appendChild(column.element)
 		columns.push(column)
 	}
+	
+	programs.appendChild(fragment)
 }
 
 // update
