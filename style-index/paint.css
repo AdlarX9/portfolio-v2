@@ -106,12 +106,7 @@
 	transform: scale(0.9);
 }
 
-@media (hover: hover) {
-	.liquid:hover {
-		filter: url(#liquid-filter);
-		will-change: filter;
-	}
-}
+/* Le filtre liquid est maintenant appliqué dynamiquement par JS */
 
 @media screen and (max-width: 767px) {
 	.drawings-stroke {

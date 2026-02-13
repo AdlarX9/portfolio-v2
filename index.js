@@ -9,7 +9,8 @@ import {
 	matrixEffect,
 	rectanglesEffect,
 	starsEffect,
-	lightningEffect
+	lightningEffect,
+	loaderEffect
 } from './effects/index.js'
 
 // === BANNER GENERATION ===
@@ -148,3 +149,4 @@ effectManager.add(distortionEffect)
 effectManager.add(rectanglesEffect)
 effectManager.add(lightningEffect)
 effectManager.add(cardEffect)
+effectManager.add(loaderEffect)

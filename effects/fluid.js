@@ -1,4 +1,5 @@
 import { Effect } from '../app/effects.js'
+import { ACCENT_COLOR, colors } from '../app/main.js'
 
 // utils
 let canvas = null
@@ -14,11 +15,6 @@ function parseColorString(colorString) {
 		g: parseInt(matches[1], 10),
 		b: parseInt(matches[2], 10)
 	}
-}
-function getCssColor(variableName) {
-	const style = getComputedStyle(document.documentElement)
-	const color = style.getPropertyValue(variableName).trim()
-	return parseColorString(color)
 }
 
 // init
@@ -50,7 +46,7 @@ function init() {
 		threshold: 0.6,
 		soft_knee: 0.7,
 
-		background_color: getCssColor('--dark-one'),
+		background_color: colors['--dark-one'],
 		transparent: false
 	})
 	myFluid.activate()
@@ -62,7 +58,7 @@ function mousemove(e) {
 	const x = e.clientX - rect.left
 	const y = e.clientY - rect.top
 
-	const { r, g, b } = getCssColor('--accent')
+	const { r, g, b } = ACCENT_COLOR
 	const factor = 1500
 
 	if (myFluid.pointers && myFluid.pointers.length > 0) {

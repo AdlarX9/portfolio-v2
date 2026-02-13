@@ -11,6 +11,7 @@ import rectanglesEffect from './rectangles.js'
 import scatterEffect from './scatter.js'
 import scrollbarEffect from './scrollbar.js'
 import lightningEffect from './lightning.js'
+import loaderEffect from './loader.js'
 
 export {
 	glareEffect,
@@ -25,5 +26,6 @@ export {
 	rectanglesEffect,
 	scatterEffect,
 	scrollbarEffect,
-	lightningEffect
+	lightningEffect,
+	loaderEffect
 }

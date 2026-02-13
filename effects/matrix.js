@@ -84,7 +84,7 @@ class Column {
 		// Régénérer si trop bas
 		// (On utilise window.innerHeight en fallback si programsHeight n'est pas défini globalement)
 		const limitHeight = typeof programsHeight !== 'undefined' ? programsHeight : window.innerHeight * 2
-		if (this.top > limitHeight) {
+		if (this.top > limitHeight + 300) {
 			this.regenerate()
 			return
 		}

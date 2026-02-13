@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="Alexis' Portfolio" />
+		<link rel="manifest" href="/favicon/site.webmanifest" />
+
 		<link rel="stylesheet" href="app/main.css" />
 		<link rel="stylesheet" href="app/popup.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,29 +30,38 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="index.css" />
 		<script src="index.js" type="module" defer></script>
-		<title>Portfolio</title>
+		<title>Alexis' Portfolio</title>
 	</head>
 	<body>
 		<main class="sections">
+			<div id="loader">
+				<div class="loader-content">
+					<div class="counter">0%</div>
+					<div class="bar-container">
+						<div class="bar"></div>
+					</div>
+				</div>
+			</div>
+
 			<section class="main">
 				<div class="stars"></div>
 				<canvas id="renderSurface"></canvas>
-				<h1 class="big-title scatter-text">Alexis' Portfolio</h1>
-				<div class="stroke-title main-stroke" data-text="code, paint, print">code, paint, print</div>
+				<h1 class="big-title scatter-text reveal">Alexis' Portfolio</h1>
+				<div class="stroke-title main-stroke reveal" data-text="code, paint, print">code, paint, print</div>
 				<div class="swiper-banner first-banner">
 					<div class="banner"></div>
 				</div>
 				<div class="general-info">
 					<div class="id">
-						<h2 class="title scatter-text">Who am I?</h2>
-						<p class="scatter-text">
+						<h2 class="title scatter-text reveal">Who am I?</h2>
+						<p class="scatter-text reveal">
 							I'm a passionnate learner, always looking for more knowledges when it comes to mathematics
 							and physics. I also do other stuff you may discover down below, enjoy !
 						</p>
 					</div>
 					<div class="awards">
-						<h2 class="title scatter-text">Prize winner</h2>
-						<div>
+						<h2 class="title scatter-text reveal">Prize winner</h2>
+						<div class="reveal">
 							<p class="scatter-text">
 								National Best Project Prize (11th grade) at the 2025 Trophées NSI
 							</p>
@@ -62,7 +78,7 @@
 								</svg>
 							</a>
 						</div>
-						<div>
+						<div class="reveal">
 							<p class="scatter-text">10th at the 2025 Mathematics Olympiads of Toulouse</p>
 							<a
 								href="https://pedagogie.ac-toulouse.fr/mathematiques/node/67"
@@ -81,7 +97,7 @@
 								</svg>
 							</a>
 						</div>
-						<div>
+						<div class="reveal">
 							<p class="scatter-text">11th at the 2025 Informatics Olympiads of Toulouse</p>
 							<a
 								href="https://pedagogie.ac-toulouse.fr/informatique/olympiades-de-nsi"
@@ -100,7 +116,7 @@
 								</svg>
 							</a>
 						</div>
-						<div>
+						<div class="reveal">
 							<p class="scatter-text">14th place at the 2025 Passe Ton Hack D'abord</p>
 							<a
 								href="https://etab.ac-reunion.fr/lyc-pierre-lagourgue/wp-content/uploads/sites/146/2025/03/PTHD-Resultats-PreBac.pdf"
@@ -119,7 +135,7 @@
 								</svg>
 							</a>
 						</div>
-						<div>
+						<div class="reveal">
 							<p class="scatter-text">9th place at the 2026 Passe Ton Hack D'abord</p>
 							<a
 								href="https://www.defense.gouv.fr/comcyber/evenements/passe-ton-hack-dabord-2026"
@@ -200,7 +216,7 @@
 				<h2 class="title scatter-text">Code</h2>
 				<p class="text-glare">A small selection of recent projects</p>
 				<div id="program-cards"></div>
-				<a class="section-button" href="/code">View more projects</a>
+				<a class="section-button" href="/code" target="_blank" rel="noopener noreferrer">View more projects</a>
 			</section>
 			<div class="separator"></div>
 
@@ -235,7 +251,7 @@
 						<img src="./assets/drawings/preview/19-chute.jpeg" alt="Drawing 3" />
 					</div>
 				</div>
-				<a class="section-button" href="/paint">View more drawings</a>
+				<a class="section-button" href="/paint" target="_blank" rel="noopener noreferrer">View more drawings</a>
 			</section>
 			<div class="separator"></div>
 
@@ -285,7 +301,7 @@
 						<img src="./assets/prints/preview/19-chaos.jpeg" alt="" />
 					</div>
 				</div>
-				<a class="section-button" href="/print">View more prints</a>
+				<a class="section-button" href="/print" target="_blank" rel="noopener noreferrer">View more prints</a>
 			</section>
 			<div class="separator"></div>
 

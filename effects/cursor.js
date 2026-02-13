@@ -2,6 +2,7 @@ import { Effect } from '../app/effects.js'
 
 const cursor = document.createElement('div')
 cursor.classList.add('glass-cursor')
+let hasMoved = false
 
 function init() {
 	document.body.appendChild(cursor)
@@ -31,6 +32,10 @@ function handleHoverOut(e) {
 }
 
 function mousemove(e) {
+	if (!hasMoved) {
+		cursor.style.opacity = '1' // Affiche le curseur après le premier mouvement
+		hasMoved = true
+	}
 	// Utilise transform au lieu de left/top pour performance GPU
 	cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0) scale(var(--cursor-scale))`
 }

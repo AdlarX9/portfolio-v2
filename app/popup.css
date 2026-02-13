@@ -16,8 +16,8 @@
 	position: absolute;
 	top: 4rem;
 	left: 4rem;
-	width: 3.5rem;
-	height: 3.5rem;
+	width: 5rem;
+	height: 5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -56,14 +56,27 @@
 }
 
 .small-slider .swiper-wrapper {
+	display: flex;
 	justify-content: center;
-	gap: 0;
+	align-items: center;
+	gap: 2rem;
 }
 
 .swiper-slide {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.small-slide {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	filter: brightness(60%);
+}
+
+.small-slide.swiper-slide-thumb-active {
+	filter: brightness(100%);
 }
 
 .swiper-slide img {

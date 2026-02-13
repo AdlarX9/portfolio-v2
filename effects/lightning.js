@@ -1,4 +1,5 @@
 import { Effect, effectManager } from '../app/effects.js'
+import { ACCENT_COLOR, colors } from '../app/main.js'
 
 // --- CONFIG ---
 const MAX_BOLTS = 2
@@ -17,17 +18,13 @@ let width = 0
 let height = 0
 let bolts = []
 let clouds = []
-let accentColor = '255, 255, 255'
-let cloudColor = '100, 100, 100'
 
 // Variables pour la vitesse souris
 let lastMousePos = { x: 0, y: 0 }
 let mouseSpeed = 0
 
-function getRGBFromVar(varName) {
-	const style = getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
-	if (style.indexOf(',') > -1 && style.indexOf('rgb') === -1) return style
-	return style
+function stringifyColor(color) {
+	return `${color.r}, ${color.g}, ${color.b}`
 }
 
 class Cloud {
@@ -47,10 +44,11 @@ class Cloud {
 	}
 
 	draw(ctx, color) {
+		const stringColor = stringifyColor(color)
 		ctx.beginPath()
 		const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius)
-		g.addColorStop(0, `rgba(${color}, 0.05)`)
-		g.addColorStop(1, `rgba(${color}, 0)`)
+		g.addColorStop(0, `rgba(${stringColor}, 0.05)`)
+		g.addColorStop(1, `rgba(${stringColor}, 0)`)
 		ctx.fillStyle = g
 		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
 		ctx.fill()
@@ -179,8 +177,6 @@ lightningEffect.resize = () => {
 	for (let i = 0; i < CLOUD_DENSITY; i++) {
 		clouds.push(new Cloud(width, height))
 	}
-	accentColor = getRGBFromVar('--accent')
-	cloudColor = getRGBFromVar('--middle-one')
 }
 
 lightningEffect.update = () => {
@@ -191,7 +187,7 @@ lightningEffect.update = () => {
 	// 1. Nuages
 	clouds.forEach(cloud => {
 		cloud.update()
-		cloud.draw(ctx, cloudColor)
+		cloud.draw(ctx, colors['--middle-one'])
 	})
 
 	// 2. Gestion Souris (Vitesse + Scroll)
@@ -246,7 +242,7 @@ lightningEffect.update = () => {
 			bolts.push(new Bolt(width, height, finalTarget))
 
 			// Flash
-			ctx.fillStyle = `rgba(${accentColor}, ${FLASH_INTENSITY})`
+			ctx.fillStyle = `rgba(${stringifyColor(ACCENT_COLOR)}, ${FLASH_INTENSITY})`
 			ctx.fillRect(0, 0, width, height)
 		}
 	}
@@ -255,7 +251,7 @@ lightningEffect.update = () => {
 	for (let i = bolts.length - 1; i >= 0; i--) {
 		const bolt = bolts[i]
 		bolt.update()
-		bolt.draw(ctx, accentColor)
+		bolt.draw(ctx, stringifyColor(ACCENT_COLOR))
 		if (bolt.life <= 0) bolts.splice(i, 1)
 	}
 }
