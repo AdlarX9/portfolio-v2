@@ -3,6 +3,7 @@ import { Effect } from '../app/effects.js'
 const cursor = document.createElement('div')
 cursor.classList.add('glass-cursor')
 let hasMoved = false
+let inScreen = true
 
 function init() {
 	document.body.appendChild(cursor)
@@ -20,12 +21,20 @@ function cleanup() {
 }
 
 function handleHoverIn(e) {
+	if (!inScreen) {
+		inScreen = true
+		cursor.style.opacity = '1'
+	}
 	if (e.target.matches('a, button, .clickable') || e.target.closest('a, button, .clickable')) {
 		cursor.classList.add('hovered')
 	}
 }
 
 function handleHoverOut(e) {
+	if (inScreen) {
+		inScreen = false
+		cursor.style.opacity = '0'
+	}
 	if (e.target.matches('a, button, .clickable') || e.target.closest('a, button, .clickable')) {
 		cursor.classList.remove('hovered')
 	}
