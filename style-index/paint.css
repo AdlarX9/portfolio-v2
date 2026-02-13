@@ -1,5 +1,5 @@
 :root {
-	--rectangles-color: 138, 43, 226;
+	--rectangles-color: var(--dark-six);
 	--angle: -40deg;
 	--spacing: 40px;
 	--bar-width: 5rem;
@@ -44,6 +44,7 @@
 
 	/* On garde un shadow léger mais sans grand rayon de flou */
 	box-shadow: 0 0 10px rgba(var(--rectangles-color), 0.05);
+	filter: brightness(130%);
 
 	/* IMPORTANT : Pas de transition ici car le JS fait déjà l'interpolation (Lerp) */
 	/* transition: transform 0.1s linear; <--- SUPPRIMÉ */

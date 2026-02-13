@@ -17,7 +17,7 @@
 	color: transparent;
 	background:
 		radial-gradient(circle at var(--x, -50%) var(--y, -50%), rgba(var(--circle-color), 0.07) 0%, transparent 20%),
-		radial-gradient(ellipse at top, rgb(47, 0, 88) 20%, rgb(var(--dark-one)) 80%);
+		radial-gradient(ellipse at top, rgb(var(--dark-five)) 20%, rgb(var(--dark-one)) 80%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-stroke: 0;
@@ -249,6 +249,15 @@
 	width: 85%;
 	margin: 0;
 	margin-bottom: 2rem;
+	--x: -1000px;
+	--y: -1000px;
+	background-image:
+		radial-gradient(
+			circle var(--big-circle) at var(--x) var(--y),
+			rgb(var(--circle-color)) 0%,
+			rgba(255, 255, 255, 0) 70%
+		),
+		linear-gradient(to right, rgb(var(--light-one)), rgb(var(--light-one)));
 }
 
 @media screen and (max-width: 767px) {
@@ -289,67 +298,134 @@
 	}
 }
 
-/* --- LE LOADER --- */
-#loader {
-	position: fixed;
-	inset: 0; /* top:0, left:0, right:0, bottom:0 */
-	background: rgb(var(--dark-one)); /* Couleur de fond de ton site */
-	z-index: 10000;
+/* === THEME SELECTOR === */
+
+#switch-theme {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	transition:
-		opacity 0.5s ease-out,
-		visibility 0.5s;
+	justify-content: center;
+	gap: 1rem;
+	border-radius: 99999px;
+	background: rgba(0, 0, 0, 0.5);
+	color: rgb(var(--light-two));
+	border: 1px solid rgb(var(--middle-one));
+	padding: 0.5rem 3rem;
+	cursor: pointer;
+	transition: all 0.1s ease;
+	backdrop-filter: blur(2px);
 }
 
-/* Une fois fini, on ajoute la classe .loaded-hidden au loader */
-#loader.loaded-hidden {
+#switch-theme:hover {
+	background: rgba(0, 0, 0, 0.7);
+	border: 1px solid rgb(var(--accent));
+}
+
+.theme-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 2000;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(5px);
 	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
+	transition: opacity 0.3s ease;
 }
 
-.loader-content {
-	width: 300px;
-	text-align: center;
+.theme-dialog.active {
+	display: flex;
+	opacity: 1;
 }
 
-.counter {
+.theme-dialog-content {
+	padding: 3rem;
+	max-width: 60rem;
+	width: 90%;
+}
+
+.theme-dialog h2 {
 	font-size: 4rem;
-	font-family: monospace;
-	margin-bottom: 20px;
-	color: var(--accent, #fff);
+	margin-top: 0;
 }
 
-.bar-container {
+.theme-options {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 	width: 100%;
-	height: 2px;
-	background: rgba(255, 255, 255, 0.2);
+	gap: 2rem;
+}
+
+.theme-option {
 	position: relative;
+	padding: 2rem 1rem;
+	border-radius: 1.2rem;
+	border: 2px solid rgb(var(--middle-one));
+	background:
+		radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(var(--theme-accent), 0.15) 0%, transparent 50%),
+		linear-gradient(135deg, rgb(var(--dark-three)), rgb(var(--dark-two)));
+	transition: all 0.1s ease;
+	text-align: center;
 	overflow: hidden;
 }
 
-.bar {
-	width: 0%; /* Sera animé par JS */
-	height: 100%;
-	background: var(--accent, #fff);
-	transition: width 0.1s linear;
-}
-
-/* --- LES ÉLÉMENTS DU SITE (Cachés par défaut) --- */
-
-/* Pour les blocs (Cartes, images) */
-.reveal {
-	opacity: 0;
-	transform: translateY(30px);
-	transition:
-		opacity 1s cubic-bezier(0.2, 1, 0.3, 1),
-		transform 1s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-/* L'état "Visible" (ajouté par JS) */
-.is-visible {
+.theme-option:hover::before {
 	opacity: 1;
-	transform: translateY(0);
+}
+
+.theme-option:hover {
+	border-color: rgb(var(--theme-accent));
+	box-shadow: 0 .5rem 1rem rgba(var(--theme-accent), 0.3);
+}
+
+.theme-option.selected {
+	border-color: rgb(var(--accent));
+	background: linear-gradient(135deg, rgba(var(--accent), 0.1), rgb(var(--dark-two)));
+	box-shadow: 0 .5rem 1rem rgba(var(--accent), 0.4);
+}
+
+.theme-name {
+	margin-bottom: 1.5rem;
+	z-index: 1;
+	position: relative;
+}
+
+.theme-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	z-index: 1;
+}
+
+.theme-color {
+	width: 3rem;
+	height: 3rem ;
+	border-radius: 50%;
+	border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.theme-color.main {
+	background: rgb(var(--theme-main));
+}
+
+.theme-color.accent {
+	background: rgb(var(--theme-accent));
+}
+
+@media screen and (max-width: 767px) {
+	#switch-theme {
+		padding: 1.2rem 2rem;
+		margin-bottom: 2rem;
+		font-size: 1.8rem;
+	}
+	.theme-options {
+		grid-template-columns: 1fr;
+	}
+	.theme-dialog-content {
+		max-width: 80vw;
+	}
+	.theme-color.main {
+		padding: 0 !important;
+	}
 }

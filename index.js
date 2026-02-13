@@ -3,6 +3,7 @@
 import { createIndexProgramCards } from '../code/script.js'
 import { bezier } from '../lib/bezier-easing.js'
 import { Effect, effectManager } from './app/effects.js'
+import { MENUS, updateTheme } from './app/main.js'
 import {
 	fluidEffect,
 	distortionEffect,
@@ -98,6 +99,119 @@ drawingsCards.forEach(card => {
 	overlay.innerHTML = '<div class="accent body">See more details</div>'
 	card.appendChild(overlay)
 })
+
+// === THEME SELECTOR ===
+
+const switchThemeBtn = document.getElementById('switch-theme')
+let themeDialog = null
+
+function createThemeDialog() {
+	const dialog = document.createElement('div')
+	dialog.className = 'theme-dialog'
+
+	const content = document.createElement('div')
+	content.className = 'theme-dialog-content gradient-card'
+
+	const title = document.createElement('h2')
+	title.className = 'title'
+	title.textContent = 'Choose your theme'
+
+	const optionsContainer = document.createElement('div')
+	optionsContainer.className = 'theme-options'
+
+	// Créer une option pour chaque thème
+	MENUS.forEach((theme, index) => {
+		const option = document.createElement('div')
+		option.className = 'theme-option clickable'
+		option.dataset.themeIndex = index
+
+		// Définir les couleurs CSS pour la preview
+		option.style.setProperty('--theme-main', `${theme.mainColor.r}, ${theme.mainColor.g}, ${theme.mainColor.b}`)
+		option.style.setProperty(
+			'--theme-accent',
+			`${theme.accentColor.r}, ${theme.accentColor.g}, ${theme.accentColor.b}`
+		)
+
+		// Vérifier si c'est le thème actuel
+		const savedIndex = parseInt(localStorage.getItem('site-theme-index') || '0', 10)
+		if (index === savedIndex) {
+			option.classList.add('selected')
+		}
+
+		const name = document.createElement('div')
+		name.className = 'theme-name'
+		name.textContent = getThemeName(index)
+
+		const preview = document.createElement('div')
+		preview.className = 'theme-preview'
+
+		const mainColor = document.createElement('div')
+		mainColor.className = 'theme-color main'
+
+		const accentColor = document.createElement('div')
+		accentColor.className = 'theme-color accent'
+
+		preview.appendChild(mainColor)
+		preview.appendChild(accentColor)
+
+		option.appendChild(name)
+		option.appendChild(preview)
+
+		// Sélection du thème
+		option.addEventListener('click', () => {
+			selectTheme(index)
+		})
+
+		optionsContainer.appendChild(option)
+	})
+
+	content.appendChild(title)
+	content.appendChild(optionsContainer)
+	dialog.appendChild(content)
+	document.body.appendChild(dialog)
+
+	// Fermer en cliquant sur le fond
+	dialog.addEventListener('click', e => {
+		if (e.target === dialog) {
+			closeThemeDialog()
+		}
+	})
+
+	return dialog
+}
+
+function getThemeName(index) {
+	const names = ['Purple Cyber', 'Pink Sunset', 'Theme 3', 'Theme 4', 'Theme 5']
+	return names[index] || `Theme ${index + 1}`
+}
+
+function openThemeDialog() {
+	if (!themeDialog) {
+		themeDialog = createThemeDialog()
+	}
+	setTimeout(() => themeDialog.classList.add('active'), 10)
+}
+
+function closeThemeDialog() {
+	if (themeDialog) {
+		themeDialog.classList.remove('active')
+	}
+}
+
+function selectTheme(index) {
+	updateTheme(index)
+
+	// Mettre à jour la sélection visuelle
+	if (themeDialog) {
+		const options = themeDialog.querySelectorAll('.theme-option')
+		options.forEach(opt => opt.classList.remove('selected'))
+		options[index]?.classList.add('selected')
+	}
+}
+
+if (switchThemeBtn) {
+	switchThemeBtn.addEventListener('click', openThemeDialog)
+}
 
 // === SCROLL TRIGGERS ===
 

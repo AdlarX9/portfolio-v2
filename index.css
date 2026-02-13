@@ -30,7 +30,7 @@ section::before {
 	position: absolute;
 	width: 50%;
 	height: 10%;
-	background: rgb(67, 0, 111);
+	background: rgb(var(--dark-six));
 	filter: blur(125rem);
 	z-index: -1;
 }
@@ -94,4 +94,69 @@ section > p {
 			),
 			linear-gradient(to right, transparent 5%, rgb(var(--middle-two)), transparent 95%);
 	}
+}
+
+/* --- LE LOADER --- */
+#loader {
+	position: fixed;
+	inset: 0; /* top:0, left:0, right:0, bottom:0 */
+	background: rgb(var(--dark-one)); /* Couleur de fond de ton site */
+	z-index: 10000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition:
+		opacity 0.5s ease-out,
+		visibility 0.5s;
+}
+
+/* Une fois fini, on ajoute la classe .loaded-hidden au loader */
+#loader.loaded-hidden {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.loader-content {
+	width: 300px;
+	text-align: center;
+}
+
+.counter {
+	font-size: 4rem;
+	font-family: monospace;
+	margin-bottom: 20px;
+	color: var(--accent, #fff);
+}
+
+.bar-container {
+	width: 100%;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.2);
+	position: relative;
+	overflow: hidden;
+}
+
+.bar {
+	width: 0%; /* Sera animé par JS */
+	height: 100%;
+	background: var(--accent, #fff);
+	transition: width 0.1s linear;
+}
+
+/* --- LES ÉLÉMENTS DU SITE (Cachés par défaut) --- */
+
+/* Pour les blocs (Cartes, images) */
+.reveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition:
+		opacity 1s cubic-bezier(0.2, 1, 0.3, 1),
+		transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* L'état "Visible" (ajouté par JS) */
+.is-visible {
+	opacity: 1;
+	transform: translateY(0);
 }
