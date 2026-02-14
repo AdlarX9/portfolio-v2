@@ -11,11 +11,15 @@ const PROJECTS = [
 	'3d-engine-ascii',
 	'print-it',
 	'tweeter',
-	'messages',
 	'portfolio-v1',
-	'particules',
-	'playground'
+	'flappy-bird',
+	'messages',
+	'flight',
+	'playground',
+	'particle-simulation'
 ]
+
+const WEBSITES = ['portfolio-v1', 'flappy-bird', 'messages', 'flight', 'playground', 'particle-simulation']
 
 const NAME_MAP = {
 	'portfolio-v2': "Alexis' Portfolio",
@@ -27,10 +31,12 @@ const NAME_MAP = {
 	'3d-engine-ascii': '3D Engine Ascii',
 	'print-it': 'Print It',
 	tweeter: 'Tweeter',
-	messages: 'Messages',
 	'portfolio-v1': 'Portfolio V1',
-	particules: 'Particules',
-	playground: 'Playground'
+	'flappy-bird': 'Flappy Bird',
+	messages: 'Messages',
+	flight: 'Flight Simulator',
+	playground: 'Playground',
+	'particle-simulation': 'Particle Simulation'
 }
 
 const TROPHEES_DESCRIPTION =
@@ -149,24 +155,31 @@ const COLORS = {
 }
 
 function getCardContent(project) {
+	let websiteLink = ''
+	if (WEBSITES.includes(project.name)) {
+		websiteLink = `<a href="https://${project.name}.pifpafdeluxe.fr" target="_blank" rel="noopener noreferrer" class="accent body website-link">Visit the website</a>`
+	}
 	return `
-		<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
-		<h3 class="subtitle">${NAME_MAP[project.name]}</h3>
-		<p class="description white body">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
-		<div class="languages sub-body">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
-		<aside>
-			<p class="detail-txt"><strong>Last Updated:</strong> ${project.updatedAt}</p>
-			<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
-		</aside>
-		<a class="overlay" href="https://github.com/${project.owner}/${project.name}" target="_blank" rel="noopener noreferrer">
-			<div class="accent body">See more details</div>
-		</a>
+		<div class="overlay-card gradient-card program-card">
+			<img src="${project.imageUrl}" alt="Project ${NAME_MAP[project.name]}">
+			<h3 class="subtitle">${NAME_MAP[project.name]}</h3>
+			<p class="description white body">${project.name === 'trophees-nsi' ? TROPHEES_DESCRIPTION : project.description}</p>
+			<div class="languages sub-body">${project.languages.map(lang => `<div class="languages-pill" style="background: ${COLORS[lang.name] || '#ccc'}"></div>${lang.name} (${lang.percentage})`).join('')}</div>
+			<aside>
+				<p class="detail-txt"><strong>Last Updated:</strong> ${project.updatedAt}</p>
+				<p class="detail-txt"><strong>⭐ Stars:</strong> ${project.stars}</p>
+			</aside>
+			<a class="overlay" href="https://github.com/${project.owner}/${project.name}" target="_blank" rel="noopener noreferrer">
+				<div class="accent body">See more details</div>
+			</a>
+		</div>
+		${websiteLink}
 	`
 }
 
 function createCard(project) {
 	const card = document.createElement('div')
-	card.classList.add('overlay-card', 'gradient-card', 'program-card')
+	card.classList.add('program-card-wrapper')
 	card.innerHTML = getCardContent(project)
 	return card
 }

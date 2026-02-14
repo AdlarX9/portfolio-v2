@@ -45,8 +45,22 @@
 	max-width: min(70vw, 130rem);
 }
 
-.program-card {
+.program-card-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin: 1.4rem;
+}
+
+.program-card {
+	flex: 1;
+	text-align: center;
+	width: 100%;
+}
+
+.website-link {
+	flex-shrink: 0;
+	text-align: center;
 }
 
 .program-card h3 {
@@ -115,8 +129,14 @@
 	}
 }
 
+@media screen and (max-width: 1000px) {
+	.website-link {
+		font-size: 3rem;
+	}
+}
+
 @media screen and (max-width: 767px) {
-	.program-card {
+	.program-card-wrapper {
 		margin: 20px 0;
 	}
 }

@@ -22,21 +22,28 @@
 	align-items: center;
 	justify-content: space-around;
 	flex-direction: column;
-	min-height: 18.75rem;
+	min-height: 22rem;
 	border-left: 1px solid rgb(var(--dark-three));
 	background: linear-gradient(to right, rgb(var(--dark-two)) 50%, transparent);
 }
 
 .about-2 h2 {
 	margin: 0;
+	margin-top: 3rem;
 	max-width: 85%;
+}
+
+.about-2 p {
+	margin: 1rem 0 3rem 0;
+	max-width: 85%;
+	text-align: center;
 }
 
 .about-images {
 	display: flex;
 	justify-content: center;
 	gap: 2rem;
-	padding-bottom: 2rem;
+	padding: 2rem;
 }
 
 .social-icon {
@@ -66,6 +73,9 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+	}
+	.about-2 h2 {
+		width: 90vw;
 	}
 	.about-2 p {
 		margin-left: 0;

@@ -260,6 +260,12 @@ body {
 	}
 }
 
+@media (hover: none) {
+	.overlay-card {
+		border-color: rgb(var(--accent)) !important;
+	}
+}
+
 .image-card {
 	border: 1px solid rgb(var(--middle-one));
 	border-radius: 0.8rem;

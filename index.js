@@ -11,7 +11,9 @@ import {
 	rectanglesEffect,
 	starsEffect,
 	lightningEffect,
-	loaderEffect
+	loaderEffect,
+	glareEffect,
+	scatterEffect
 } from './effects/index.js'
 
 // === BANNER GENERATION ===
@@ -227,6 +229,8 @@ mm.add('(min-width: 768px)', () => {
 
 // === EFFECTS ===
 
+effectManager.add(glareEffect)
+effectManager.add(scatterEffect)
 effectManager.add(starsEffect)
 effectManager.add(fluidEffect)
 effectManager.add(matrixEffect)
