@@ -32,9 +32,11 @@ function updateThumbSize() {
 function updateThumbPosition() {
 	if (!thumb || !track || isDragging) return
 
+	// Utilise Lenis si disponible, sinon window.scrollY
+	const scrollTop = window.lenis ? window.lenis.scroll : window.scrollY
+
 	const docHeight = document.documentElement.scrollHeight
 	const winHeight = window.innerHeight
-	const scrollTop = window.scrollY
 
 	const trackHeight = winHeight
 	const thumbHeight = parseFloat(thumb.style.height) || 0
@@ -59,9 +61,13 @@ scrollbarEffect.smallScreen = false
 // --- LIFECYCLE ---
 
 scrollbarEffect.init = () => {
-	// 1. Sélection dynamique (au moment où l'effet se lance)
-	track = document.querySelector('.cyber-scrollbar-track')
-	thumb = document.querySelector('.cyber-scrollbar-thumb')
+	// 1. Création de la scrollbar
+	track = document.createElement('div')
+	track.classList.add('cyber-scrollbar-track')
+	thumb = document.createElement('div')
+	thumb.classList.add('cyber-scrollbar-thumb')
+	track.appendChild(thumb)
+	document.body.appendChild(track)
 
 	if (!track || !thumb) return
 
@@ -74,15 +80,19 @@ scrollbarEffect.init = () => {
 		isDragging = true
 		track.classList.add('grabbing')
 		startY = e.clientY
-		startScrollTop = window.scrollY
+		startScrollTop = window.lenis ? window.lenis.scroll : window.scrollY
 		document.body.style.userSelect = 'none'
 		e.preventDefault() // Évite de sélectionner du texte
 	}
 	thumb.addEventListener('mousedown', mouseDownHandler)
 
-	// 3. Calcul initial
-	updateThumbSize()
-	updateThumbPosition()
+	// 3. Calcul initial - On attend 2 frames pour être sûr que le DOM est rendu
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
+			updateThumbSize()
+			updateThumbPosition()
+		})
+	})
 }
 
 scrollbarEffect.cleanup = () => {
@@ -125,9 +135,6 @@ scrollbarEffect.mouseup = () => {
 scrollbarEffect.mousemove = e => {
 	if (!isDragging || !thumb) return
 
-	// Empêcher les sélections bizarres
-	e.preventDefault()
-
 	const deltaY = e.clientY - startY
 	const docHeight = document.documentElement.scrollHeight
 	const winHeight = window.innerHeight
@@ -140,15 +147,17 @@ scrollbarEffect.mousemove = e => {
 	if (trackableHeight <= 0) return
 
 	const ratio = scrollableHeight / trackableHeight
+	const newScrollPosition = startScrollTop + deltaY * ratio
 
-	// On scroll la fenêtre
-	window.scrollTo(0, startScrollTop + deltaY * ratio)
+	// Utilise Lenis si disponible, sinon window.scrollTo
+	if (window.lenis) {
+		window.lenis.scrollTo(newScrollPosition, { immediate: true })
+	} else {
+		window.scrollTo(0, newScrollPosition)
+	}
 
 	// On met à jour le thumb visuellement tout de suite (plus fluide)
-	const newThumbY = Math.min(
-		Math.max(0, ((startScrollTop + deltaY * ratio) / scrollableHeight) * trackableHeight),
-		trackableHeight
-	)
+	const newThumbY = Math.min(Math.max(0, (newScrollPosition / scrollableHeight) * trackableHeight), trackableHeight)
 	thumb.style.transform = `translate3d(0, ${newThumbY}px, 0)`
 }
 

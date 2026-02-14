@@ -8,7 +8,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, clamp(25rem, 40vw, 56.25rem));
 	grid-template-rows: repeat(2, auto);
-	width: 80%;
+	width: 90%;
 	justify-content: center;
 	margin-bottom: 12.5rem;
 }

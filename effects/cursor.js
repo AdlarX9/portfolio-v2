@@ -21,7 +21,7 @@ function cleanup() {
 }
 
 function handleHoverIn(e) {
-	if (!inScreen) {
+	if (!inScreen && hasMoved) {
 		inScreen = true
 		cursor.style.opacity = '1'
 	}

@@ -305,7 +305,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 1rem;
-	border-radius: 99999px;
+	border-radius: 999px;
 	background: rgba(0, 0, 0, 0.5);
 	color: rgb(var(--light-two));
 	border: 1px solid rgb(var(--middle-one));

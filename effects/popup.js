@@ -1,11 +1,12 @@
 import { Effect } from '../app/effects.js'
 import { DATA as DRAWINGS_DATA } from '../paint/script.js'
-import { DATA as PRINTS_DATA } from '../print/script.js'
+import { MODELS_DATA, DATA as PRINTS_DATA } from '../print/script.js'
 
 // utils
 const DATA = {
 	drawing: DRAWINGS_DATA,
-	print: PRINTS_DATA
+	print: PRINTS_DATA,
+	model: MODELS_DATA
 }
 
 // --- CSS DU LOADER ET TRANSITIONS ---

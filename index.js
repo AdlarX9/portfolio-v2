@@ -106,69 +106,40 @@ const switchThemeBtn = document.getElementById('switch-theme')
 let themeDialog = null
 
 function createThemeDialog() {
-	const dialog = document.createElement('div')
-	dialog.className = 'theme-dialog'
-
-	const content = document.createElement('div')
-	content.className = 'theme-dialog-content gradient-card'
-
-	const title = document.createElement('h2')
-	title.className = 'title'
-	title.textContent = 'Choose your theme'
-
-	const optionsContainer = document.createElement('div')
-	optionsContainer.className = 'theme-options'
+	const dialog = document.querySelector('.theme-dialog')
+	const optionsContainer = document.querySelector('.theme-options')
 
 	// Créer une option pour chaque thème
-	MENUS.forEach((theme, index) => {
-		const option = document.createElement('div')
-		option.className = 'theme-option clickable'
-		option.dataset.themeIndex = index
+	const savedIndex = parseInt(localStorage.getItem('site-theme-index') || '0', 10)
 
-		// Définir les couleurs CSS pour la preview
-		option.style.setProperty('--theme-main', `${theme.mainColor.r}, ${theme.mainColor.g}, ${theme.mainColor.b}`)
-		option.style.setProperty(
-			'--theme-accent',
-			`${theme.accentColor.r}, ${theme.accentColor.g}, ${theme.accentColor.b}`
-		)
+	// 1. Génération du HTML en une seule fois
+	optionsContainer.innerHTML = MENUS.map((theme, index) => {
+		const isSelected = index === savedIndex ? 'selected' : ''
+		const mainRGB = `${theme.mainColor.r}, ${theme.mainColor.g}, ${theme.mainColor.b}`
+		const accentRGB = `${theme.accentColor.r}, ${theme.accentColor.g}, ${theme.accentColor.b}`
 
-		// Vérifier si c'est le thème actuel
-		const savedIndex = parseInt(localStorage.getItem('site-theme-index') || '0', 10)
-		if (index === savedIndex) {
-			option.classList.add('selected')
-		}
+		return `
+			<div class="theme-option clickable ${isSelected}" 
+				 data-theme-index="${index}"
+				 style="--theme-main: ${mainRGB}; --theme-accent: ${accentRGB}">
+				
+				<div class="theme-name">${getThemeName(index)}</div>
+				
+				<div class="theme-preview">
+					<div class="theme-color main"></div>
+					<div class="theme-color accent"></div>
+				</div>
+			</div>
+		`
+	}).join('')
 
-		const name = document.createElement('div')
-		name.className = 'theme-name'
-		name.textContent = getThemeName(index)
-
-		const preview = document.createElement('div')
-		preview.className = 'theme-preview'
-
-		const mainColor = document.createElement('div')
-		mainColor.className = 'theme-color main'
-
-		const accentColor = document.createElement('div')
-		accentColor.className = 'theme-color accent'
-
-		preview.appendChild(mainColor)
-		preview.appendChild(accentColor)
-
-		option.appendChild(name)
-		option.appendChild(preview)
-
-		// Sélection du thème
+	// 2. Ajout des écouteurs d'événements (après l'injection)
+	optionsContainer.querySelectorAll('.theme-option').forEach(option => {
 		option.addEventListener('click', () => {
+			const index = parseInt(option.dataset.themeIndex, 10)
 			selectTheme(index)
 		})
-
-		optionsContainer.appendChild(option)
 	})
-
-	content.appendChild(title)
-	content.appendChild(optionsContainer)
-	dialog.appendChild(content)
-	document.body.appendChild(dialog)
 
 	// Fermer en cliquant sur le fond
 	dialog.addEventListener('click', e => {

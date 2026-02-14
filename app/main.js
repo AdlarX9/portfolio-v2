@@ -117,7 +117,7 @@ export const MENUS = [
 		accentColor: { r: 200, g: 20, b: 200 } // Violet
 	},
 	{
-		mainColor: { r: 50, g: 0, b: 0 }, // Rouge foncé
+		mainColor: { r: 160, g: 20, b: 70 }, // Rouge foncé
 		accentColor: { r: 0, g: 255, b: 0 } // Vert hacker
 	}
 ]

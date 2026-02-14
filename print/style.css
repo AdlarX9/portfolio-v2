@@ -4,7 +4,7 @@ body {
 	align-items: center;
 }
 
-.all-prints {
+.grid-content {
 	max-width: min(90%, 125rem);
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 31.25rem);
@@ -14,24 +14,97 @@ body {
 	margin-bottom: 12.5rem;
 }
 
-.all-prints > div {
+.card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.all-prints img {
+.grid-content img {
 	width: 31.25rem;
 	height: auto;
 }
 
+.profile-tabs {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	--active-index: 0;
+	--count: 2;
+}
+
+/* --- HEADER --- */
+.tabs-header {
+	display: flex;
+	position: relative;
+	border-bottom: 2px solid rgba(var(--light-two), 0.1);
+	width: 70rem;
+}
+
+.tab-btn {
+	flex: 1;
+	background: none;
+	border: none;
+	padding: 1rem 3rem;
+	transition: color 0.1s;
+	font-weight: bold;
+}
+
+.tab-btn.active {
+	color: rgb(var(--accent)); /* Ou ta Main Color */
+}
+
+/* La ligne qui glisse */
+.active-line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	background: rgb(var(--accent));
+	width: calc(100% / var(--count));
+	transform: translate(calc(100% * var(--active-index)), 100%);
+	transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tabs-window {
+	width: 100%;
+	overflow: hidden;
+    height: auto; 
+    transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tabs-track {
+	display: flex;
+	align-items: start;
+	width: 100%;
+	transform: translateX(calc(-100% * var(--active-index)));
+	transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tab-panel {
+	min-width: 100%;
+	flex-shrink: 0;
+	padding: 1.5rem 0;
+	display: flex;
+	justify-content: center;
+	height: fit-content;
+}
+
 @media screen and (max-width: 767px) {
-	.all-prints {
+	.grid-content {
 		grid-template-columns: 1fr;
 		grid-template-rows: repeat(5, auto);
 	}
-	.all-prints img {
+	.grid-content img {
 		width: 95vw;
 		height: auto;
+	}
+	.tab-btn {
+		font-size: 3rem;
+	}
+	.tabs-header {
+		width: 95%;
 	}
 }

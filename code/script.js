@@ -2,6 +2,8 @@ import { Octokit, App } from 'https://esm.sh/octokit'
 
 const octokit = new Octokit({})
 const PROJECTS = [
+	'portfolio-v2',
+	'codepulse',
 	'nitflex',
 	'project-p',
 	'empire',
@@ -16,6 +18,8 @@ const PROJECTS = [
 ]
 
 const NAME_MAP = {
+	'portfolio-v2': "Alexis' Portfolio",
+	codepulse: 'CodePulse',
 	nitflex: 'Nitflex',
 	'project-p': 'Project P',
 	empire: 'Empire',

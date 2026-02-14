@@ -7,12 +7,6 @@ let elementRects = null // Cache pour les rectangles
 let lastResizeTime = 0
 const RECT_CACHE_DURATION = 200 // ms
 
-// load
-function load() {
-	elements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el, .separator')
-	updateRects()
-}
-
 // Fonction pour mettre à jour le cache des rectangles
 function updateRects() {
 	elementRects = Array.from(elements || []).map(el => ({
@@ -20,6 +14,21 @@ function updateRects() {
 		rect: el.getBoundingClientRect()
 	}))
 	lastResizeTime = Date.now()
+}
+
+function mouseHoverOut() {
+	if (!elementRects) return
+	elementRects.forEach(({ el }) => {
+		el.style.setProperty('--x', '-1000px')
+		el.style.setProperty('--y', '-1000px')
+	})
+}
+
+// load
+function load() {
+	elements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .banner-el, .separator')
+	updateRects()
+	document.addEventListener('mouseleave', mouseHoverOut, { passive: true })
 }
 
 // resize - recalculer les rectangles
