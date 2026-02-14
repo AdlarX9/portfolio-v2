@@ -71,8 +71,8 @@ body {
 .tabs-window {
 	width: 100%;
 	overflow: hidden;
-    height: auto; 
-    transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+	height: auto;
+	transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .tabs-track {

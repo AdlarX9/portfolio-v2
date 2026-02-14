@@ -375,13 +375,13 @@
 
 .theme-option:hover {
 	border-color: rgb(var(--theme-accent));
-	box-shadow: 0 .5rem 1rem rgba(var(--theme-accent), 0.3);
+	box-shadow: 0 0.5rem 1rem rgba(var(--theme-accent), 0.3);
 }
 
 .theme-option.selected {
 	border-color: rgb(var(--accent));
 	background: linear-gradient(135deg, rgba(var(--accent), 0.1), rgb(var(--dark-two)));
-	box-shadow: 0 .5rem 1rem rgba(var(--accent), 0.4);
+	box-shadow: 0 0.5rem 1rem rgba(var(--accent), 0.4);
 }
 
 .theme-name {
@@ -400,7 +400,7 @@
 
 .theme-color {
 	width: 3rem;
-	height: 3rem ;
+	height: 3rem;
 	border-radius: 50%;
 	border: 2px solid rgba(0, 0, 0, 0.3);
 }

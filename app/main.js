@@ -1,12 +1,7 @@
 // === MAIN ===
 
 import { effectManager } from './effects.js'
-import {
-	cursorEffect,
-	popupEffect,
-	scrollbarEffect,
-	smoothScrollEffect
-} from '../effects/index.js'
+import { cursorEffect, popupEffect, scrollbarEffect, smoothScrollEffect } from '../effects/index.js'
 
 // Setup theme
 export let MAIN_COLOR = null
@@ -86,7 +81,7 @@ function generateTheme(sourceColor) {
 	// 67, 0, 111 par défaut
 	const hsl = rgbToHsl(sourceColor.r, sourceColor.g, sourceColor.b)
 	const deepVariant = hslToRgb((hsl.h + 22) % 360, 100, 22)
-	
+
 	setVar('--middle-three', sourceColor)
 	setVar('--dark-one', mix(sourceColor, BLACK, 0.9))
 	setVar('--dark-two', mix(sourceColor, BLACK, 0.83))
