@@ -8,28 +8,20 @@
 		<meta name="apple-mobile-web-app-title" content="Alexis' Portfolio" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 
-		<link rel="stylesheet" href="app/main.css" />
-		<link rel="stylesheet" href="app/popup.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Special+Gothic+Expanded+One&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+		<link rel="stylesheet" href="/src/app/main.css" />
+		<link rel="stylesheet" href="/src/app/popup.css" />
 
-		<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js" defer></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js" defer></script>
-		<script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
-
-		<script src="lib/fluid.js" defer></script>
-		<script src="app/main.js" type="module" defer></script>
-
+		<script src="/src/app/main.js" type="module" defer></script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="index.css" />
-		<script src="index.js" type="module" defer></script>
+		<link rel="stylesheet" href="/src/index/index.css" />
+		<script src="/src/index/index.js" type="module" defer></script>
 		<title>Alexis' Portfolio</title>
 	</head>
 	<body>
@@ -52,6 +44,7 @@
 
 			<section class="main">
 				<div class="stars"></div>
+				<div class="stars stars-safari"></div>
 				<canvas id="renderSurface"></canvas>
 				<h1 class="big-title scatter-text reveal">Alexis' Portfolio</h1>
 				<div class="stroke-title main-stroke reveal" data-text="code, paint, print">code, paint, print</div>
@@ -356,9 +349,15 @@
 		</main>
 		<svg style="display: none">
 			<defs>
-				<!-- 1. FILTRE GLITCH (Existant) -->
-				<filter id="glitch-filter">
-					<!-- J'ai ajouté l'ID 'turb-glitch' pour le cibler en JS -->
+				<!-- 1. FILTRE GLITCH -->
+				<filter
+					id="glitch-filter"
+					x="-20%"
+					y="-20%"
+					width="140%"
+					height="140%"
+					color-interpolation-filters="sRGB"
+				>
 					<feTurbulence
 						id="turb-glitch"
 						type="fractalNoise"
@@ -367,26 +366,6 @@
 						result="noise"
 					/>
 					<feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
-				</filter>
-
-				<!-- 2. FILTRE LIQUID (Nouveau) -->
-				<filter id="liquid-filter">
-					<!-- J'ai ajouté les ID 'turb-liquid' et 'disp-liquid' -->
-					<feTurbulence
-						id="turb-liquid"
-						type="fractalNoise"
-						baseFrequency="0.02 0.03"
-						numOctaves="1"
-						result="noise"
-					/>
-					<feDisplacementMap
-						id="disp-liquid"
-						in="SourceGraphic"
-						in2="noise"
-						scale="0"
-						xChannelSelector="R"
-						yChannelSelector="G"
-					/>
 				</filter>
 			</defs>
 		</svg>

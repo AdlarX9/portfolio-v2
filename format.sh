@@ -14,6 +14,6 @@ echo "🎨 Démarrage du formatage..."
 # --write : écrase les fichiers avec la version formatée (sinon il affiche juste le résultat)
 # "**/*.{html,css,js}" : cherche récursivement dans tous les dossiers
 # --ignore-path .gitignore : respecte ton .gitignore (pour ne pas formater node_modules !)
-npx prettier --write "**/*.{html,css,js}" --ignore-path .gitignore
+npx prettier --write "*.html" "src/**/*.{html,css,js}" --ignore-path .gitignore
 
 echo "✅ Terminé ! Tous les fichiers HTML, CSS et JS sont formatés."
