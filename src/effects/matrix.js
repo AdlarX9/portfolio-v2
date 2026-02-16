@@ -16,6 +16,12 @@ if (programsSection) {
 }
 let rect = null
 
+export function computeMatrixRect() {
+	if (programsSection) {
+		rect = getRect(programsSection)
+	}
+}
+
 // Constantes optimisées
 const COUNT_DESKTOP = 40
 const COUNT_MOBILE = 20 // Moins de colonnes sur mobile

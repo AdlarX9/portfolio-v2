@@ -168,12 +168,14 @@ lightningEffect.init = () => {
 
 lightningEffect.resize = () => {
 	if (!container || !canvas) return
-	const rect = container.getBoundingClientRect()
-	width = rect.width
-	height = rect.height
+	const currentRect = container.getBoundingClientRect()
+	width = currentRect.width
+	height = currentRect.height
 
 	canvas.width = width
 	canvas.height = height
+
+	rect = null
 
 	clouds = []
 	for (let i = 0; i < CLOUD_DENSITY; i++) {

@@ -39,6 +39,10 @@ rectanglesEffect.cleanup = () => {
 	}
 }
 
+rectanglesEffect.resize = () => {
+	rect = null
+}
+
 rectanglesEffect.update = () => {
 	if (!container) return
 	if (!rect) {

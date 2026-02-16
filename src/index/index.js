@@ -17,6 +17,7 @@ import {
 import bezier from 'bezier-easing'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { computeMatrixRect } from '../effects/matrix.js'
 
 // === BANNER GENERATION ===
 
@@ -121,11 +122,16 @@ mm.add('(min-width: 768px)', () => {
 	return () => {}
 })
 
+window.addEventListener('load', () => {
+	ScrollTrigger.refresh()
+})
+
 const programsSection = document.getElementById('program-cards')
 createIndexProgramCards(programsSection).then(() => {
 	setTimeout(() => {
 		ScrollTrigger.refresh()
-	}, 200)
+		computeMatrixRect()
+	}, 1500)
 })
 
 const printingCards = document.querySelectorAll('.printing-el')

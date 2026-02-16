@@ -4,11 +4,19 @@ let elements = []
 let ticking = false
 let mouseX = 0
 let mouseY = 0
+const CACHE_DURATION = 300
 
 // On stocke les données pour éviter de lire le DOM en permanence
 let itemsState = []
+let lastUpdateTime = 0
 
-function updateRects() {
+function updateRects(force = false) {
+	const now = performance.now()
+	if (now - lastUpdateTime < CACHE_DURATION && !force) {
+		return
+	}
+	lastUpdateTime = now
+
 	// On calcule tout d'un coup pour éviter le layout thrashing
 	const scrollY = window.scrollY
 
@@ -40,10 +48,11 @@ function updateRects() {
 function load() {
 	// Sélection des éléments
 	elements = document.querySelectorAll('.text-glare, .bordered, .stroke-title, .separator')
-	updateRects()
+	updateRects(true)
+}
 
-	// Écouteurs globaux pour recalculer les positions (coûteux mais rare)
-	window.addEventListener('scroll', updateRects, { passive: true })
+function scroll() {
+	updateRects()
 }
 
 function resize() {
@@ -86,7 +95,9 @@ function mousemove(e) {
 
 const glareEffect = new Effect()
 glareEffect.smallScreen = true
+glareEffect.init = load
 glareEffect.load = load
+glareEffect.scroll = scroll
 glareEffect.resize = resize
 glareEffect.mousemove = mousemove
 
