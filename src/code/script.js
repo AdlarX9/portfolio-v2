@@ -8,6 +8,7 @@ const PROJECTS = [
 	'project-p',
 	'empire',
 	'trophees-nsi',
+	'wasm-particles',
 	'3d-engine-ascii',
 	'print-it',
 	'tweeter',
@@ -19,7 +20,7 @@ const PROJECTS = [
 	'particle-simulation'
 ]
 
-const WEBSITES = ['portfolio-v1', 'flappy-bird', 'messages', 'flight', 'playground', 'particle-simulation']
+const WEBSITES = ['wasm-particles', 'portfolio-v1', 'flappy-bird', 'messages', 'flight', 'playground', 'particle-simulation']
 
 const NAME_MAP = {
 	'portfolio-v2': "Alexis' Portfolio",
@@ -28,6 +29,7 @@ const NAME_MAP = {
 	'project-p': 'Project P',
 	empire: 'Empire',
 	'trophees-nsi': "Bletchley's Adventure",
+	'wasm-particles': 'WASM Particles',
 	'3d-engine-ascii': '3D Engine Ascii',
 	'print-it': 'Print It',
 	tweeter: 'Tweeter',
