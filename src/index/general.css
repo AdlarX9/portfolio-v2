@@ -149,6 +149,7 @@
 		linear-gradient(to right, rgb(var(--dark-three)), rgb(var(--middle-three)), rgb(var(--dark-three))) border-box;
 	will-change: background-position;
 	contain: layout style paint;
+	white-space: nowrap;
 }
 
 .banner-el img {

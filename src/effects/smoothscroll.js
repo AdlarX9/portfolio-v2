@@ -2,7 +2,6 @@ import Lenis from 'lenis'
 import { Effect } from '../app/effects.js'
 
 let lenis = null
-const isFirefox = typeof InstallTrigger !== 'undefined'
 const isSafari =
 	/constructor/i.test(window.HTMLElement) ||
 	(function (p) {
@@ -19,7 +18,6 @@ function init() {
 		easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 		direction: 'vertical',
 		smooth: true,
-		wheelMultiplier: isFirefox ? 3 : 1,
 		smoothTouch: false // On désactive le lissage tactile (souvent buggé/lourd)
 	})
 
