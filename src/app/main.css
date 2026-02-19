@@ -23,7 +23,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 2rem;
-	background: rgb(var(--dark-one));
+	background: rgb(var(--dark-one, (25, 15, 17)));
 	color: rgb(var(--light-one));
 	-ms-overflow-style: none;
 }

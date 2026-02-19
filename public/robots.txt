@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://alexis-larose.com/sitemap.xml
+Host: https://alexis-larose.com

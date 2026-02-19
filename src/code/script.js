@@ -159,7 +159,7 @@ const COLORS = {
 function getCardContent(project) {
 	let websiteLink = ''
 	if (WEBSITES.includes(project.name)) {
-		websiteLink = `<a href="https://${project.name}.pifpafdeluxe.fr" target="_blank" rel="noopener noreferrer" class="accent body website-link">Visit the website</a>`
+		websiteLink = `<a href="https://${project.name}.alexis-larose.com" target="_blank" rel="noopener noreferrer" class="accent body website-link">Visit the website</a>`
 	}
 	return `
 		<div class="overlay-card gradient-card program-card">
