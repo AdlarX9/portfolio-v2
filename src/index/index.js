@@ -245,7 +245,6 @@ effectManager.add(scatterEffect)
 effectManager.add(starsEffect)
 effectManager.add(matrixEffect)
 effectManager.add(distortionEffect)
-effectManager.add(rectanglesEffect)
 effectManager.add(cardEffect)
 effectManager.add(loaderEffect)
 
@@ -253,6 +252,7 @@ effectManager.add(loaderEffect)
 window.addEventListener('load', () => {
 	setTimeout(() => {
 		effectManager.add(fluidEffect)
+		effectManager.add(rectanglesEffect)
 		effectManager.add(lightningEffect)
-	}, 500)
+	}, 1000)
 })
