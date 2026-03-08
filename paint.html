@@ -4,49 +4,68 @@
 		<!-- inside -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Alexis' Paintings</title>
+		<title>Alexis Larose — Paintings</title>
+		<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+		<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 		<meta
 			name="description"
-			content="Gallery of Alexis' paintings, showing off his most beautiful artworks, demonstrating his mastery of the different techniques and styles of painting as well as his incredible creativity!"
+			content="Painting gallery by Alexis Larose: selected artworks, studies, and personal pieces."
 		/>
 		<link rel="canonical" href="https://alexis-larose.com/paint.html" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://alexis-larose.com/paint.html" />
-		<meta property="og:title" content="Alexis' Paintings" />
-		<meta
-			property="og:description"
-			content="Gallery of Alexis' paintings, showing off his most beautiful artworks, demonstrating his mastery of the different techniques and styles of painting as well as his incredible creativity!"
-		/>
+		<meta property="og:title" content="Alexis Larose — Paintings" />
+		<meta property="og:description" content="Selected artworks, studies, and personal pieces." />
 		<meta property="og:image" content="https://alexis-larose.com/favicon/logo.png" />
+		<meta property="og:image:alt" content="Alexis Larose — Paintings" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Alexis Larose" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@SpiderManMaGeul" />
 		<meta name="twitter:creator" content="@SpiderManMaGeul" />
-		<meta name="twitter:title" content="Alexis' Paintings" />
-		<meta
-			name="twitter:description"
-			content="Gallery of Alexis' paintings, showing off his most beautiful artworks, demonstrating his mastery of the different techniques and styles of painting as well as his incredible creativity!"
-		/>
+		<meta name="twitter:title" content="Alexis Larose — Paintings" />
+		<meta name="twitter:description" content="Selected artworks, studies, and personal pieces." />
 		<meta name="twitter:image" content="https://alexis-larose.com/favicon/logo.png" />
 
 		<!-- json-ld -->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"url": "https://alexis-larose.com/paint.html",
-				"name": "Alexis' Paintings",
-				"description": "Gallery of Alexis' paintings, showing off his most beautiful artworks, demonstrating his mastery of the different techniques and styles of painting as well as his incredible creativity!",
-				"publisher": {
-					"@type": "Organization",
-					"name": "Alexis Larose",
-					"logo": { "@type": "ImageObject", "url": "https://alexis-larose.com/favicon/logo.png" }
-				}
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://alexis-larose.com/#alexis-larose",
+						"name": "Alexis Larose",
+						"url": "https://alexis-larose.com/",
+						"image": "https://alexis-larose.com/favicon/logo.png",
+						"sameAs": ["https://x.com/SpiderManMaGeul"]
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://alexis-larose.com/#website",
+						"url": "https://alexis-larose.com/",
+						"name": "Alexis Larose — Portfolio",
+						"publisher": { "@id": "https://alexis-larose.com/#alexis-larose" }
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://alexis-larose.com/paint.html#webpage",
+						"url": "https://alexis-larose.com/paint.html",
+						"name": "Alexis Larose — Paintings",
+						"description": "Painting gallery by Alexis Larose: selected artworks, studies, and personal pieces.",
+						"isPartOf": { "@id": "https://alexis-larose.com/#website" },
+						"about": { "@id": "https://alexis-larose.com/#alexis-larose" },
+						"primaryImageOfPage": {
+							"@type": "ImageObject",
+							"url": "https://alexis-larose.com/favicon/logo.png"
+						}
+					}
+				]
 			}
 		</script>
 

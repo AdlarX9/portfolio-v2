@@ -243,10 +243,16 @@ if (switchThemeBtn) {
 effectManager.add(glareEffect)
 effectManager.add(scatterEffect)
 effectManager.add(starsEffect)
-effectManager.add(fluidEffect)
 effectManager.add(matrixEffect)
 effectManager.add(distortionEffect)
 effectManager.add(rectanglesEffect)
-effectManager.add(lightningEffect)
 effectManager.add(cardEffect)
 effectManager.add(loaderEffect)
+
+// sometimes bugged effects when first loaded, so we delay them a bit
+window.addEventListener('load', () => {
+	setTimeout(() => {
+		effectManager.add(fluidEffect)
+		effectManager.add(lightningEffect)
+	}, 500)
+})

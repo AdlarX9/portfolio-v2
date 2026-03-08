@@ -4,49 +4,68 @@
 		<!-- inside -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Alexis' Code</title>
+		<title>Alexis Larose — Code projects</title>
+		<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+		<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 		<meta
 			name="description"
-			content="Gallery of Alexis' code projects, showcasing his incredible creativity and expertise in web development and design, as well as his mastery in various fields. Check it out!"
+			content="A selection of Alexis Larose’s coding projects: web experiments, interactive effects, and builds."
 		/>
 		<link rel="canonical" href="https://alexis-larose.com/code.html" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://alexis-larose.com/code.html" />
-		<meta property="og:title" content="Alexis' Code" />
-		<meta
-			property="og:description"
-			content="Gallery of Alexis' code projects, showcasing his incredible creativity and expertise in web development and design, as well as his mastery in various fields. Check it out!"
-		/>
+		<meta property="og:title" content="Alexis Larose — Code projects" />
+		<meta property="og:description" content="Web experiments, interactive effects, and selected builds." />
 		<meta property="og:image" content="https://alexis-larose.com/favicon/logo.png" />
+		<meta property="og:image:alt" content="Alexis Larose — Code projects" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Alexis Larose" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@SpiderManMaGeul" />
 		<meta name="twitter:creator" content="@SpiderManMaGeul" />
-		<meta name="twitter:title" content="Alexis' Code" />
-		<meta
-			name="twitter:description"
-			content="Gallery of Alexis' code projects, showcasing his incredible creativity and expertise in web development and design, as well as his mastery in various fields. Check it out!"
-		/>
+		<meta name="twitter:title" content="Alexis Larose — Code projects" />
+		<meta name="twitter:description" content="Web experiments, interactive effects, and selected builds." />
 		<meta name="twitter:image" content="https://alexis-larose.com/favicon/logo.png" />
 
 		<!-- json-ld -->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"url": "https://alexis-larose.com/code.html",
-				"name": "Alexis' Code",
-				"description": "Gallery of Alexis' code projects, showcasing his incredible creativity and expertise in web development and design, as well as his mastery in various fields. Check it out!",
-				"publisher": {
-					"@type": "Organization",
-					"name": "Alexis Larose",
-					"logo": { "@type": "ImageObject", "url": "https://alexis-larose.com/favicon/logo.png" }
-				}
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://alexis-larose.com/#alexis-larose",
+						"name": "Alexis Larose",
+						"url": "https://alexis-larose.com/",
+						"image": "https://alexis-larose.com/favicon/logo.png",
+						"sameAs": ["https://x.com/SpiderManMaGeul"]
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://alexis-larose.com/#website",
+						"url": "https://alexis-larose.com/",
+						"name": "Alexis Larose — Portfolio",
+						"publisher": { "@id": "https://alexis-larose.com/#alexis-larose" }
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://alexis-larose.com/code.html#webpage",
+						"url": "https://alexis-larose.com/code.html",
+						"name": "Alexis Larose — Code projects",
+						"description": "A selection of Alexis Larose’s coding projects: web experiments, interactive effects, and builds.",
+						"isPartOf": { "@id": "https://alexis-larose.com/#website" },
+						"about": { "@id": "https://alexis-larose.com/#alexis-larose" },
+						"primaryImageOfPage": {
+							"@type": "ImageObject",
+							"url": "https://alexis-larose.com/favicon/logo.png"
+						}
+					}
+				]
 			}
 		</script>
 

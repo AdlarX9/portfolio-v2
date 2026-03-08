@@ -4,49 +4,68 @@
 		<!-- inside -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Alexis' Prints</title>
+		<title>Alexis Larose — 3D prints & models</title>
+		<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+		<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 		<meta
 			name="description"
-			content="Gallery of Alexis' 3D prints and designs, illustrating how he is good at it and how his creativity is limitless, check it out!"
+			content="3D prints and models by Alexis Larose: selected designs, printable pieces, and 3D work."
 		/>
 		<link rel="canonical" href="https://alexis-larose.com/print.html" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://alexis-larose.com/print.html" />
-		<meta property="og:title" content="Alexis' Prints" />
-		<meta
-			property="og:description"
-			content="Gallery of Alexis' 3D prints and designs, illustrating how he is good at it and how his creativity is limitless, check it out!"
-		/>
+		<meta property="og:title" content="Alexis Larose — 3D prints & models" />
+		<meta property="og:description" content="Selected 3D designs, printable pieces, and models." />
 		<meta property="og:image" content="https://alexis-larose.com/favicon/logo.png" />
+		<meta property="og:image:alt" content="Alexis Larose — 3D prints & models" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Alexis Larose" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@SpiderManMaGeul" />
 		<meta name="twitter:creator" content="@SpiderManMaGeul" />
-		<meta name="twitter:title" content="Alexis' Prints" />
-		<meta
-			name="twitter:description"
-			content="Gallery of Alexis' 3D prints and designs, illustrating how he is good at it and how his creativity is limitless, check it out!"
-		/>
+		<meta name="twitter:title" content="Alexis Larose — 3D prints & models" />
+		<meta name="twitter:description" content="Selected 3D designs, printable pieces, and models." />
 		<meta name="twitter:image" content="https://alexis-larose.com/favicon/logo.png" />
 
 		<!-- json-ld -->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"url": "https://alexis-larose.com/print.html",
-				"name": "Alexis' Prints",
-				"description": "Gallery of Alexis' 3D prints and designs, illustrating how he is good at it and how his creativity is limitless, check it out!",
-				"publisher": {
-					"@type": "Organization",
-					"name": "Alexis Larose",
-					"logo": { "@type": "ImageObject", "url": "https://alexis-larose.com/favicon/logo.png" }
-				}
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://alexis-larose.com/#alexis-larose",
+						"name": "Alexis Larose",
+						"url": "https://alexis-larose.com/",
+						"image": "https://alexis-larose.com/favicon/logo.png",
+						"sameAs": ["https://x.com/SpiderManMaGeul"]
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://alexis-larose.com/#website",
+						"url": "https://alexis-larose.com/",
+						"name": "Alexis Larose — Portfolio",
+						"publisher": { "@id": "https://alexis-larose.com/#alexis-larose" }
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://alexis-larose.com/print.html#webpage",
+						"url": "https://alexis-larose.com/print.html",
+						"name": "Alexis Larose — 3D prints & models",
+						"description": "3D prints and models by Alexis Larose: selected designs, printable pieces, and 3D work.",
+						"isPartOf": { "@id": "https://alexis-larose.com/#website" },
+						"about": { "@id": "https://alexis-larose.com/#alexis-larose" },
+						"primaryImageOfPage": {
+							"@type": "ImageObject",
+							"url": "https://alexis-larose.com/favicon/logo.png"
+						}
+					}
+				]
 			}
 		</script>
 
@@ -67,12 +86,8 @@
 			rel="stylesheet"
 		/>
 		<script src="/src/app/main.js" type="module" defer></script>
-
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/src/print/style.css" />
 		<script src="/src/print/script.js" type="module" defer></script>
-		<title>Alexis' Prints</title>
 	</head>
 	<body>
 		<div class="profile-tabs">

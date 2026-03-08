@@ -1,7 +1,7 @@
 {
-  "name": "Alexis' Portfolio",
-  "short_name": "Alexis", 
-  "description": "Alexis' incredibly creative Portfolio, presenting the goat in web development & design, also a master in many fields, including... Well, just check it out!",
+  "name": "Alexis Larose — Portfolio",
+  "short_name": "Alexis",
+  "description": "Portfolio of Alexis Larose: web development & design projects, experiments, and selected work.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
