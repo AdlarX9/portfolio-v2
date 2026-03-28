@@ -20,7 +20,15 @@ const PROJECTS = [
 	'particle-simulation'
 ]
 
-const WEBSITES = ['wasm-particles', 'portfolio-v1', 'flappy-bird', 'messages', 'flight', 'playground', 'particle-simulation']
+const WEBSITES = [
+	'wasm-particles',
+	'portfolio-v1',
+	'flappy-bird',
+	'messages',
+	'flight',
+	'playground',
+	'particle-simulation'
+]
 
 const NAME_MAP = {
 	'portfolio-v2': "Alexis' Portfolio",

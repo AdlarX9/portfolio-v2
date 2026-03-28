@@ -73,6 +73,9 @@ export const DATA = {
 	},
 	'25-mer': {
 		number: 3
+	},
+	'26-borgne': {
+		number: 2
 	}
 }
 
