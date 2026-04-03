@@ -2,8 +2,8 @@ import { Octokit } from '@octokit/rest'
 
 const octokit = new Octokit({})
 const PROJECTS = [
-	'portfolio-v2',
 	'codepulse',
+	'portfolio-v2',
 	'nitflex',
 	'project-p',
 	'empire',
@@ -27,12 +27,13 @@ const WEBSITES = [
 	'messages',
 	'flight',
 	'playground',
-	'particle-simulation'
+	'particle-simulation',
+	'codepulse'
 ]
 
 const NAME_MAP = {
-	'portfolio-v2': "Alexis' Portfolio",
 	codepulse: 'CodePulse',
+	'portfolio-v2': "Alexis' Portfolio",
 	nitflex: 'Nitflex',
 	'project-p': 'Project P',
 	empire: 'Empire',
@@ -203,7 +204,7 @@ function createAllCards(container) {
 	})
 }
 
-const INDEX_PROJECTS = ['nitflex', 'project-p', 'trophees-nsi', '3d-engine-ascii']
+const INDEX_PROJECTS = ['codepulse', 'nitflex', 'project-p', 'trophees-nsi']
 export async function createIndexProgramCards(container) {
 	return new Promise((res, rej) => {
 		getProjects()
