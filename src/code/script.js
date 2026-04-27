@@ -1,7 +1,10 @@
 import { Octokit } from '@octokit/rest'
 
+const CACHE_VERSION = '1'
+
 const octokit = new Octokit({})
 const PROJECTS = [
+	'basket',
 	'codepulse',
 	'portfolio-v2',
 	'nitflex',
@@ -28,10 +31,12 @@ const WEBSITES = [
 	'flight',
 	'playground',
 	'particle-simulation',
-	'codepulse'
+	'codepulse',
+	'basket'
 ]
 
 const NAME_MAP = {
+	basket: 'Free Throw Lab',
 	codepulse: 'CodePulse',
 	'portfolio-v2': "Alexis' Portfolio",
 	nitflex: 'Nitflex',
@@ -51,7 +56,7 @@ const NAME_MAP = {
 }
 
 const TROPHEES_DESCRIPTION =
-	'an open-world game where players help the Allies win World War II by decrypting Nazi communications. Set in Bletchley Park, the game teaches the origins of cryptography through educational missions featuring systems like Enigma and the Bombe, while remaining fun and engaging.'
+	'An open-world game where players help the Allies win World War II by decrypting Nazi communications. Set in Bletchley Park, the game teaches the origins of cryptography through educational missions featuring systems like Enigma and the Bombe, while remaining fun and engaging.'
 
 /**
  * Récupère les détails de repositories spécifiques avec un minimum de requêtes.
@@ -123,8 +128,8 @@ async function getReposDetails(username, repoNames) {
 async function getProjects() {
 	return new Promise((res, rej) => {
 		let data
-		if (localStorage.getItem('codingProjects')) {
-			data = JSON.parse(localStorage.getItem('codingProjects'))
+		if (localStorage.getItem(`codingProjects-${CACHE_VERSION}`)) {
+			data = JSON.parse(localStorage.getItem(`codingProjects-${CACHE_VERSION}`))
 			res(data)
 		} else {
 			getReposDetails('AdlarX9', PROJECTS)
@@ -136,7 +141,7 @@ async function getProjects() {
 							data.sort((a, b) => {
 								return PROJECTS.indexOf(a.name) - PROJECTS.indexOf(b.name)
 							})
-							localStorage.setItem('codingProjects', JSON.stringify(data))
+							localStorage.setItem(`codingProjects-${CACHE_VERSION}`, JSON.stringify(data))
 							res(data)
 						})
 						.catch(err => {
