@@ -1,10 +1,10 @@
 import { Octokit } from '@octokit/rest'
 
-const CACHE_VERSION = '2'
+const CACHE_VERSION = '3'
 
 const octokit = new Octokit({})
 const PROJECTS = [
-	'multilayer-perceptron',
+	'neural-network',
 	'basket',
 	'codepulse',
 	'portfolio-v2',
@@ -37,7 +37,7 @@ const WEBSITES = [
 ]
 
 const NAME_MAP = {
-	'multilayer-perceptron': 'Multilayer Perceptron',
+	'neural-network': 'Neural Network',
 	basket: 'Free Throw Lab',
 	codepulse: 'CodePulse',
 	'portfolio-v2': "Alexis' Portfolio",

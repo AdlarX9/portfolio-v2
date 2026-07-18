@@ -76,6 +76,9 @@ export const DATA = {
 	},
 	'26-borgne': {
 		number: 2
+	},
+	'27-finale': {
+		number: 3
 	}
 }
 
