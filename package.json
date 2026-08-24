@@ -1,7 +1,7 @@
 {
   "name": "portfolio-v2",
   "version": "1.0.0",
-  "description": "This is my portfolio where I showcase everything I create.   You can find it live on [my website](https://pifpafdeluxe.fr).",
+  "description": "This is my portfolio where I showcase everything I create.   You can find it live on [my website](https://alexis-larose.com).",
   "main": "index.js",
   "directories": {
     "example": "examples",

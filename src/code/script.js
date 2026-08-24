@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest'
 
-const CACHE_VERSION = '3'
+const CACHE_VERSION = '4'
 
 const octokit = new Octokit({})
 const PROJECTS = [
@@ -211,7 +211,7 @@ function createAllCards(container) {
 	})
 }
 
-const INDEX_PROJECTS = ['codepulse', 'nitflex', 'project-p', 'trophees-nsi']
+const INDEX_PROJECTS = ['neural-network', 'nitflex', 'project-p', 'trophees-nsi']
 export async function createIndexProgramCards(container) {
 	return new Promise((res, rej) => {
 		getProjects()
